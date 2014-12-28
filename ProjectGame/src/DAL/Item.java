@@ -1,5 +1,5 @@
 package DAL;
-// Generated 28-dec-2014 18:10:18 by Hibernate Tools 4.3.1
+// Generated 28-dec-2014 18:58:35 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;

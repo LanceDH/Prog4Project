@@ -1,5 +1,5 @@
-[Sun Dec 28 18:04:34.905071 2014] [mpm_winnt:notice] [pid 6764:tid 380] AH00455: Apache/2.4.6 (Win32) PHP/5.4.17 configured -- resuming normal operations
-[Sun Dec 28 18:04:34.905071 2014] [mpm_winnt:notice] [pid 6764:tid 380] AH00456: Apache Lounge VC10 Server built: Jul 16 2013 11:15:41
-[Sun Dec 28 18:04:34.905071 2014] [core:notice] [pid 6764:tid 380] AH00094: Command line: 'F:\\SChool\\Java\\Prog4Project\\USBWebserver v8.6/apache2/bin/httpd_usbwv8.exe -d F:/SChool/Java/Prog4Project/USBWebserver v8.6/apache2'
-[Sun Dec 28 18:04:34.930073 2014] [mpm_winnt:notice] [pid 6764:tid 380] AH00418: Parent: Created child process 6224
-[Sun Dec 28 18:04:35.130084 2014] [mpm_winnt:notice] [pid 6224:tid 396] AH00354: Child: Starting 64 worker threads.
+[Sun Dec 28 18:42:27.272043 2014] [mpm_winnt:notice] [pid 8848:tid 380] AH00455: Apache/2.4.6 (Win32) PHP/5.4.17 configured -- resuming normal operations
+[Sun Dec 28 18:42:27.272043 2014] [mpm_winnt:notice] [pid 8848:tid 380] AH00456: Apache Lounge VC10 Server built: Jul 16 2013 11:15:41
+[Sun Dec 28 18:42:27.272043 2014] [core:notice] [pid 8848:tid 380] AH00094: Command line: 'F:\\SChool\\Java\\Prog4Project\\USBWebserver v8.6/apache2/bin/httpd_usbwv8.exe -d F:/SChool/Java/Prog4Project/USBWebserver v8.6/apache2'
+[Sun Dec 28 18:42:27.276044 2014] [mpm_winnt:notice] [pid 8848:tid 380] AH00418: Parent: Created child process 6552
+[Sun Dec 28 18:42:27.468055 2014] [mpm_winnt:notice] [pid 6552:tid 396] AH00354: Child: Starting 64 worker threads.

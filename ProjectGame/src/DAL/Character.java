@@ -1,5 +1,5 @@
 package DAL;
-// Generated 28-dec-2014 18:10:18 by Hibernate Tools 4.3.1
+// Generated 28-dec-2014 18:58:35 by Hibernate Tools 4.3.1
 
 
 
@@ -11,7 +11,7 @@ public class Character  implements java.io.Serializable {
 
      private Integer id;
      private Account account;
-     private Class charClass;
+     private Charclass charclass;
      private Item itemByBootsItemId;
      private Item itemByWeaponItemId;
      private Item itemByLegsItemId;
@@ -23,15 +23,15 @@ public class Character  implements java.io.Serializable {
     }
 
 	
-    public Character(Account account, Class _class, Race race, String name) {
+    public Character(Account account, Charclass charclass, Race race, String name) {
         this.account = account;
-        this.charClass = _class;
+        this.charclass = charclass;
         this.race = race;
         this.name = name;
     }
-    public Character(Account account, Class _class, Item itemByBootsItemId, Item itemByWeaponItemId, Item itemByLegsItemId, Item itemByChestItemId, Race race, String name) {
+    public Character(Account account, Charclass charclass, Item itemByBootsItemId, Item itemByWeaponItemId, Item itemByLegsItemId, Item itemByChestItemId, Race race, String name) {
        this.account = account;
-       this.charClass = _class;
+       this.charclass = charclass;
        this.itemByBootsItemId = itemByBootsItemId;
        this.itemByWeaponItemId = itemByWeaponItemId;
        this.itemByLegsItemId = itemByLegsItemId;
@@ -54,12 +54,12 @@ public class Character  implements java.io.Serializable {
     public void setAccount(Account account) {
         this.account = account;
     }
-    public Class getCharClass() {
-        return this.charClass;
+    public Charclass getCharclass() {
+        return this.charclass;
     }
     
-    public void setClass(Class _class) {
-        this.charClass = _class;
+    public void setCharclass(Charclass charclass) {
+        this.charclass = charclass;
     }
     public Item getItemByBootsItemId() {
         return this.itemByBootsItemId;

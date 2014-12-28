@@ -6,8 +6,10 @@
 
 package UI;
 
+import DAL.Account;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.util.*;
 import javax.swing.SwingUtilities;
 
 /**
@@ -114,6 +116,12 @@ public class LogingPanel extends javax.swing.JPanel {
 
     private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
         //GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
+        ArrayList<DAL.Account> list = Services.accountServices.GetAllAccounts();
+        
+        for (Account acc : list) {
+            System.out.println(acc.getName());
+        }
+        
         _parent.remove(this);
         _parent.ShowCharacterSelect();
     }//GEN-LAST:event_btn_LoginActionPerformed
