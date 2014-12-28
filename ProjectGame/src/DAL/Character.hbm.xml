@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-dec-2014 18:10:18 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DAL.Character" table="character" catalog="game" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="account" class="DAL.Account" fetch="select">
+            <column name="AccountId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="class" class="DAL.Class" fetch="select">
+            <column name="ClassId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="itemByBootsItemId" class="DAL.Item" fetch="select">
+            <column name="BootsItemId" />
+        </many-to-one>
+        <many-to-one name="itemByWeaponItemId" class="DAL.Item" fetch="select">
+            <column name="WeaponItemId" />
+        </many-to-one>
+        <many-to-one name="itemByLegsItemId" class="DAL.Item" fetch="select">
+            <column name="LegsItemId" />
+        </many-to-one>
+        <many-to-one name="itemByChestItemId" class="DAL.Item" fetch="select">
+            <column name="ChestItemId" />
+        </many-to-one>
+        <many-to-one name="race" class="DAL.Race" fetch="select">
+            <column name="RaceId" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="Name" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
