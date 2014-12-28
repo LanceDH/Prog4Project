@@ -19,12 +19,19 @@ public class accountServices {
         ArrayList<DAL.Account> list = new ArrayList<DAL.Account>();
         
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        try {
+            session.beginTransaction();
              
         Query q = session.createQuery("from Account");
         list = (ArrayList<DAL.Account>) q.list();
-                
-        session.close();
+        
+        
+        } catch (Exception e) {
+        }
+        finally{
+            //session.close();
+        }
+        
         
         return list;
     }

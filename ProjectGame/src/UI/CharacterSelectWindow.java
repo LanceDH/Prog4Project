@@ -7,6 +7,9 @@
 package UI;
 
 import javax.swing.SwingUtilities;
+import DAL.*;
+import java.util.*;
+import javax.swing.*;
 
 /**
  *
@@ -14,12 +17,24 @@ import javax.swing.SwingUtilities;
  */
 public class CharacterSelectWindow extends javax.swing.JPanel {
 
+    ArrayList<Map> charMaps = new ArrayList<Map>();
+    ArrayList<DAL.Character> characterList;
+    
     /**
      * Creates new form pnl_CharacterSelect
      */
     public CharacterSelectWindow() {
         initComponents();
+        InitMapArray();
         HideAllCharacters();
+        
+        characterList = Services.characterServices.GetAllChactersOfAccount(1);
+        
+        
+        
+        for (int i = 0; i < characterList.size(); i++) {
+            AddCharacterToList(i, characterList.get(i));
+        }
     }
 
     /**
@@ -384,18 +399,66 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void InitMapArray(){
+        Map map1 = new HashMap();
+        map1.put("panel", pnl_Char1);
+        map1.put("login", btn_LoginChar1);
+        map1.put("class", lbl_IconClassChar1);
+        map1.put("race", lbl_IconRaceChar1);
+        map1.put("delete", btn_DeleteChar1);
+        charMaps.add(map1);
+        Map map2 = new HashMap();
+        map2.put("panel", pnl_Char2);
+        map2.put("login", btn_LoginChar2);
+        map2.put("class", lbl_IconClassChar2);
+        map2.put("race", lbl_IconRaceChar2);
+        map2.put("delete", btn_DeleteChar2);
+        charMaps.add(map2);
+        Map map3 = new HashMap();
+        map3.put("panel", pnl_Char3);
+        map3.put("login", btn_LoginChar3);
+        map3.put("class", lbl_IconClassChar3);
+        map3.put("race", lbl_IconRaceChar3);
+        map3.put("delete", btn_DeleteChar3);
+        charMaps.add(map3);
+        Map map4 = new HashMap();
+        map4.put("panel", pnl_Char4);
+        map4.put("login", btn_LoginChar4);
+        map4.put("class", lbl_IconClassChar4);
+        map4.put("race", lbl_IconRaceChar4);
+        map4.put("delete", btn_DeleteChar4);
+        charMaps.add(map4);
+        Map map5 = new HashMap();
+        map5.put("panel", pnl_Char5);
+        map5.put("login", btn_LoginChar5);
+        map5.put("class", lbl_IconClassChar5);
+        map5.put("race", lbl_IconRaceChar5);
+        map5.put("delete", btn_DeleteChar5);
+        charMaps.add(map5);
+    }
+    
+    private void AddCharacterToList(int nr, DAL.Character character){
+        Map map = charMaps.get(nr);
+        JPanel p = (JPanel)map.get("panel");
+        p.setVisible(true);
+        JLabel l1 = (JLabel)map.get("race");
+        l1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getRace().getName() + "26.png")));
+        JButton b1 = (JButton)map.get("login");
+        b1.setText(character.getName());
+    }
+    
     private void HideAllCharacters(){
-        //pnl_Char1.setVisible(false);
-        lbl_IconRaceChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/human26.png")));
-        btn_LoginChar1.setText("TestCharacterName");
-        pnl_Char2.setVisible(false);
-        btn_LoginChar2.setText("null");
-        pnl_Char3.setVisible(false);
-        btn_LoginChar3.setText("null");
-        pnl_Char4.setVisible(false);
-        btn_LoginChar4.setText("null");
-        pnl_Char5.setVisible(false);
-        btn_LoginChar5.setText("null");
+        
+        for (Map map : charMaps) {
+            JPanel p = (JPanel)map.get("panel");
+            p.setVisible(false);
+        }
+        //lbl_IconRaceChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/human26.png")));
+        //btn_LoginChar1.setText("null");
+        //btn_LoginChar2.setText("null");
+        //btn_LoginChar3.setText("null");
+        //btn_LoginChar4.setText("null");
+        //btn_LoginChar5.setText("null");
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
