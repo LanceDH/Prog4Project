@@ -16,11 +16,13 @@ import javax.swing.SwingUtilities;
  */
 public class LogingPanel extends javax.swing.JPanel {
 
+    GameWindow _parent;
     /**
      * Creates new form pnl_Login
      */
-    public LogingPanel() {
+    public LogingPanel(GameWindow parent) {
         initComponents();
+        _parent = parent;
     }
 
     /**
@@ -50,6 +52,11 @@ public class LogingPanel extends javax.swing.JPanel {
         jLabel3.setText("MF  LOGO  SON!");
 
         btn_Exit.setText("Exit");
+        btn_Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ExitActionPerformed(evt);
+            }
+        });
 
         btn_Login.setText("Login");
         btn_Login.addActionListener(new java.awt.event.ActionListener() {
@@ -106,10 +113,14 @@ public class LogingPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
-        GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
-        parent.remove(this);
-        parent.ShowCharacterSelect();
+        //GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
+        _parent.remove(this);
+        _parent.ShowCharacterSelect();
     }//GEN-LAST:event_btn_LoginActionPerformed
+
+    private void btn_ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ExitActionPerformed
+        _parent.dispose();
+    }//GEN-LAST:event_btn_ExitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

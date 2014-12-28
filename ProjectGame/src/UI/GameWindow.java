@@ -6,9 +6,7 @@
 
 package UI;
 
-import com.sun.crypto.provider.AESCipher;
 import java.awt.BorderLayout;
-import sun.io.ByteToCharISO8859_13;
 
 /**
  *
@@ -21,7 +19,7 @@ public class GameWindow extends javax.swing.JFrame {
      */
     public GameWindow() {
         initComponents();
-        loginPanel = new LogingPanel();
+        loginPanel = new LogingPanel(this);
         CharSelectPanel = new CharacterSelectWindow();
         
         this.setLayout(new BorderLayout(10, 10));
@@ -95,7 +93,11 @@ public class GameWindow extends javax.swing.JFrame {
             }
         });
         
-        
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+        public void run() {
+            System.out.println("In shutdown hook");
+        }
+        }, "Shutdown-thread"));
         
     }
     
