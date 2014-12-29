@@ -26,7 +26,7 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
     public CharacterSelectWindow() {
         initComponents();
         InitMapArray();
-        HideAllCharacters();
+        ResetAllCharacterPanels();
         
         characterList = Services.characterServices.GetAllChactersOfAccount(1);
         
@@ -392,7 +392,7 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(34, 34, 34))
+                        .addContainerGap(34, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addContainerGap())))
@@ -447,7 +447,7 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         b1.setText(character.getName());
     }
     
-    private void HideAllCharacters(){
+    private void ResetAllCharacterPanels(){
         
         for (Map map : charMaps) {
             JPanel p = (JPanel)map.get("panel");
@@ -461,8 +461,20 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         //btn_LoginChar5.setText("null");
     }
     
+    public void UpdateCharacters(int accId) {
+        ResetAllCharacterPanels();
+        
+        characterList = Services.characterServices.GetAllChactersOfAccount(accId);
+        
+        for (int i = 0; i < characterList.size(); i++) {
+            AddCharacterToList(i, characterList.get(i));
+        }
+    }
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
+        
+        parent.activeAccount = null;
         parent.remove(this);
         parent.ShowLogin();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -499,4 +511,6 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_Char4;
     private javax.swing.JPanel pnl_Char5;
     // End of variables declaration//GEN-END:variables
+
+    
 }

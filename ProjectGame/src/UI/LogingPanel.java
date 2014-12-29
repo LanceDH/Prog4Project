@@ -10,6 +10,8 @@ import DAL.Account;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 /**
@@ -43,6 +45,7 @@ public class LogingPanel extends javax.swing.JPanel {
         txt_Account = new javax.swing.JTextField();
         btn_Exit = new javax.swing.JButton();
         btn_Login = new javax.swing.JButton();
+        lbl_error = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(400, 300));
 
@@ -72,25 +75,27 @@ public class LogingPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(txt_Account, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)
-                        .addComponent(txt_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(btn_Login)
-                        .addGap(30, 30, 30)))
-                .addGap(0, 132, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Exit)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(jLabel3)
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_error, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txt_Account, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(txt_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(22, 22, 22)
+                            .addComponent(btn_Login)
+                            .addGap(30, 30, 30))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -108,20 +113,37 @@ public class LogingPanel extends javax.swing.JPanel {
                 .addComponent(txt_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Login)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_error)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(btn_Exit)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginActionPerformed
-        //GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
-        ArrayList<DAL.Account> list = Services.accountServices.GetAllAccounts();
         
-        for (Account acc : list) {
+            //GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
+            /*ArrayList<DAL.Account> list = Services.accountServices.GetAllAccounts();
+            
+            for (Account acc : list) {
             System.out.println(acc.getName());
+            }*/
+        lbl_error.setText("");
+        Account acc = null;
+        try {    
+            acc = Services.accountServices.Login(txt_Account.getText(), txt_Password.getText());
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            lbl_error.setText(ex.getMessage());
+            return;
         }
         
+        txt_Account.setText("");
+        txt_Password.setText("");
+        
+
+        _parent.SetActiveAccount(acc);
         _parent.remove(this);
         _parent.ShowCharacterSelect();
     }//GEN-LAST:event_btn_LoginActionPerformed
@@ -137,6 +159,7 @@ public class LogingPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lbl_error;
     private javax.swing.JTextField txt_Account;
     private javax.swing.JTextField txt_Password;
     // End of variables declaration//GEN-END:variables

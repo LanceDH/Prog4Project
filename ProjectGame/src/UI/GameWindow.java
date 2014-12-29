@@ -14,6 +14,8 @@ import java.awt.BorderLayout;
  */
 public class GameWindow extends javax.swing.JFrame {
 
+    DAL.Account activeAccount;
+    
     /**
      * Creates new form GameWindow
      */
@@ -101,6 +103,10 @@ public class GameWindow extends javax.swing.JFrame {
         
     }
     
+    public void SetActiveAccount(DAL.Account acc){
+        this.activeAccount = acc;
+    }
+    
     public void ShowLogin(){
         this.add(loginPanel, BorderLayout.CENTER);
         this.repaint();
@@ -108,7 +114,12 @@ public class GameWindow extends javax.swing.JFrame {
     }
     
     public void ShowCharacterSelect(){
+        if (activeAccount == null) {
+            ShowLogin();
+        }
+        
         this.add(CharSelectPanel, BorderLayout.CENTER);
+        CharSelectPanel.UpdateCharacters(activeAccount.getId());
         this.repaint();
         this.pack();   
     }

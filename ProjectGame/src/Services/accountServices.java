@@ -35,4 +35,31 @@ public class accountServices {
         
         return list;
     }
+    
+    public static Account Login(String name, String pass) throws Exception{
+        Account account = new Account();
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+             
+        Query q = session.createQuery("from Account where name = '" + name + "' and password = '" + pass + "'");
+        
+        if(q.list().size() == 0){
+            Exception ex = new Exception("Account name or password is incorrect");
+            throw ex;
+            
+        }
+            
+        account = (Account)q.list().get(0);
+        
+        } catch (Exception e) {
+            throw e;
+        }
+        finally{
+            //session.close();
+        }
+        
+        return account;
+    }
 }
