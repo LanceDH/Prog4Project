@@ -50,6 +50,11 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        pnl_Char0 = new javax.swing.JPanel();
+        btn_LoginChar0 = new javax.swing.JButton();
+        btn_DeleteChar0 = new javax.swing.JButton();
+        lbl_IconClassChar0 = new javax.swing.JLabel();
+        lbl_IconRaceChar0 = new javax.swing.JLabel();
         pnl_Char1 = new javax.swing.JPanel();
         btn_LoginChar1 = new javax.swing.JButton();
         btn_DeleteChar1 = new javax.swing.JButton();
@@ -70,11 +75,6 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         btn_DeleteChar4 = new javax.swing.JButton();
         lbl_IconClassChar4 = new javax.swing.JLabel();
         lbl_IconRaceChar4 = new javax.swing.JLabel();
-        pnl_Char5 = new javax.swing.JPanel();
-        btn_LoginChar5 = new javax.swing.JButton();
-        btn_DeleteChar5 = new javax.swing.JButton();
-        lbl_IconClassChar5 = new javax.swing.JLabel();
-        lbl_IconRaceChar5 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
@@ -93,9 +93,74 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.GridLayout(5, 1));
 
+        btn_LoginChar0.setMaximumSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar0.setMinimumSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar0.setName("0"); // NOI18N
+        btn_LoginChar0.setPreferredSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectCharacter(evt);
+            }
+        });
+
+        btn_DeleteChar0.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        btn_DeleteChar0.setText("x");
+        btn_DeleteChar0.setMaximumSize(new java.awt.Dimension(26, 26));
+        btn_DeleteChar0.setMinimumSize(new java.awt.Dimension(26, 26));
+        btn_DeleteChar0.setName(""); // NOI18N
+        btn_DeleteChar0.setPreferredSize(new java.awt.Dimension(26, 26));
+
+        lbl_IconClassChar0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconClassChar0.setToolTipText("");
+        lbl_IconClassChar0.setMaximumSize(new java.awt.Dimension(25, 25));
+        lbl_IconClassChar0.setMinimumSize(new java.awt.Dimension(25, 25));
+        lbl_IconClassChar0.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        lbl_IconRaceChar0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconRaceChar0.setToolTipText("");
+        lbl_IconRaceChar0.setMaximumSize(new java.awt.Dimension(25, 25));
+        lbl_IconRaceChar0.setMinimumSize(new java.awt.Dimension(25, 25));
+        lbl_IconRaceChar0.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        javax.swing.GroupLayout pnl_Char0Layout = new javax.swing.GroupLayout(pnl_Char0);
+        pnl_Char0.setLayout(pnl_Char0Layout);
+        pnl_Char0Layout.setHorizontalGroup(
+            pnl_Char0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_Char0Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_IconClassChar0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_IconRaceChar0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_LoginChar0, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_DeleteChar0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnl_Char0Layout.setVerticalGroup(
+            pnl_Char0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_Char0Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(pnl_Char0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_IconRaceChar0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_IconClassChar0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnl_Char0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_LoginChar0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_DeleteChar0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6))
+        );
+
+        jPanel1.add(pnl_Char0);
+
         btn_LoginChar1.setMaximumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar1.setMinimumSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar1.setName("1"); // NOI18N
         btn_LoginChar1.setPreferredSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectCharacter(evt);
+            }
+        });
 
         btn_DeleteChar1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btn_DeleteChar1.setText("x");
@@ -148,7 +213,13 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
 
         btn_LoginChar2.setMaximumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar2.setMinimumSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar2.setName("2"); // NOI18N
         btn_LoginChar2.setPreferredSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectCharacter(evt);
+            }
+        });
 
         btn_DeleteChar2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btn_DeleteChar2.setText("x");
@@ -201,7 +272,13 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
 
         btn_LoginChar3.setMaximumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar3.setMinimumSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar3.setName("3"); // NOI18N
         btn_LoginChar3.setPreferredSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectCharacter(evt);
+            }
+        });
 
         btn_DeleteChar3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btn_DeleteChar3.setText("x");
@@ -254,7 +331,13 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
 
         btn_LoginChar4.setMaximumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar4.setMinimumSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar4.setName("4"); // NOI18N
         btn_LoginChar4.setPreferredSize(new java.awt.Dimension(33, 26));
+        btn_LoginChar4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectCharacter(evt);
+            }
+        });
 
         btn_DeleteChar4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btn_DeleteChar4.setText("x");
@@ -305,59 +388,6 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
 
         jPanel1.add(pnl_Char4);
 
-        btn_LoginChar5.setMaximumSize(new java.awt.Dimension(33, 26));
-        btn_LoginChar5.setMinimumSize(new java.awt.Dimension(33, 26));
-        btn_LoginChar5.setPreferredSize(new java.awt.Dimension(33, 26));
-
-        btn_DeleteChar5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btn_DeleteChar5.setText("x");
-        btn_DeleteChar5.setMaximumSize(new java.awt.Dimension(26, 26));
-        btn_DeleteChar5.setMinimumSize(new java.awt.Dimension(26, 26));
-        btn_DeleteChar5.setName(""); // NOI18N
-        btn_DeleteChar5.setPreferredSize(new java.awt.Dimension(26, 26));
-
-        lbl_IconClassChar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
-        lbl_IconClassChar5.setToolTipText("");
-        lbl_IconClassChar5.setMaximumSize(new java.awt.Dimension(25, 25));
-        lbl_IconClassChar5.setMinimumSize(new java.awt.Dimension(25, 25));
-        lbl_IconClassChar5.setPreferredSize(new java.awt.Dimension(25, 25));
-
-        lbl_IconRaceChar5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
-        lbl_IconRaceChar5.setToolTipText("");
-        lbl_IconRaceChar5.setMaximumSize(new java.awt.Dimension(25, 25));
-        lbl_IconRaceChar5.setMinimumSize(new java.awt.Dimension(25, 25));
-        lbl_IconRaceChar5.setPreferredSize(new java.awt.Dimension(25, 25));
-
-        javax.swing.GroupLayout pnl_Char5Layout = new javax.swing.GroupLayout(pnl_Char5);
-        pnl_Char5.setLayout(pnl_Char5Layout);
-        pnl_Char5Layout.setHorizontalGroup(
-            pnl_Char5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_Char5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_IconClassChar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_IconRaceChar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_LoginChar5, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_DeleteChar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        pnl_Char5Layout.setVerticalGroup(
-            pnl_Char5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_Char5Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(pnl_Char5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_IconRaceChar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_IconClassChar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnl_Char5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_LoginChar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_DeleteChar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6))
-        );
-
-        jPanel1.add(pnl_Char5);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -405,39 +435,39 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
 
     private void InitMapArray(){
         Map map1 = new HashMap();
-        map1.put("panel", pnl_Char1);
-        map1.put("login", btn_LoginChar1);
-        map1.put("class", lbl_IconClassChar1);
-        map1.put("race", lbl_IconRaceChar1);
-        map1.put("delete", btn_DeleteChar1);
+        map1.put("panel", pnl_Char0);
+        map1.put("login", btn_LoginChar0);
+        map1.put("class", lbl_IconClassChar0);
+        map1.put("race", lbl_IconRaceChar0);
+        map1.put("delete", btn_DeleteChar0);
         charMaps.add(map1);
         Map map2 = new HashMap();
-        map2.put("panel", pnl_Char2);
-        map2.put("login", btn_LoginChar2);
-        map2.put("class", lbl_IconClassChar2);
-        map2.put("race", lbl_IconRaceChar2);
-        map2.put("delete", btn_DeleteChar2);
+        map2.put("panel", pnl_Char1);
+        map2.put("login", btn_LoginChar1);
+        map2.put("class", lbl_IconClassChar1);
+        map2.put("race", lbl_IconRaceChar1);
+        map2.put("delete", btn_DeleteChar1);
         charMaps.add(map2);
         Map map3 = new HashMap();
-        map3.put("panel", pnl_Char3);
-        map3.put("login", btn_LoginChar3);
-        map3.put("class", lbl_IconClassChar3);
-        map3.put("race", lbl_IconRaceChar3);
-        map3.put("delete", btn_DeleteChar3);
+        map3.put("panel", pnl_Char2);
+        map3.put("login", btn_LoginChar2);
+        map3.put("class", lbl_IconClassChar2);
+        map3.put("race", lbl_IconRaceChar2);
+        map3.put("delete", btn_DeleteChar2);
         charMaps.add(map3);
         Map map4 = new HashMap();
-        map4.put("panel", pnl_Char4);
-        map4.put("login", btn_LoginChar4);
-        map4.put("class", lbl_IconClassChar4);
-        map4.put("race", lbl_IconRaceChar4);
-        map4.put("delete", btn_DeleteChar4);
+        map4.put("panel", pnl_Char3);
+        map4.put("login", btn_LoginChar3);
+        map4.put("class", lbl_IconClassChar3);
+        map4.put("race", lbl_IconRaceChar3);
+        map4.put("delete", btn_DeleteChar3);
         charMaps.add(map4);
         Map map5 = new HashMap();
-        map5.put("panel", pnl_Char5);
-        map5.put("login", btn_LoginChar5);
-        map5.put("class", lbl_IconClassChar5);
-        map5.put("race", lbl_IconRaceChar5);
-        map5.put("delete", btn_DeleteChar5);
+        map5.put("panel", pnl_Char4);
+        map5.put("login", btn_LoginChar4);
+        map5.put("class", lbl_IconClassChar4);
+        map5.put("race", lbl_IconRaceChar4);
+        map5.put("delete", btn_DeleteChar4);
         charMaps.add(map5);
     }
     
@@ -486,37 +516,46 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         parent.ShowLogin();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void SelectCharacter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectCharacter
+        int charIdInArray = Integer.parseInt(((JButton)evt.getSource()).getName());
+        GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
+        parent.activeCharacter = characterList.get(charIdInArray);
+        parent.remove(this);
+        parent.ShowLoot();
+    }//GEN-LAST:event_SelectCharacter
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_DeleteChar0;
     private javax.swing.JButton btn_DeleteChar1;
     private javax.swing.JButton btn_DeleteChar2;
     private javax.swing.JButton btn_DeleteChar3;
     private javax.swing.JButton btn_DeleteChar4;
-    private javax.swing.JButton btn_DeleteChar5;
+    private javax.swing.JButton btn_LoginChar0;
     private javax.swing.JButton btn_LoginChar1;
     private javax.swing.JButton btn_LoginChar2;
     private javax.swing.JButton btn_LoginChar3;
     private javax.swing.JButton btn_LoginChar4;
-    private javax.swing.JButton btn_LoginChar5;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbl_IconClassChar0;
     private javax.swing.JLabel lbl_IconClassChar1;
     private javax.swing.JLabel lbl_IconClassChar2;
     private javax.swing.JLabel lbl_IconClassChar3;
     private javax.swing.JLabel lbl_IconClassChar4;
-    private javax.swing.JLabel lbl_IconClassChar5;
+    private javax.swing.JLabel lbl_IconRaceChar0;
     private javax.swing.JLabel lbl_IconRaceChar1;
     private javax.swing.JLabel lbl_IconRaceChar2;
     private javax.swing.JLabel lbl_IconRaceChar3;
     private javax.swing.JLabel lbl_IconRaceChar4;
-    private javax.swing.JLabel lbl_IconRaceChar5;
+    private javax.swing.JPanel pnl_Char0;
     private javax.swing.JPanel pnl_Char1;
     private javax.swing.JPanel pnl_Char2;
     private javax.swing.JPanel pnl_Char3;
     private javax.swing.JPanel pnl_Char4;
-    private javax.swing.JPanel pnl_Char5;
     // End of variables declaration//GEN-END:variables
 
     

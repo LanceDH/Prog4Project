@@ -7,6 +7,7 @@
 package UI;
 
 import java.awt.BorderLayout;
+import javax.swing.JLabel;
 
 /**
  *
@@ -15,6 +16,11 @@ import java.awt.BorderLayout;
 public class GameWindow extends javax.swing.JFrame {
 
     DAL.Account activeAccount;
+    DAL.Character activeCharacter;
+    
+    LogingPanel loginPanel;
+    CharacterSelectWindow CharSelectPanel;
+    LootPanel lootPanel;
     
     /**
      * Creates new form GameWindow
@@ -24,6 +30,7 @@ public class GameWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         loginPanel = new LogingPanel(this);
         CharSelectPanel = new CharacterSelectWindow();
+        lootPanel = new LootPanel(this);
         
         this.setLayout(new BorderLayout(10, 10));
         ShowLogin();
@@ -40,6 +47,7 @@ public class GameWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Totally Not Warcraft");
         setMinimumSize(new java.awt.Dimension(433, 310));
         setPreferredSize(new java.awt.Dimension(433, 310));
         setResizable(false);
@@ -62,8 +70,7 @@ public class GameWindow extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-    LogingPanel loginPanel;
-    CharacterSelectWindow CharSelectPanel;
+    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -98,11 +105,11 @@ public class GameWindow extends javax.swing.JFrame {
             }
         });
         
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-        public void run() {
-            System.out.println("In shutdown hook");
-        }
-        }, "Shutdown-thread"));
+        //Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+        //public void run() {
+        //    System.out.println("In shutdown hook");
+        //}
+        //}, "Shutdown-thread"));
         
     }
     
@@ -125,6 +132,26 @@ public class GameWindow extends javax.swing.JFrame {
         CharSelectPanel.UpdateCharacters(activeAccount.getId());
         this.repaint();
         this.pack();   
+    }
+    
+    public void ShowLoot(){
+        if (this.activeCharacter == null) {
+            ShowCharacterSelect();
+        }
+
+        this.add(lootPanel, BorderLayout.CENTER);
+        lootPanel.Reset();
+        lootPanel.UpdateCharacterLoot();
+        this.repaint();
+        this.pack();   
+    }
+    
+    public void ChangeIcon(JLabel lbl, String name){
+        try {
+            lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource(name)));
+        } catch (Exception e) {
+            lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown.png")));
+        }
     }
     
     
