@@ -21,12 +21,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="64" max="32767" attributes="0"/>
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jPanel2" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="lbl_CharacterName" min="-2" pref="171" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="85" max="32767" attributes="0"/>
                       <Component id="btn_ChangeCharacter" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -160,7 +160,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbl_ItemName" alignment="0" max="32767" attributes="0"/>
                               <Component id="lbl_ItemSlot" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lbl_ItemAtt1" pref="80" max="32767" attributes="0"/>
+                              <Component id="lbl_ItemAtt1" max="32767" attributes="0"/>
                               <Component id="lbl_ItemAtt1Val" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
