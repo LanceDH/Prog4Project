@@ -21,6 +21,7 @@ public class GameWindow extends javax.swing.JFrame {
      */
     public GameWindow() {
         initComponents();
+        this.setLocationRelativeTo(null);
         loginPanel = new LogingPanel(this);
         CharSelectPanel = new CharacterSelectWindow();
         
