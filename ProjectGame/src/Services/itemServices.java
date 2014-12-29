@@ -15,6 +15,26 @@ import org.hibernate.*;
  * @author LanceDH
  */
 public class itemServices {
+    public static ArrayList<DAL.Item> LootList;
+    
+    public static void LoadAllLoot(){
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+             
+        Query q = session.createQuery("from Item");
+        LootList = (ArrayList<DAL.Item>) q.list();
+        
+        
+        } catch (Exception e) {
+        }
+        finally{
+            //session.close();
+        }
+
+    }
+    
     public static Item GetItemById(int id){
         Item item = new Item();
         
@@ -35,4 +55,6 @@ public class itemServices {
         
         return item;
     }
+    
+    
 }

@@ -7,6 +7,7 @@
 package UI;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 
 /**
@@ -21,6 +22,7 @@ public class GameWindow extends javax.swing.JFrame {
     LogingPanel loginPanel;
     CharacterSelectWindow CharSelectPanel;
     LootPanel lootPanel;
+    
     
     /**
      * Creates new form GameWindow

@@ -6,6 +6,7 @@
 package UI;
 
 import DAL.Item;
+import java.util.Random;
 import javax.swing.SwingUtilities;
 
 /**
@@ -19,12 +20,14 @@ public class LootPanel extends javax.swing.JPanel {
     Item equipedLegs;
     Item equipedFeet;
     Item equipedWeapon;
+    Item loot;
     /**
      * Creates new form LootWindow
      */
     public LootPanel(GameWindow parent) {
         initComponents();
         this._parent = parent;
+        Services.itemServices.LoadAllLoot();
     }
 
     /**
@@ -36,13 +39,32 @@ public class LootPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbl_CharacterName = new javax.swing.JLabel();
+        btn_ChangeCharacter = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         lbl_ChestIcon = new javax.swing.JLabel();
         lbl_LegsIcon = new javax.swing.JLabel();
         lbl_FeetIcon = new javax.swing.JLabel();
         lbl_WeaponIcon = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         lbl_LootIcon = new javax.swing.JLabel();
-        lbl_CharacterName = new javax.swing.JLabel();
-        btn_ChangeCharacter = new javax.swing.JButton();
+        btn_Loot = new javax.swing.JButton();
+        lbl_ItemName = new javax.swing.JLabel();
+        lbl_ItemSlot = new javax.swing.JLabel();
+        lbl_ItemAtt1 = new javax.swing.JLabel();
+        lbl_ItemAtt1Val = new javax.swing.JLabel();
+
+        lbl_CharacterName.setToolTipText("");
+        lbl_CharacterName.setMaximumSize(new java.awt.Dimension(5, 14));
+        lbl_CharacterName.setMinimumSize(new java.awt.Dimension(5, 14));
+        lbl_CharacterName.setPreferredSize(new java.awt.Dimension(5, 14));
+
+        btn_ChangeCharacter.setText("Change Charater");
+        btn_ChangeCharacter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ChangeCharacterActionPerformed(evt);
+            }
+        });
 
         lbl_ChestIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Slot-Chest.png"))); // NOI18N
         lbl_ChestIcon.setToolTipText("");
@@ -59,20 +81,84 @@ public class LootPanel extends javax.swing.JPanel {
         lbl_WeaponIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Slot-Weapon.png"))); // NOI18N
         lbl_WeaponIcon.setToolTipText("");
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_FeetIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(lbl_ChestIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(lbl_WeaponIcon)
+                .addGap(9, 9, 9)
+                .addComponent(lbl_LegsIcon))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(lbl_ChestIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_LegsIcon)
+                    .addComponent(lbl_WeaponIcon))
+                .addGap(9, 9, 9)
+                .addComponent(lbl_FeetIcon))
+        );
+
         lbl_LootIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Slot-Loot.png"))); // NOI18N
         lbl_LootIcon.setToolTipText("");
 
-        lbl_CharacterName.setToolTipText("");
-        lbl_CharacterName.setMaximumSize(new java.awt.Dimension(5, 14));
-        lbl_CharacterName.setMinimumSize(new java.awt.Dimension(5, 14));
-        lbl_CharacterName.setPreferredSize(new java.awt.Dimension(5, 14));
-
-        btn_ChangeCharacter.setText("Change Charater");
-        btn_ChangeCharacter.addActionListener(new java.awt.event.ActionListener() {
+        btn_Loot.setText("Loot");
+        btn_Loot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ChangeCharacterActionPerformed(evt);
+                btn_LootActionPerformed(evt);
             }
         });
+
+        lbl_ItemName.setText("Name");
+
+        lbl_ItemSlot.setText("Slot");
+
+        lbl_ItemAtt1.setText("Attribute");
+
+        lbl_ItemAtt1Val.setText("value");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_LootIcon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_ItemName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_ItemSlot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_ItemAtt1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                    .addComponent(lbl_ItemAtt1Val, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(btn_Loot, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(btn_Loot)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_LootIcon)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbl_ItemName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_ItemSlot)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_ItemAtt1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_ItemAtt1Val)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -82,39 +168,27 @@ public class LootPanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_FeetIcon)
-                            .addComponent(lbl_ChestIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_WeaponIcon)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_LegsIcon)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_LootIcon)
-                        .addGap(70, 70, 70))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_CharacterName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                        .addComponent(btn_ChangeCharacter)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_ChangeCharacter)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_CharacterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_ChangeCharacter))
                 .addGap(9, 9, 9)
-                .addComponent(lbl_ChestIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_LegsIcon)
-                    .addComponent(lbl_WeaponIcon)
-                    .addComponent(lbl_LootIcon))
-                .addGap(18, 18, 18)
-                .addComponent(lbl_FeetIcon)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,6 +197,16 @@ public class LootPanel extends javax.swing.JPanel {
         _parent.remove(this);
         _parent.ShowCharacterSelect();
     }//GEN-LAST:event_btn_ChangeCharacterActionPerformed
+
+    private void btn_LootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LootActionPerformed
+        Random rnd = new Random();
+        loot = Services.itemServices.LootList.get(rnd.nextInt(Services.itemServices.LootList.size()));
+        _parent.ChangeIcon(lbl_LootIcon, "/Images/" + loot.getIconPath() + ".png");
+        lbl_ItemName.setText(loot.getName());
+        lbl_ItemSlot.setText(loot.getSlot().getName());
+        lbl_ItemAtt1.setText(loot.getAttribute().getName());
+        lbl_ItemAtt1Val.setText("" + loot.getAttribute1value());
+    }//GEN-LAST:event_btn_LootActionPerformed
 
     public void Reset(){
         _parent.ChangeIcon(lbl_ChestIcon, "/Images/Slot-Chest.png");
@@ -152,9 +236,16 @@ public class LootPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ChangeCharacter;
+    private javax.swing.JButton btn_Loot;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbl_CharacterName;
     private javax.swing.JLabel lbl_ChestIcon;
     private javax.swing.JLabel lbl_FeetIcon;
+    private javax.swing.JLabel lbl_ItemAtt1;
+    private javax.swing.JLabel lbl_ItemAtt1Val;
+    private javax.swing.JLabel lbl_ItemName;
+    private javax.swing.JLabel lbl_ItemSlot;
     private javax.swing.JLabel lbl_LegsIcon;
     private javax.swing.JLabel lbl_LootIcon;
     private javax.swing.JLabel lbl_WeaponIcon;
