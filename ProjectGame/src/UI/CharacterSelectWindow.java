@@ -18,7 +18,7 @@ import javax.swing.*;
 public class CharacterSelectWindow extends javax.swing.JPanel {
 
     ArrayList<Map> charMaps = new ArrayList<Map>();
-    ArrayList<DAL.Character> characterList;
+    ArrayList<DAL.Character> characterList = null;
     
     /**
      * Creates new form pnl_CharacterSelect
@@ -77,6 +77,7 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         lbl_IconRaceChar5 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(400, 300));
+        setMinimumSize(new java.awt.Dimension(400, 300));
         setPreferredSize(new java.awt.Dimension(400, 300));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -441,8 +442,11 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         Map map = charMaps.get(nr);
         JPanel p = (JPanel)map.get("panel");
         p.setVisible(true);
-        JLabel l1 = (JLabel)map.get("race");
-        l1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getRace().getName() + "26.png")));
+        JLabel lblRace = (JLabel)map.get("race");
+        lblRace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getRace().getIconPath() + "_26.png")));
+        JLabel lbl_Class = (JLabel)map.get("class");
+        lbl_Class.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getCharclass().getIconPath() + "_26.png")));
+        
         JButton b1 = (JButton)map.get("login");
         b1.setText(character.getName());
     }
