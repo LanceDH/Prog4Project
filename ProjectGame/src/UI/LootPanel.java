@@ -5,6 +5,7 @@
  */
 package UI;
 
+import DAL.Item;
 import javax.swing.SwingUtilities;
 
 /**
@@ -14,6 +15,10 @@ import javax.swing.SwingUtilities;
 public class LootPanel extends javax.swing.JPanel {
 
     GameWindow _parent;
+    Item equipedChest;
+    Item equipedLegs;
+    Item equipedFeet;
+    Item equipedWeapon;
     /**
      * Creates new form LootWindow
      */
@@ -100,7 +105,7 @@ public class LootPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_CharacterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_ChangeCharacter))
-                .addGap(18, 18, 18)
+                .addGap(9, 9, 9)
                 .addComponent(lbl_ChestIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -109,7 +114,7 @@ public class LootPanel extends javax.swing.JPanel {
                     .addComponent(lbl_LootIcon))
                 .addGap(18, 18, 18)
                 .addComponent(lbl_FeetIcon)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,7 +133,21 @@ public class LootPanel extends javax.swing.JPanel {
     }
     
     public void UpdateCharacterLoot(){
-        lbl_CharacterName.setText(_parent.activeCharacter.getName()); 
+        lbl_CharacterName.setText(_parent.activeCharacter.getName());
+        if (_parent.activeCharacter.getItemByChestItemId() != null) {
+            _parent.ChangeIcon(lbl_ChestIcon, "/Images/" + _parent.activeCharacter.getItemByChestItemId().getIconPath() + ".png");
+        }
+        if (_parent.activeCharacter.getItemByBootsItemId() != null) {
+            _parent.ChangeIcon(lbl_FeetIcon, "/Images/" + _parent.activeCharacter.getItemByBootsItemId().getIconPath() + ".png");
+        }
+        if (_parent.activeCharacter.getItemByLegsItemId() != null) {
+            _parent.ChangeIcon(lbl_LegsIcon, "/Images/" + _parent.activeCharacter.getItemByLegsItemId().getIconPath() + ".png");
+        }
+        if (_parent.activeCharacter.getItemByWeaponItemId() != null) {
+            _parent.ChangeIcon(lbl_WeaponIcon, "/Images/" + _parent.activeCharacter.getItemByWeaponItemId().getIconPath() + ".png");
+        }
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
