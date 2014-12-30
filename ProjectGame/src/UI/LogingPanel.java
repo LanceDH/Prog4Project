@@ -9,6 +9,9 @@ package UI;
 import DAL.Account;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +30,7 @@ public class LogingPanel extends javax.swing.JPanel {
     public LogingPanel(GameWindow parent) {
         initComponents();
         _parent = parent;
+
     }
 
     /**
