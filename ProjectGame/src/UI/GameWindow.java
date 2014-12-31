@@ -22,6 +22,7 @@ public class GameWindow extends javax.swing.JFrame {
     LogingPanel loginPanel;
     CharacterSelectWindow CharSelectPanel;
     LootPanel lootPanel;
+    CharacterCreateWindow characterCreateWindow;
     
     
     /**
@@ -33,10 +34,12 @@ public class GameWindow extends javax.swing.JFrame {
         loginPanel = new LogingPanel(this);
         CharSelectPanel = new CharacterSelectWindow();
         lootPanel = new LootPanel(this);
+        characterCreateWindow = new CharacterCreateWindow(this);
         
         this.setLayout(new BorderLayout(10, 10));
         ShowLogin();
         
+        Services.MiscServices.LoadRaceData();
     }
 
     /**
@@ -148,10 +151,22 @@ public class GameWindow extends javax.swing.JFrame {
         this.pack();   
     }
     
+    void ShowCharacterCreate() {
+        this.add(characterCreateWindow, BorderLayout.CENTER);
+        this.repaint();
+        this.pack(); 
+    }
+    
     public void ChangeIcon(JLabel lbl, String name){
+        String sizeString = "";
+        
+        if (lbl.getIcon().getIconWidth() != 64) {
+            sizeString = "_" + (int)lbl.getIcon().getIconWidth();
+        }
         try {
-            lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource(name)));
+            lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + name + sizeString + ".png")));
         } catch (Exception e) {
+            System.err.println("Could not find image: " + "/Images/" + name + sizeString + ".png");
             lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown.png")));
         }
     }
@@ -159,4 +174,6 @@ public class GameWindow extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    
 }

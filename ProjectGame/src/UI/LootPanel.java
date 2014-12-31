@@ -52,7 +52,6 @@ public class LootPanel extends javax.swing.JPanel {
         lbl_ItemName = new javax.swing.JLabel();
         lbl_ItemSlot = new javax.swing.JLabel();
         lbl_ItemAtt1 = new javax.swing.JLabel();
-        lbl_ItemAtt1Val = new javax.swing.JLabel();
         btn_Equip = new javax.swing.JButton();
         lbl_IconClass = new javax.swing.JLabel();
         lbl_IconRace = new javax.swing.JLabel();
@@ -69,6 +68,9 @@ public class LootPanel extends javax.swing.JPanel {
                 btn_ChangeCharacterActionPerformed(evt);
             }
         });
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(137, 210));
+        jPanel1.setMinimumSize(new java.awt.Dimension(137, 210));
 
         lbl_ChestIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Slot-Chest.png"))); // NOI18N
         lbl_ChestIcon.setToolTipText("");
@@ -123,8 +125,6 @@ public class LootPanel extends javax.swing.JPanel {
 
         lbl_ItemAtt1.setText("Attribute");
 
-        lbl_ItemAtt1Val.setText("value");
-
         btn_Equip.setText("Equip");
         btn_Equip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +142,6 @@ public class LootPanel extends javax.swing.JPanel {
                     .addComponent(lbl_ItemName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbl_ItemSlot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbl_ItemAtt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_ItemAtt1Val, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbl_LootIcon)
                         .addGap(18, 18, 18)
@@ -154,8 +153,8 @@ public class LootPanel extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btn_Loot)
@@ -168,9 +167,7 @@ public class LootPanel extends javax.swing.JPanel {
                 .addComponent(lbl_ItemSlot)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_ItemAtt1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_ItemAtt1Val)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         lbl_IconClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
@@ -234,11 +231,10 @@ public class LootPanel extends javax.swing.JPanel {
     private void btn_LootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LootActionPerformed
         Random rnd = new Random();
         loot = Services.itemServices.LootList.get(rnd.nextInt(Services.itemServices.LootList.size()));
-        _parent.ChangeIcon(lbl_LootIcon, "/Images/" + loot.getIconPath() + ".png");
+        _parent.ChangeIcon(lbl_LootIcon, loot.getIconPath());
         lbl_ItemName.setText(loot.getName());
         lbl_ItemSlot.setText(loot.getSlot().getName());
-        lbl_ItemAtt1.setText(loot.getAttribute().getName());
-        lbl_ItemAtt1Val.setText("" + loot.getAttribute1value());
+        lbl_ItemAtt1.setText("+" + loot.getAttribute1value() + " " +loot.getAttribute().getName());
     }//GEN-LAST:event_btn_LootActionPerformed
 
     private void btn_EquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EquipActionPerformed
@@ -270,34 +266,33 @@ public class LootPanel extends javax.swing.JPanel {
         lbl_ItemName.setText("Name");
         lbl_ItemSlot.setText("Slot");
         lbl_ItemAtt1.setText("Attribute");
-        lbl_ItemAtt1Val.setText("Attribute Value");
         
-        _parent.ChangeIcon(lbl_ChestIcon, "/Images/Slot-Chest.png");
-        _parent.ChangeIcon(lbl_FeetIcon, "/Images/Slot-Feet.png");
-        _parent.ChangeIcon(lbl_LegsIcon, "/Images/Slot-Legs.png");
-        _parent.ChangeIcon(lbl_WeaponIcon, "/Images/Slot-Weapon.png");
-        _parent.ChangeIcon(lbl_LootIcon, "/Images/Slot-Loot.png");
+        _parent.ChangeIcon(lbl_ChestIcon, "Slot-Chest");
+        _parent.ChangeIcon(lbl_FeetIcon, "Slot-Feet");
+        _parent.ChangeIcon(lbl_LegsIcon, "Slot-Legs");
+        _parent.ChangeIcon(lbl_WeaponIcon, "Slot-Weapon");
+        _parent.ChangeIcon(lbl_LootIcon, "Slot-Loot");
         
-        _parent.ChangeIcon(lbl_IconRace, "/Images/Unknown_26.png");
-        _parent.ChangeIcon(lbl_IconClass, "/Images/Unknown_26.png");
+        _parent.ChangeIcon(lbl_IconRace, "Unknown");
+        _parent.ChangeIcon(lbl_IconClass, "Unknown");
     }
     
     public void UpdateCharacterLoot(){
         lbl_CharacterName.setText(_parent.activeCharacter.getName());
-        _parent.ChangeIcon(lbl_IconRace, "/Images/" + _parent.activeCharacter.getRace().getIconPath() + "_26.png");
-        _parent.ChangeIcon(lbl_IconClass, "/Images/" + _parent.activeCharacter.getCharclass().getIconPath() + "_26.png");
+        _parent.ChangeIcon(lbl_IconRace, _parent.activeCharacter.getRace().getIconPath());
+        _parent.ChangeIcon(lbl_IconClass, _parent.activeCharacter.getCharclass().getIconPath());
         
         if (_parent.activeCharacter.getItemByChestItemId() != null) {
-            _parent.ChangeIcon(lbl_ChestIcon, "/Images/" + _parent.activeCharacter.getItemByChestItemId().getIconPath() + ".png");
+            _parent.ChangeIcon(lbl_ChestIcon, _parent.activeCharacter.getItemByChestItemId().getIconPath());
         }
         if (_parent.activeCharacter.getItemByBootsItemId() != null) {
-            _parent.ChangeIcon(lbl_FeetIcon, "/Images/" + _parent.activeCharacter.getItemByBootsItemId().getIconPath() + ".png");
+            _parent.ChangeIcon(lbl_FeetIcon, _parent.activeCharacter.getItemByBootsItemId().getIconPath());
         }
         if (_parent.activeCharacter.getItemByLegsItemId() != null) {
-            _parent.ChangeIcon(lbl_LegsIcon, "/Images/" + _parent.activeCharacter.getItemByLegsItemId().getIconPath() + ".png");
+            _parent.ChangeIcon(lbl_LegsIcon, _parent.activeCharacter.getItemByLegsItemId().getIconPath());
         }
         if (_parent.activeCharacter.getItemByWeaponItemId() != null) {
-            _parent.ChangeIcon(lbl_WeaponIcon, "/Images/" + _parent.activeCharacter.getItemByWeaponItemId().getIconPath() + ".png");
+            _parent.ChangeIcon(lbl_WeaponIcon, _parent.activeCharacter.getItemByWeaponItemId().getIconPath());
         }
     }
 
@@ -313,7 +308,6 @@ public class LootPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_IconClass;
     private javax.swing.JLabel lbl_IconRace;
     private javax.swing.JLabel lbl_ItemAtt1;
-    private javax.swing.JLabel lbl_ItemAtt1Val;
     private javax.swing.JLabel lbl_ItemName;
     private javax.swing.JLabel lbl_ItemSlot;
     private javax.swing.JLabel lbl_LegsIcon;

@@ -18,8 +18,9 @@ public class accountServices {
     public static ArrayList<DAL.Account> GetAllAccounts(){
         ArrayList<DAL.Account> list = new ArrayList<DAL.Account>();
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        
         try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
              
         Query q = session.createQuery("from Account");
@@ -27,6 +28,9 @@ public class accountServices {
         
         
         } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } catch(ExceptionInInitializerError e){
+            System.err.println(e.getMessage());
         }
         finally{
             //session.close();
@@ -39,8 +43,9 @@ public class accountServices {
     public static Account Login(String name, String pass) throws Exception{
         Account account = new Account();
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        
         try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
              
         Query q = session.createQuery("from Account where name = '" + name + "' and password = '" + pass + "'");
@@ -55,6 +60,8 @@ public class accountServices {
         
         } catch (Exception e) {
             throw e;
+        } catch(ExceptionInInitializerError e){
+            System.err.println(e.getMessage());
         }
         finally{
             //session.close();

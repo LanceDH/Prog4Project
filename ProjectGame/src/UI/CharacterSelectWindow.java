@@ -75,6 +75,7 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         btn_DeleteChar4 = new javax.swing.JButton();
         lbl_IconClassChar4 = new javax.swing.JLabel();
         lbl_IconRaceChar4 = new javax.swing.JLabel();
+        btn_CreateChar = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
@@ -405,15 +406,24 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
+        btn_CreateChar.setText("New");
+        btn_CreateChar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreateCharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(163, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btn_CreateChar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91)
                         .addComponent(jButton3)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -428,7 +438,9 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(btn_CreateChar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -524,9 +536,16 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         parent.ShowLoot();
     }//GEN-LAST:event_SelectCharacter
 
+    private void btn_CreateCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateCharActionPerformed
+        GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
+        parent.remove(this);
+        parent.ShowCharacterCreate();
+    }//GEN-LAST:event_btn_CreateCharActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_CreateChar;
     private javax.swing.JButton btn_DeleteChar0;
     private javax.swing.JButton btn_DeleteChar1;
     private javax.swing.JButton btn_DeleteChar2;

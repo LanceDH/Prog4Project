@@ -87,6 +87,14 @@
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[137, 210]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[137, 210]"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -162,7 +170,6 @@
                       <Component id="lbl_ItemName" alignment="0" max="32767" attributes="0"/>
                       <Component id="lbl_ItemSlot" alignment="0" max="32767" attributes="0"/>
                       <Component id="lbl_ItemAtt1" max="32767" attributes="0"/>
-                      <Component id="lbl_ItemAtt1Val" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="lbl_LootIcon" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -179,8 +186,8 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="btn_Loot" min="-2" max="-2" attributes="0"/>
@@ -195,9 +202,7 @@
                   <Component id="lbl_ItemSlot" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lbl_ItemAtt1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lbl_ItemAtt1Val" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -235,11 +240,6 @@
         <Component class="javax.swing.JLabel" name="lbl_ItemAtt1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Attribute"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbl_ItemAtt1Val">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="value"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Equip">

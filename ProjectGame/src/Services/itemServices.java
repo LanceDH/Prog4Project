@@ -19,8 +19,8 @@ public class itemServices {
     
     public static void LoadAllLoot(){
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
              
         Query q = session.createQuery("from Item");
@@ -28,6 +28,9 @@ public class itemServices {
         
         
         } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } catch(ExceptionInInitializerError e){
+            System.err.println(e.getMessage());
         }
         finally{
             //session.close();
@@ -38,8 +41,8 @@ public class itemServices {
     public static Item GetItemById(int id){
         Item item = new Item();
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
              
         Query q = session.createQuery("from Item where ID = '" + id + "'");
@@ -48,6 +51,8 @@ public class itemServices {
         
         } catch (Exception e) {
             throw e;
+        } catch(ExceptionInInitializerError e){
+            System.err.println(e.getMessage());
         }
         finally{
             //session.close();

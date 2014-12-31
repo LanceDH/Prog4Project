@@ -18,8 +18,9 @@ public class characterServices {
     public static int UpdateCharacter(DAL.Character character){
         int rows = 0;
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        
         try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             Transaction tx = session.beginTransaction();
              
              //AccountId 	Name 	RaceId 	ClassId 	ChestItemId 	LegsItemId 	BootsItemId 	WeaponItemId 
@@ -56,6 +57,8 @@ public class characterServices {
         //session.close();
         } catch (Exception e) {
             System.err.println(e.getMessage());
+        } catch(ExceptionInInitializerError e){
+            System.err.println(e.getMessage());
         }
         finally{
             
@@ -67,13 +70,17 @@ public class characterServices {
     public static ArrayList<DAL.Character> GetAllChactersOfAccount(int accId){
         ArrayList<DAL.Character> list = new ArrayList<DAL.Character>();
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        
         try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
              
         Query q = session.createQuery("from Character where AccountId = " + accId);
         list = (ArrayList<DAL.Character>) q.list();
         } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } catch(ExceptionInInitializerError e){
+            System.err.println(e.getMessage());
         }
         finally{
             //session.close();
