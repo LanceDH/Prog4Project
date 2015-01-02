@@ -7,8 +7,7 @@ package Services;
 
 import DAL.HibernateUtil;
 import java.util.ArrayList;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import org.hibernate.*;
 
 /**
  *
@@ -21,17 +20,19 @@ public class MiscServices {
     
     public static void LoadRaceData(){
         Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
         try {
             
-            session.beginTransaction();
+            tx = session.beginTransaction();
              
         Query q = session.createQuery("from Race");
         RaceList = (ArrayList<DAL.Race>) q.list();
         
         
+        tx.commit();
+        //session.close();
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-        } catch(ExceptionInInitializerError e){
+            if (tx != null) tx.rollback();
             System.err.println(e.getMessage());
         }
         finally{
@@ -42,17 +43,19 @@ public class MiscServices {
     
     public static void LoadClassData(){
         Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
         try {
             
-            session.beginTransaction();
+            tx = session.beginTransaction();
              
         Query q = session.createQuery("from Charclass");
         ClassList = (ArrayList<DAL.Charclass>) q.list();
         
         
+        tx.commit();
+        //session.close();
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-        } catch(ExceptionInInitializerError e){
+            if (tx != null) tx.rollback();
             System.err.println(e.getMessage());
         }
         finally{

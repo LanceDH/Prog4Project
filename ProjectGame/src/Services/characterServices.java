@@ -74,7 +74,7 @@ public class characterServices {
         try {
             tx = session.beginTransaction();
              
-            Query q = session.createQuery("from Character where AccountId = " + accId);
+            Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId  left join fetch c.itemByWeaponItemId  left join fetch c.itemByChestItemId  left join fetch c.itemByLegsItemId  left join fetch c.charclass  left join fetch c.race where AccountId = " + accId);
             list = (ArrayList<DAL.Character>) q.list();
         
             tx.commit();
@@ -132,7 +132,9 @@ public class characterServices {
                         + "," + character.getCharclass().getId()
                         + ")");
                 rows = q.executeUpdate();*/
-                session.delete(tx);
+                session.delete(character);
+                //Query q = session.createQuery("delete character where ID = " + character.getId());
+                //rows = q.executeUpdate();
                 tx.commit();
         //session.close();
         } catch (Exception e) {

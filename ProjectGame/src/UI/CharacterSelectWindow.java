@@ -30,11 +30,11 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         InitMapArray();
         ResetAllCharacterPanels();
         
-        characterList = Services.characterServices.GetAllChactersOfAccount(1);
+        //characterList = Services.characterServices.GetAllChactersOfAccount(1);
         
-        for (int i = 0; i < characterList.size(); i++) {
-            AddCharacterToList(i, characterList.get(i));
-        }
+        //for (int i = 0; i < characterList.size(); i++) {
+        //    AddCharacterToList(i, characterList.get(i));
+        //}
     }
 
     /**
@@ -513,9 +513,11 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         JPanel p = (JPanel)map.get("panel");
         p.setVisible(true);
         JLabel lblRace = (JLabel)map.get("race");
-        lblRace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getRace().getIconPath() + "_26.png")));
+        _parent.ChangeIcon(lblRace, character.getRace().getIconPath());
+        //lblRace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getRace().getIconPath() + "_26.png")));
         JLabel lbl_Class = (JLabel)map.get("class");
-        lbl_Class.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getCharclass().getIconPath() + "_26.png")));
+        _parent.ChangeIcon(lbl_Class, character.getCharclass().getIconPath());
+        //lbl_Class.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getCharclass().getIconPath() + "_26.png")));
         
         JButton b1 = (JButton)map.get("login");
         b1.setText(character.getName());
