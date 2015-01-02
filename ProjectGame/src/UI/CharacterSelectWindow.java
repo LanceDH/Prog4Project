@@ -30,8 +30,6 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         
         characterList = Services.characterServices.GetAllChactersOfAccount(1);
         
-        
-        
         for (int i = 0; i < characterList.size(); i++) {
             AddCharacterToList(i, characterList.get(i));
         }

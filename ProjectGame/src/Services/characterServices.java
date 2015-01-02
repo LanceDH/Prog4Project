@@ -17,8 +17,7 @@ public class characterServices {
     
     public static int UpdateCharacter(DAL.Character character){
         int rows = 0;
-        
-        
+
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             Transaction tx = session.beginTransaction();
@@ -89,5 +88,32 @@ public class characterServices {
         return list;
     }
     
-    
+    public static int InsertCharacter(DAL.Character character){
+        int rows = 0;
+
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Transaction tx = session.beginTransaction();
+            
+                /*Query q = session.createQuery("insert into Character(AccountId, Name, RaceId, ClassId) values ("
+                        + character.getAccount().getId()
+                        + "," + character.getName()
+                        + "," + character.getRace().getId()
+                        + "," + character.getCharclass().getId()
+                        + ")");
+                rows = q.executeUpdate();*/
+                session.save(character);
+                tx.commit();
+        //session.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } catch(ExceptionInInitializerError e){
+            System.err.println(e.getMessage());
+        }
+        finally{
+            
+        }
+        
+        return rows;
+    }
 }

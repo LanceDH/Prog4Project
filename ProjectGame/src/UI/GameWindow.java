@@ -30,6 +30,11 @@ public class GameWindow extends javax.swing.JFrame {
      */
     public GameWindow() {
         initComponents();
+        
+        //Load UI related info
+        Services.MiscServices.LoadRaceData();
+        Services.MiscServices.LoadClassData();
+        
         this.setLocationRelativeTo(null);
         loginPanel = new LogingPanel(this);
         CharSelectPanel = new CharacterSelectWindow();
@@ -38,8 +43,6 @@ public class GameWindow extends javax.swing.JFrame {
         
         this.setLayout(new BorderLayout(10, 10));
         ShowLogin();
-        
-        Services.MiscServices.LoadRaceData();
     }
 
     /**

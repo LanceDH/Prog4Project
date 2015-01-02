@@ -9,6 +9,10 @@ package UI;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -17,6 +21,8 @@ import javax.swing.JLabel;
 public class CharacterCreateWindow extends javax.swing.JPanel {
 
     GameWindow _parent;
+    int _selectedRace = 0;
+    int _selectedClass = 0;
     
     /**
      * Creates new form CharacterCreateWindow
@@ -24,7 +30,29 @@ public class CharacterCreateWindow extends javax.swing.JPanel {
     public CharacterCreateWindow(GameWindow parent) {
         initComponents();
         _parent = parent;
+        ChangeSelectedRaceIcon(_selectedRace);
+        ChangeSelectedClassIcon(_selectedClass);
         
+        //Some way to limit input
+        txt_Name.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void insertUpdate(DocumentEvent de) {
+                if(txt_Name.getText().length() > 25){
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            txt_Name.setText(txt_Name.getText().substring(0, 25));
+                        }
+                    });
+                    ;
+                }
+            }
+            @Override
+            public void removeUpdate(DocumentEvent de) {}
+        });
         //lbl_SelectRace.setBounds(new Rectangle(lbl_RaceHuman.getLocation(), lbl_SelectRace.getPreferredSize()));
     }
 
@@ -37,42 +65,64 @@ public class CharacterCreateWindow extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        lbl_AccountName = new javax.swing.JLabel();
+        btn_Create = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         lbl_ClassRogue = new javax.swing.JLabel();
         lbl_ClassWarrior = new javax.swing.JLabel();
         lbl_ClassMage = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        lbl_RaceElf = new javax.swing.JLabel();
         lbl_RaceHuman = new javax.swing.JLabel();
         lbl_RaceOrc = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        lbl_RaceElf = new javax.swing.JLabel();
+        lbl_Error = new javax.swing.JLabel();
+        btn_Back = new javax.swing.JButton();
+        txt_Name = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
         setPreferredSize(new java.awt.Dimension(400, 300));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("AccountName");
+        lbl_AccountName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lbl_AccountName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_AccountName.setText("AccountName");
 
-        jToggleButton1.setText("jToggleButton1");
+        btn_Create.setText("Create Character");
+        btn_Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreateActionPerformed(evt);
+            }
+        });
 
         lbl_ClassRogue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Class_Rogue.png"))); // NOI18N
-        lbl_ClassRogue.setName("3"); // NOI18N
+        lbl_ClassRogue.setName("2"); // NOI18N
+        lbl_ClassRogue.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SelectClass(evt);
+            }
+        });
 
         lbl_ClassWarrior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/class_Warrior.png"))); // NOI18N
-        lbl_ClassWarrior.setName("1"); // NOI18N
+        lbl_ClassWarrior.setName("0"); // NOI18N
+        lbl_ClassWarrior.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SelectClass(evt);
+            }
+        });
 
         lbl_ClassMage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Class_Mage.png"))); // NOI18N
-        lbl_ClassMage.setName("2"); // NOI18N
+        lbl_ClassMage.setName("1"); // NOI18N
+        lbl_ClassMage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SelectClass(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Class");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -80,35 +130,26 @@ public class CharacterCreateWindow extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_ClassWarrior)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_ClassMage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_ClassRogue)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_ClassWarrior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_ClassMage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_ClassRogue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(lbl_ClassMage)
-                    .addComponent(lbl_ClassWarrior)
-                    .addComponent(lbl_ClassRogue))
-                .addGap(20, 20, 20))
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_ClassWarrior)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_ClassMage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_ClassRogue)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        lbl_RaceElf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Race_Elf.png"))); // NOI18N
-        lbl_RaceElf.setName("2"); // NOI18N
-        lbl_RaceElf.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SelectRace(evt);
-            }
-        });
 
         lbl_RaceHuman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Race_Human.png"))); // NOI18N
         lbl_RaceHuman.setName("0"); // NOI18N
@@ -127,100 +168,164 @@ public class CharacterCreateWindow extends javax.swing.JPanel {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Race");
         jLabel6.setMaximumSize(new java.awt.Dimension(61, 29));
         jLabel6.setMinimumSize(new java.awt.Dimension(61, 29));
         jLabel6.setPreferredSize(new java.awt.Dimension(61, 29));
+
+        lbl_RaceElf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Race_Elf.png"))); // NOI18N
+        lbl_RaceElf.setName("2"); // NOI18N
+        lbl_RaceElf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SelectRace(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_RaceHuman)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_RaceOrc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_RaceElf)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_RaceHuman, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_RaceOrc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_RaceElf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_RaceOrc)
-                    .addComponent(lbl_RaceHuman)
-                    .addComponent(lbl_RaceElf))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_RaceHuman)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_RaceOrc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_RaceElf)
+                .addContainerGap())
         );
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("jLabel2");
+        lbl_Error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jButton1.setText("jButton1");
+        btn_Back.setText("Back");
+        btn_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BackActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText("jTextField1");
+        jLabel3.setText("Character Name");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_AccountName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_Error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Create, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btn_Back))
+                            .addComponent(txt_Name))
+                        .addGap(17, 17, 17)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jToggleButton1))
-                .addContainerGap())
+                .addComponent(lbl_AccountName, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Create)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_Error, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Back)))
+                .addGap(300, 300, 300))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void SelectRace(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectRace
-        System.out.println(evt.getComponent().getName());
-        ChangeSelectedRaceIcon(Integer.parseInt(evt.getComponent().getName()));
+        _selectedRace = Integer.parseInt(evt.getComponent().getName());
+        System.out.println(_selectedRace);
+        ChangeSelectedRaceIcon(_selectedRace);
     }//GEN-LAST:event_SelectRace
+
+    private void SelectClass(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectClass
+        _selectedClass = Integer.parseInt(evt.getComponent().getName());
+        System.out.println(_selectedClass);
+        ChangeSelectedClassIcon(_selectedClass);
+    }//GEN-LAST:event_SelectClass
+
+    private void btn_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackActionPerformed
+        _parent.remove(this);
+        _parent.ShowCharacterSelect();
+    }//GEN-LAST:event_btn_BackActionPerformed
+
+    private void btn_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateActionPerformed
+        String name = txt_Name.getText();
+        if(name.length() < 3){
+            lbl_Error.setText("Name has to be at least 3 letters.");
+            return;
+        }
+        
+        // make sure the name is max 25 chars
+        if (name.length() > 25) {
+            name = name.substring(0, 25);
+        }
+        
+        
+        DAL.Character character = new DAL.Character();
+        character.setAccount(_parent.activeAccount);
+        character.setRace(Services.MiscServices.RaceList.get(_selectedRace));
+        character.setCharclass(Services.MiscServices.ClassList.get(_selectedClass));
+        character.setName(name);
+        
+        try {
+            Services.characterServices.InsertCharacter(character);
+        } catch (Exception e) {
+            lbl_Error.setText(e.getMessage());
+        }
+        
+        
+        _parent.remove(this);
+        _parent.ShowCharacterSelect();
+    }//GEN-LAST:event_btn_CreateActionPerformed
 
     private void ChangeSelectedRaceIcon(int nr){
         _parent.ChangeIcon(lbl_RaceHuman, Services.MiscServices.RaceList.get(0).getIconPath());
         _parent.ChangeIcon(lbl_RaceOrc, Services.MiscServices.RaceList.get(1).getIconPath());
         _parent.ChangeIcon(lbl_RaceElf, Services.MiscServices.RaceList.get(2).getIconPath());
-                                
         
-        JLabel lbl = null;
+        JLabel lbl = lbl_RaceHuman;
         switch(nr){
             case 0:
                 lbl = lbl_RaceHuman;
@@ -235,22 +340,46 @@ public class CharacterCreateWindow extends javax.swing.JPanel {
         
         _parent.ChangeIcon(lbl, Services.MiscServices.RaceList.get(nr).getIconPath()+"_Selected");
     }
+    
+    private void ChangeSelectedClassIcon(int nr){
+        _parent.ChangeIcon(lbl_ClassWarrior, Services.MiscServices.ClassList.get(0).getIconPath());
+        _parent.ChangeIcon(lbl_ClassMage, Services.MiscServices.ClassList.get(1).getIconPath());
+        _parent.ChangeIcon(lbl_ClassRogue, Services.MiscServices.ClassList.get(2).getIconPath());
+        
+                                
+        
+        JLabel lbl = lbl_ClassWarrior;
+        switch(nr){
+            case 0:
+                lbl = lbl_ClassWarrior;
+                break;
+            case 1:
+                lbl = lbl_ClassMage;
+                break;
+            case 2:
+                lbl = lbl_ClassRogue;
+                break;
+        }
+        
+        _parent.ChangeIcon(lbl, Services.MiscServices.ClassList.get(nr).getIconPath()+"_Selected");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btn_Back;
+    private javax.swing.JToggleButton btn_Create;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel lbl_AccountName;
     private javax.swing.JLabel lbl_ClassMage;
     private javax.swing.JLabel lbl_ClassRogue;
     private javax.swing.JLabel lbl_ClassWarrior;
+    private javax.swing.JLabel lbl_Error;
     private javax.swing.JLabel lbl_RaceElf;
     private javax.swing.JLabel lbl_RaceHuman;
     private javax.swing.JLabel lbl_RaceOrc;
+    private javax.swing.JTextField txt_Name;
     // End of variables declaration//GEN-END:variables
 }

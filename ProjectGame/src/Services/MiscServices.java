@@ -16,6 +16,8 @@ import org.hibernate.Session;
  */
 public class MiscServices {
     public static ArrayList<DAL.Race> RaceList;
+    public static ArrayList<DAL.Charclass> ClassList;
+    
     
     public static void LoadRaceData(){
         
@@ -25,6 +27,27 @@ public class MiscServices {
              
         Query q = session.createQuery("from Race");
         RaceList = (ArrayList<DAL.Race>) q.list();
+        
+        
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } catch(ExceptionInInitializerError e){
+            System.err.println(e.getMessage());
+        }
+        finally{
+            //session.close();
+        }
+
+    }
+    
+    public static void LoadClassData(){
+        
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+             
+        Query q = session.createQuery("from Charclass");
+        ClassList = (ArrayList<DAL.Charclass>) q.list();
         
         
         } catch (Exception e) {
