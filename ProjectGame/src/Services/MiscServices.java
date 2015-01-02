@@ -20,9 +20,9 @@ public class MiscServices {
     
     
     public static void LoadRaceData(){
-        
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+            
             session.beginTransaction();
              
         Query q = session.createQuery("from Race");
@@ -35,15 +35,15 @@ public class MiscServices {
             System.err.println(e.getMessage());
         }
         finally{
-            //session.close();
+            session.close();
         }
 
     }
     
     public static void LoadClassData(){
-        
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+            
             session.beginTransaction();
              
         Query q = session.createQuery("from Charclass");
@@ -56,7 +56,7 @@ public class MiscServices {
             System.err.println(e.getMessage());
         }
         finally{
-            //session.close();
+            session.close();
         }
 
     }

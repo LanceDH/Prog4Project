@@ -6,6 +6,7 @@
 
 package UI;
 
+import DAL.HibernateUtil;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ public class GameWindow extends javax.swing.JFrame {
      * Creates new form GameWindow
      */
     public GameWindow() {
+        
         initComponents();
         
         //Load UI related info
@@ -37,7 +39,7 @@ public class GameWindow extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         loginPanel = new LogingPanel(this);
-        CharSelectPanel = new CharacterSelectWindow();
+        CharSelectPanel = new CharacterSelectWindow(this);
         lootPanel = new LootPanel(this);
         characterCreateWindow = new CharacterCreateWindow(this);
         

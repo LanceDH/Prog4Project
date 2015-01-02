@@ -17,10 +17,11 @@ public class characterServices {
     
     public static int UpdateCharacter(DAL.Character character){
         int rows = 0;
-
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Transaction tx = session.beginTransaction();
+            
+            tx = session.beginTransaction();
              
              //AccountId 	Name 	RaceId 	ClassId 	ChestItemId 	LegsItemId 	BootsItemId 	WeaponItemId 
             
@@ -55,12 +56,11 @@ public class characterServices {
         tx.commit();
         //session.close();
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-        } catch(ExceptionInInitializerError e){
+            if (tx != null) tx.rollback();
             System.err.println(e.getMessage());
         }
         finally{
-            
+            session.close();
         }
         
         return rows;
@@ -69,20 +69,21 @@ public class characterServices {
     public static ArrayList<DAL.Character> GetAllChactersOfAccount(int accId){
         ArrayList<DAL.Character> list = new ArrayList<DAL.Character>();
         
-        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
+            tx = session.beginTransaction();
              
-        Query q = session.createQuery("from Character where AccountId = " + accId);
-        list = (ArrayList<DAL.Character>) q.list();
+            Query q = session.createQuery("from Character where AccountId = " + accId);
+            list = (ArrayList<DAL.Character>) q.list();
+        
+            tx.commit();
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-        } catch(ExceptionInInitializerError e){
+            if (tx != null) tx.rollback();
             System.err.println(e.getMessage());
         }
         finally{
-            //session.close();
+            session.close();
         }
 
         return list;
@@ -90,10 +91,10 @@ public class characterServices {
     
     public static int InsertCharacter(DAL.Character character){
         int rows = 0;
-
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             
                 /*Query q = session.createQuery("insert into Character(AccountId, Name, RaceId, ClassId) values ("
                         + character.getAccount().getId()
@@ -102,16 +103,44 @@ public class characterServices {
                         + "," + character.getCharclass().getId()
                         + ")");
                 rows = q.executeUpdate();*/
-                session.save(character);
-                tx.commit();
+            session.save(character);
+            tx.commit();
         //session.close();
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-        } catch(ExceptionInInitializerError e){
+            if (tx != null) tx.rollback();
             System.err.println(e.getMessage());
         }
         finally{
+            session.close();
+        }
+        
+        return rows;
+    }
+    
+    public static int DeleteCharacter(DAL.Character character){
+        int rows = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
             
+            tx = session.beginTransaction();
+            
+                /*Query q = session.createQuery("insert into Character(AccountId, Name, RaceId, ClassId) values ("
+                        + character.getAccount().getId()
+                        + "," + character.getName()
+                        + "," + character.getRace().getId()
+                        + "," + character.getCharclass().getId()
+                        + ")");
+                rows = q.executeUpdate();*/
+                session.delete(tx);
+                tx.commit();
+        //session.close();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
         }
         
         return rows;

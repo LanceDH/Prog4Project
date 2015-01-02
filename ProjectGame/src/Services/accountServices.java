@@ -18,22 +18,23 @@ public class accountServices {
     public static ArrayList<DAL.Account> GetAllAccounts(){
         ArrayList<DAL.Account> list = new ArrayList<DAL.Account>();
         
-        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+         Transaction tx = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
+            
+            tx = session.beginTransaction();
+            
              
         Query q = session.createQuery("from Account");
         list = (ArrayList<DAL.Account>) q.list();
         
         
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-        } catch(ExceptionInInitializerError e){
+            if (tx != null) tx.rollback();
             System.err.println(e.getMessage());
         }
         finally{
-            //session.close();
+            session.close();
         }
         
         
@@ -43,10 +44,12 @@ public class accountServices {
     public static Account Login(String name, String pass) throws Exception{
         Account account = new Account();
         
-        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+         Transaction tx = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
+            
+            tx = session.beginTransaction();
+            
              
         Query q = session.createQuery("from Account where name = '" + name + "' and password = '" + pass + "'");
         
@@ -59,12 +62,11 @@ public class accountServices {
         account = (Account)q.list().get(0);
         
         } catch (Exception e) {
+            if (tx != null) tx.rollback();
             throw e;
-        } catch(ExceptionInInitializerError e){
-            System.err.println(e.getMessage());
         }
         finally{
-            //session.close();
+            session.close();
         }
         
         return account;

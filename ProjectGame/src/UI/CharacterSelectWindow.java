@@ -19,11 +19,13 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
 
     ArrayList<Map> charMaps = new ArrayList<Map>();
     ArrayList<DAL.Character> characterList = null;
+    GameWindow _parent;
     
     /**
      * Creates new form pnl_CharacterSelect
      */
-    public CharacterSelectWindow() {
+    public CharacterSelectWindow(GameWindow parent) {
+        _parent = parent;
         initComponents();
         InitMapArray();
         ResetAllCharacterPanels();
@@ -106,8 +108,13 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         btn_DeleteChar0.setText("x");
         btn_DeleteChar0.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar0.setMinimumSize(new java.awt.Dimension(26, 26));
-        btn_DeleteChar0.setName(""); // NOI18N
+        btn_DeleteChar0.setName("0"); // NOI18N
         btn_DeleteChar0.setPreferredSize(new java.awt.Dimension(26, 26));
+        btn_DeleteChar0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteCharacter(evt);
+            }
+        });
 
         lbl_IconClassChar0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
         lbl_IconClassChar0.setToolTipText("");
@@ -165,8 +172,13 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         btn_DeleteChar1.setText("x");
         btn_DeleteChar1.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar1.setMinimumSize(new java.awt.Dimension(26, 26));
-        btn_DeleteChar1.setName(""); // NOI18N
+        btn_DeleteChar1.setName("1"); // NOI18N
         btn_DeleteChar1.setPreferredSize(new java.awt.Dimension(26, 26));
+        btn_DeleteChar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteCharacter(evt);
+            }
+        });
 
         lbl_IconClassChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
         lbl_IconClassChar1.setToolTipText("");
@@ -224,8 +236,13 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         btn_DeleteChar2.setText("x");
         btn_DeleteChar2.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar2.setMinimumSize(new java.awt.Dimension(26, 26));
-        btn_DeleteChar2.setName(""); // NOI18N
+        btn_DeleteChar2.setName("2"); // NOI18N
         btn_DeleteChar2.setPreferredSize(new java.awt.Dimension(26, 26));
+        btn_DeleteChar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteCharacter(evt);
+            }
+        });
 
         lbl_IconClassChar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
         lbl_IconClassChar2.setToolTipText("");
@@ -283,8 +300,13 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         btn_DeleteChar3.setText("x");
         btn_DeleteChar3.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar3.setMinimumSize(new java.awt.Dimension(26, 26));
-        btn_DeleteChar3.setName(""); // NOI18N
+        btn_DeleteChar3.setName("3"); // NOI18N
         btn_DeleteChar3.setPreferredSize(new java.awt.Dimension(26, 26));
+        btn_DeleteChar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteCharacter(evt);
+            }
+        });
 
         lbl_IconClassChar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
         lbl_IconClassChar3.setToolTipText("");
@@ -342,8 +364,13 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         btn_DeleteChar4.setText("x");
         btn_DeleteChar4.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar4.setMinimumSize(new java.awt.Dimension(26, 26));
-        btn_DeleteChar4.setName(""); // NOI18N
+        btn_DeleteChar4.setName("4"); // NOI18N
         btn_DeleteChar4.setPreferredSize(new java.awt.Dimension(26, 26));
+        btn_DeleteChar4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteCharacter(evt);
+            }
+        });
 
         lbl_IconClassChar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
         lbl_IconClassChar4.setToolTipText("");
@@ -500,12 +527,10 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
             JPanel p = (JPanel)map.get("panel");
             p.setVisible(false);
         }
-        //lbl_IconRaceChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/human26.png")));
-        //btn_LoginChar1.setText("null");
-        //btn_LoginChar2.setText("null");
-        //btn_LoginChar3.setText("null");
-        //btn_LoginChar4.setText("null");
-        //btn_LoginChar5.setText("null");
+        
+        btn_CreateChar.setEnabled(true);
+        btn_CreateChar.setVisible(true);
+        
     }
     
     public void UpdateCharacters(int accId) {
@@ -516,29 +541,38 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
         for (int i = 0; i < characterList.size(); i++) {
             AddCharacterToList(i, characterList.get(i));
         }
+        
+        if(characterList.size() == 5){
+            btn_CreateChar.setEnabled(false);
+            btn_CreateChar.setVisible(false);
+        }
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
-        
-        parent.activeAccount = null;
-        parent.remove(this);
-        parent.ShowLogin();
+
+        _parent.activeAccount = null;
+        _parent.remove(this);
+        _parent.ShowLogin();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void SelectCharacter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectCharacter
         int charIdInArray = Integer.parseInt(((JButton)evt.getSource()).getName());
-        GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
-        parent.activeCharacter = characterList.get(charIdInArray);
-        parent.remove(this);
-        parent.ShowLoot();
+        _parent.activeCharacter = characterList.get(charIdInArray);
+        _parent.remove(this);
+        _parent.ShowLoot();
     }//GEN-LAST:event_SelectCharacter
 
     private void btn_CreateCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateCharActionPerformed
-        GameWindow parent = (GameWindow)SwingUtilities.getWindowAncestor(this);
-        parent.remove(this);
-        parent.ShowCharacterCreate();
+        _parent.remove(this);
+        _parent.ShowCharacterCreate();
     }//GEN-LAST:event_btn_CreateCharActionPerformed
+
+    private void DeleteCharacter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCharacter
+        int charIdInArray = Integer.parseInt(((JButton)evt.getSource()).getName());
+        Services.characterServices.DeleteCharacter(characterList.get(charIdInArray));
+        
+        UpdateCharacters(_parent.activeAccount.getId());
+    }//GEN-LAST:event_DeleteCharacter
 
     
 
