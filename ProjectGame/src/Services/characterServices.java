@@ -5,6 +5,7 @@
  */
 package Services;
 
+import DAL.Character;
 import DAL.HibernateUtil;
 import java.util.*;
 import org.hibernate.*;
@@ -22,38 +23,8 @@ public class characterServices {
         try {
             
             tx = session.beginTransaction();
-             
-             //AccountId 	Name 	RaceId 	ClassId 	ChestItemId 	LegsItemId 	BootsItemId 	WeaponItemId 
-            
-            String chestItemId = "null"; 
-            String legsItemId = "null";
-            String bootsItemId = "null";
-            String weaponItemId = "null";
-            if(character.getItemByChestItemId() != null){
-                chestItemId = "'" + character.getItemByChestItemId().getId() + "'";
-            }
-            if(character.getItemByLegsItemId() != null){
-                legsItemId = "'" + character.getItemByLegsItemId().getId() + "'";
-            }
-            if(character.getItemByBootsItemId() != null){
-                bootsItemId = "'" + character.getItemByBootsItemId().getId() + "'";
-            }
-            if(character.getItemByWeaponItemId() != null){
-                weaponItemId = "'" + character.getItemByWeaponItemId().getId() + "'";
-            }
-            
-        Query q = session.createQuery("update Character set "
-                + "AccountId = '" + character.getAccount().getId() +  "' "
-                + ",Name = '" + character.getName() +  "' "
-                + ",RaceId = '" + character.getRace().getId() +  "' "
-                + ",ClassId = '" + character.getCharclass().getId() +  "' "
-                + ",ChestItemId = " + chestItemId +  " "
-                + ",LegsItemId = " + legsItemId +  " "
-                + ",BootsItemId = " + bootsItemId +  " "
-                + ",WeaponItemId = " + weaponItemId +  " "
-                + "where ID = '" + character.getId() +  "' ");
-        rows = q.executeUpdate();
-        tx.commit();
+            session.update(character);
+            tx.commit();
         //session.close();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
@@ -73,10 +44,15 @@ public class characterServices {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-             
             Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId  left join fetch c.itemByWeaponItemId  left join fetch c.itemByChestItemId  left join fetch c.itemByLegsItemId  left join fetch c.charclass  left join fetch c.race where AccountId = " + accId);
             list = (ArrayList<DAL.Character>) q.list();
-        
+            //because sort by is too mainstream
+            Collections.sort(list, new Comparator<DAL.Character>() {
+                @Override
+                public int compare(Character t, Character t1) {
+                    return t.getId().compareTo(t1.getId());
+                }
+            });
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
@@ -89,13 +65,20 @@ public class characterServices {
         return list;
     }
     
-    public static int InsertCharacter(DAL.Character character){
+    public static int InsertCharacter(DAL.Character character) throws Exception{
         int rows = 0;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             
+            Query q = session.createQuery("from Character where name = :name");
+            q.setParameter("name", character.getName());
+            //rows = q.executeUpdate();
+            //tx.commit();
+            if (q.list().size() > 0) {
+                throw new Exception("Character name is unavailable");
+            }
                 /*Query q = session.createQuery("insert into Character(AccountId, Name, RaceId, ClassId) values ("
                         + character.getAccount().getId()
                         + "," + character.getName()
@@ -109,7 +92,8 @@ public class characterServices {
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             System.err.println(e.getMessage());
-        }
+            throw e;
+        } 
         finally{
             session.close();
         }
@@ -124,18 +108,9 @@ public class characterServices {
         try {
             
             tx = session.beginTransaction();
-            
-                /*Query q = session.createQuery("insert into Character(AccountId, Name, RaceId, ClassId) values ("
-                        + character.getAccount().getId()
-                        + "," + character.getName()
-                        + "," + character.getRace().getId()
-                        + "," + character.getCharclass().getId()
-                        + ")");
-                rows = q.executeUpdate();*/
-                session.delete(character);
-                //Query q = session.createQuery("delete character where ID = " + character.getId());
-                //rows = q.executeUpdate();
-                tx.commit();
+
+            session.delete(character);
+            tx.commit();
         //session.close();
         } catch (Exception e) {
             if (tx != null) tx.rollback();

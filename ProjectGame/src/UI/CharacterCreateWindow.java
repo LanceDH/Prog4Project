@@ -313,6 +313,7 @@ public class CharacterCreateWindow extends javax.swing.JPanel {
             Services.characterServices.InsertCharacter(character);
         } catch (Exception e) {
             lbl_Error.setText(e.getMessage());
+            return;
         }
         
         

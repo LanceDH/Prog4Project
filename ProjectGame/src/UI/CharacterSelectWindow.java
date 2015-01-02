@@ -571,9 +571,12 @@ public class CharacterSelectWindow extends javax.swing.JPanel {
 
     private void DeleteCharacter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCharacter
         int charIdInArray = Integer.parseInt(((JButton)evt.getSource()).getName());
-        Services.characterServices.DeleteCharacter(characterList.get(charIdInArray));
-        
-        UpdateCharacters(_parent.activeAccount.getId());
+        DAL.Character c = characterList.get(charIdInArray);
+        int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete " + c.getName() + " ?", "Warning" , JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            Services.characterServices.DeleteCharacter(c);
+            UpdateCharacters(_parent.activeAccount.getId());
+        }
     }//GEN-LAST:event_DeleteCharacter
 
     

@@ -4,7 +4,7 @@
 <!-- Generated 28-dec-2014 18:58:35 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="DAL.Character" table="character" catalog="game" optimistic-lock="version">
-        <id name="id" type="java.lang.Integer">
+        <id name="id" type="java.lang.Integer" >
             <column name="ID" />
             <generator class="identity" />
         </id>

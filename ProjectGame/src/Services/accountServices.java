@@ -51,7 +51,9 @@ public class accountServices {
             tx = session.beginTransaction();
             
              
-        Query q = session.createQuery("from Account where name = '" + name + "' and password = '" + pass + "'");
+        Query q = session.createQuery("from Account where name = :login and password = :pass");
+        q.setParameter("login", name);
+        q.setParameter("pass", pass);
         
         if(q.list().size() == 0){
             Exception ex = new Exception("Account name or password is incorrect");
