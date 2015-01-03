@@ -17,15 +17,15 @@ import javax.swing.*;
  */
 public class CharacterSelectPanel extends javax.swing.JPanel {
 
-    ArrayList<Map> charMaps = new ArrayList<Map>();
-    ArrayList<DAL.Character> characterList = null;
-    GameWindow _parent;
+    private ArrayList<Map> charMaps = new ArrayList<Map>();
+    private ArrayList<DAL.Character> characterList = null;
+    private GameWindow _parentWindow;
     
     /**
      * Creates new form pnl_CharacterSelect
      */
     public CharacterSelectPanel(GameWindow parent) {
-        _parent = parent;
+        _parentWindow = parent;
         initComponents();
         InitMapArray();
         ResetAllCharacterPanels();
@@ -513,10 +513,10 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         JPanel p = (JPanel)map.get("panel");
         p.setVisible(true);
         JLabel lblRace = (JLabel)map.get("race");
-        _parent.ChangeIcon(lblRace, character.getRace().getIconPath());
+        _parentWindow.ChangeIcon(lblRace, character.getRace().getIconPath());
         //lblRace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getRace().getIconPath() + "_26.png")));
         JLabel lbl_Class = (JLabel)map.get("class");
-        _parent.ChangeIcon(lbl_Class, character.getCharclass().getIconPath());
+        _parentWindow.ChangeIcon(lbl_Class, character.getCharclass().getIconPath());
         //lbl_Class.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getCharclass().getIconPath() + "_26.png")));
         
         JButton b1 = (JButton)map.get("login");
@@ -552,21 +552,21 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        _parent.activeAccount = null;
-        _parent.remove(this);
-        _parent.ShowLogin();
+        _parentWindow.setActiveAccount(null);
+        _parentWindow.remove(this);
+        _parentWindow.ShowLogin();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void SelectCharacter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectCharacter
         int charIdInArray = Integer.parseInt(((JButton)evt.getSource()).getName());
-        _parent.activeCharacter = characterList.get(charIdInArray);
-        _parent.remove(this);
-        _parent.ShowLoot();
+        _parentWindow.setActiveCharacter(characterList.get(charIdInArray));
+        _parentWindow.remove(this);
+        _parentWindow.ShowLoot();
     }//GEN-LAST:event_SelectCharacter
 
     private void btn_CreateCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateCharActionPerformed
-        _parent.remove(this);
-        _parent.ShowCharacterCreate();
+        _parentWindow.remove(this);
+        _parentWindow.ShowCharacterCreate();
     }//GEN-LAST:event_btn_CreateCharActionPerformed
 
     private void DeleteCharacter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCharacter
@@ -575,7 +575,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete " + c.getName() + " ?", "Warning" , JOptionPane.YES_NO_OPTION);
         if(result == JOptionPane.YES_OPTION){
             Services.CharacterServices.DeleteCharacter(c);
-            UpdateCharacters(_parent.activeAccount.getId());
+            UpdateCharacters(_parentWindow.getActiveAccount().getId());
         }
     }//GEN-LAST:event_DeleteCharacter
 

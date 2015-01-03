@@ -1,8 +1,20 @@
 Swing
-[] Create account
-- [] UI
-- [] Save account
+[x] Create account
+- [x] UI design
+- [x] UI code
+- [x] Save account
 [x] get/set for misc stuff
+[] safeguard no spaces in passwords
+[] safeguard chacter
+- [] name only letters/spaces
+- [] name 3 actual letters
+- [] min/max length
+- [] no start/end with space
+[] safeguard account
+- [] name only letters/spaces
+- [] name 5 actual letters
+- [x] min/max length
+- [] no start/end with space
 
 Site
 [] homepage

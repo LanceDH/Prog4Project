@@ -7,13 +7,11 @@
 package UI;
 
 import Services.UIException;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
+import Services.Validators;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.transaction.Transactional;
 
 /**
  *
@@ -21,16 +19,16 @@ import javax.transaction.Transactional;
  */
 public class CharacterCreatePanel extends javax.swing.JPanel {
 
-    GameWindow _parent;
-    int _selectedRace = 0;
-    int _selectedClass = 0;
+    private GameWindow _parentWindow;
+    private int _selectedRace = 0;
+    private int _selectedClass = 0;
     
     /**
      * Creates new form CharacterCreateWindow
      */
     public CharacterCreatePanel(GameWindow parent) {
         initComponents();
-        _parent = parent;
+        _parentWindow = parent;
         ChangeSelectedRaceIcon(_selectedRace);
         ChangeSelectedClassIcon(_selectedClass);
         
@@ -287,25 +285,32 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_SelectClass
 
     private void btn_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackActionPerformed
-        _parent.remove(this);
-        _parent.ShowCharacterSelect();
+        _parentWindow.remove(this);
+        _parentWindow.ShowCharacterSelect();
     }//GEN-LAST:event_btn_BackActionPerformed
 
     private void btn_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateActionPerformed
         String name = txt_Name.getText();
+        
+        // make sure the name is max 25 chars
+        if (name.length() > Validators.ACCNAME_MAXLENGTH) {
+            name = name.substring(0, Validators.ACCNAME_MAXLENGTH);
+        }
+        
         if(name.length() < 3){
             lbl_Error.setText("Name has to be at least 3 letters.");
             return;
         }
         
-        // make sure the name is max 25 chars
-        if (name.length() > 25) {
-            name = name.substring(0, 25);
+        try {
+            Validators.IsValidCharacterName(name);
+        } catch (Exception e) {
+            lbl_Error.setText(e.getMessage());
+            return;
         }
-        
-        
+
         DAL.Character character = new DAL.Character();
-        character.setAccount(_parent.activeAccount);
+        character.setAccount(_parentWindow.getActiveAccount());
         character.setRace(Services.MiscServices.getRaceList().get(_selectedRace));
         character.setCharclass(Services.MiscServices.getClassList().get(_selectedClass));
         character.setName(name);
@@ -316,16 +321,15 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
             lbl_Error.setText(e.getMessage());
             return;
         }
-        
-        
-        _parent.remove(this);
-        _parent.ShowCharacterSelect();
+
+        _parentWindow.remove(this);
+        _parentWindow.ShowCharacterSelect();
     }//GEN-LAST:event_btn_CreateActionPerformed
 
     private void ChangeSelectedRaceIcon(int nr){
-        _parent.ChangeIcon(lbl_RaceHuman, Services.MiscServices.getRaceList().get(0).getIconPath());
-        _parent.ChangeIcon(lbl_RaceOrc, Services.MiscServices.getRaceList().get(1).getIconPath());
-        _parent.ChangeIcon(lbl_RaceElf, Services.MiscServices.getRaceList().get(2).getIconPath());
+        _parentWindow.ChangeIcon(lbl_RaceHuman, Services.MiscServices.getRaceList().get(0).getIconPath());
+        _parentWindow.ChangeIcon(lbl_RaceOrc, Services.MiscServices.getRaceList().get(1).getIconPath());
+        _parentWindow.ChangeIcon(lbl_RaceElf, Services.MiscServices.getRaceList().get(2).getIconPath());
         
         JLabel lbl = lbl_RaceHuman;
         switch(nr){
@@ -340,16 +344,14 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
                 break;
         }
         
-        _parent.ChangeIcon(lbl, Services.MiscServices.getRaceList().get(nr).getIconPath()+"_Selected");
+        _parentWindow.ChangeIcon(lbl, Services.MiscServices.getRaceList().get(nr).getIconPath()+"_Selected");
     }
     
     private void ChangeSelectedClassIcon(int nr){
-        _parent.ChangeIcon(lbl_ClassWarrior, Services.MiscServices.getClassList().get(0).getIconPath());
-        _parent.ChangeIcon(lbl_ClassMage, Services.MiscServices.getClassList().get(1).getIconPath());
-        _parent.ChangeIcon(lbl_ClassRogue, Services.MiscServices.getClassList().get(2).getIconPath());
-        
-                                
-        
+        _parentWindow.ChangeIcon(lbl_ClassWarrior, Services.MiscServices.getClassList().get(0).getIconPath());
+        _parentWindow.ChangeIcon(lbl_ClassMage, Services.MiscServices.getClassList().get(1).getIconPath());
+        _parentWindow.ChangeIcon(lbl_ClassRogue, Services.MiscServices.getClassList().get(2).getIconPath());
+
         JLabel lbl = lbl_ClassWarrior;
         switch(nr){
             case 0:
@@ -363,9 +365,18 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
                 break;
         }
         
-        _parent.ChangeIcon(lbl, Services.MiscServices.getClassList().get(nr).getIconPath()+"_Selected");
+        _parentWindow.ChangeIcon(lbl, Services.MiscServices.getClassList().get(nr).getIconPath()+"_Selected");
     }
 
+    public void Reset(){
+        _selectedRace = 0;
+        _selectedClass = 0;
+        ChangeSelectedRaceIcon(_selectedRace);
+        ChangeSelectedClassIcon(_selectedClass);
+        txt_Name.setText("");
+        lbl_Error.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Back;
     private javax.swing.JToggleButton btn_Create;

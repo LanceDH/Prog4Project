@@ -23,12 +23,9 @@ public class AccountServices {
         try {
             
             tx = session.beginTransaction();
-            
-             
-        Query q = session.createQuery("from Account");
-        list = (ArrayList<DAL.Account>) q.list();
-        
-        
+            Query q = session.createQuery("from Account");
+            list = (ArrayList<DAL.Account>) q.list();
+
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             System.err.println(e.getMessage());
@@ -75,5 +72,36 @@ public class AccountServices {
         }
         
         return account;
+    }
+    
+    public static int InsertAccount(DAL.Account account) throws UIException{
+        int row = 0;
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            
+            Query q = session.createQuery("from Account where name = :name");
+            q.setParameter("name", account.getName());
+            if (q.list().size() > 0) {
+                throw new UIException("Account name is unavailable");
+            }
+            
+            session.save(account);
+            tx.commit();
+        } catch (UIException e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        } 
+        finally{
+            session.close();
+        }
+        
+        
+        return row;
     }
 }

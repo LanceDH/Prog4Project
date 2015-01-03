@@ -15,12 +15,8 @@ import javax.swing.SwingUtilities;
  */
 public class LootPanel extends javax.swing.JPanel {
 
-    GameWindow _parent;
-    Item equipedChest;
-    Item equipedLegs;
-    Item equipedFeet;
-    Item equipedWeapon;
-    Item loot;
+    private GameWindow _parent;
+    private Item loot;
     /**
      * Creates new form LootWindow
      */
@@ -222,8 +218,8 @@ public class LootPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ChangeCharacterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChangeCharacterActionPerformed
-        Services.CharacterServices.UpdateCharacter(_parent.activeCharacter);
-        _parent.activeCharacter = null;
+        Services.CharacterServices.UpdateCharacter(_parent.getActiveCharacter());
+        _parent.setActiveCharacter(null);
         _parent.remove(this);
         _parent.ShowCharacterSelect();
     }//GEN-LAST:event_btn_ChangeCharacterActionPerformed
@@ -245,16 +241,16 @@ public class LootPanel extends javax.swing.JPanel {
         
         switch(loot.getSlot().getId()){
             case 2: //Chest
-                _parent.activeCharacter.setItemByChestItemId(loot);
+                _parent.getActiveCharacter().setItemByChestItemId(loot);
                 break;
             case 3: //Legs
-                _parent.activeCharacter.setItemByLegsItemId(loot);
+                _parent.getActiveCharacter().setItemByLegsItemId(loot);
                 break;
             case 4: //Boots
-                _parent.activeCharacter.setItemByBootsItemId(loot);
+                _parent.getActiveCharacter().setItemByBootsItemId(loot);
                 break;
             case 5: //Weapon
-                _parent.activeCharacter.setItemByWeaponItemId(loot);
+                _parent.getActiveCharacter().setItemByWeaponItemId(loot);
                 break;
         }
         UpdateCharacterLoot();
@@ -278,21 +274,21 @@ public class LootPanel extends javax.swing.JPanel {
     }
     
     public void UpdateCharacterLoot(){
-        lbl_CharacterName.setText(_parent.activeCharacter.getName());
-        _parent.ChangeIcon(lbl_IconRace, _parent.activeCharacter.getRace().getIconPath());
-        _parent.ChangeIcon(lbl_IconClass, _parent.activeCharacter.getCharclass().getIconPath());
+        lbl_CharacterName.setText(_parent.getActiveCharacter().getName());
+        _parent.ChangeIcon(lbl_IconRace, _parent.getActiveCharacter().getRace().getIconPath());
+        _parent.ChangeIcon(lbl_IconClass, _parent.getActiveCharacter().getCharclass().getIconPath());
         
-        if (_parent.activeCharacter.getItemByChestItemId() != null) {
-            _parent.ChangeIcon(lbl_ChestIcon, _parent.activeCharacter.getItemByChestItemId().getIconPath());
+        if (_parent.getActiveCharacter().getItemByChestItemId() != null) {
+            _parent.ChangeIcon(lbl_ChestIcon, _parent.getActiveCharacter().getItemByChestItemId().getIconPath());
         }
-        if (_parent.activeCharacter.getItemByBootsItemId() != null) {
-            _parent.ChangeIcon(lbl_FeetIcon, _parent.activeCharacter.getItemByBootsItemId().getIconPath());
+        if (_parent.getActiveCharacter().getItemByBootsItemId() != null) {
+            _parent.ChangeIcon(lbl_FeetIcon, _parent.getActiveCharacter().getItemByBootsItemId().getIconPath());
         }
-        if (_parent.activeCharacter.getItemByLegsItemId() != null) {
-            _parent.ChangeIcon(lbl_LegsIcon, _parent.activeCharacter.getItemByLegsItemId().getIconPath());
+        if (_parent.getActiveCharacter().getItemByLegsItemId() != null) {
+            _parent.ChangeIcon(lbl_LegsIcon, _parent.getActiveCharacter().getItemByLegsItemId().getIconPath());
         }
-        if (_parent.activeCharacter.getItemByWeaponItemId() != null) {
-            _parent.ChangeIcon(lbl_WeaponIcon, _parent.activeCharacter.getItemByWeaponItemId().getIconPath());
+        if (_parent.getActiveCharacter().getItemByWeaponItemId() != null) {
+            _parent.ChangeIcon(lbl_WeaponIcon, _parent.getActiveCharacter().getItemByWeaponItemId().getIconPath());
         }
     }
 

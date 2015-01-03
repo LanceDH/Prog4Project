@@ -17,13 +17,14 @@ import javax.swing.JLabel;
  */
 public class GameWindow extends javax.swing.JFrame {
 
-    DAL.Account activeAccount;
-    DAL.Character activeCharacter;
+    private DAL.Account activeAccount;
+    private DAL.Character activeCharacter;
     
-    LogingPanel loginPanel;
-    CharacterSelectPanel CharSelectPanel;
-    LootPanel lootPanel;
-    CharacterCreatePanel characterCreateWindow;
+    private LogingPanel loginPanel;
+    private CharacterSelectPanel CharSelectPanel;
+    private LootPanel lootPanel;
+    private CharacterCreatePanel characterCreatePanel;
+    private AccountRegistrationPanel accRegisterPanel;
     
     
     /**
@@ -41,7 +42,8 @@ public class GameWindow extends javax.swing.JFrame {
         loginPanel = new LogingPanel(this);
         CharSelectPanel = new CharacterSelectPanel(this);
         lootPanel = new LootPanel(this);
-        characterCreateWindow = new CharacterCreatePanel(this);
+        characterCreatePanel = new CharacterCreatePanel(this);
+        accRegisterPanel = new AccountRegistrationPanel(this);
         
         this.setLayout(new BorderLayout(10, 10));
         ShowLogin();
@@ -124,7 +126,7 @@ public class GameWindow extends javax.swing.JFrame {
     }
     
     public void SetActiveAccount(DAL.Account acc){
-        this.activeAccount = acc;
+        this.setActiveAccount(acc);
     }
     
     public void ShowLogin(){
@@ -134,18 +136,18 @@ public class GameWindow extends javax.swing.JFrame {
     }
     
     public void ShowCharacterSelect(){
-        if (activeAccount == null) {
+        if (getActiveAccount() == null) {
             ShowLogin();
         }
         
         this.add(CharSelectPanel, BorderLayout.CENTER);
-        CharSelectPanel.UpdateCharacters(activeAccount.getId());
+        CharSelectPanel.UpdateCharacters(getActiveAccount().getId());
         this.repaint();
         this.pack();   
     }
     
     public void ShowLoot(){
-        if (this.activeCharacter == null) {
+        if (this.getActiveCharacter() == null) {
             ShowCharacterSelect();
         }
 
@@ -157,7 +159,14 @@ public class GameWindow extends javax.swing.JFrame {
     }
     
     void ShowCharacterCreate() {
-        this.add(characterCreateWindow, BorderLayout.CENTER);
+        this.add(characterCreatePanel, BorderLayout.CENTER);
+        this.repaint();
+        this.pack(); 
+    }
+    
+    void ShowAccountRegistration() {
+        this.add(accRegisterPanel, BorderLayout.CENTER);
+        accRegisterPanel.Reset();
         this.repaint();
         this.pack(); 
     }
@@ -180,5 +189,20 @@ public class GameWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
+    public DAL.Account getActiveAccount() {
+        return activeAccount;
+    }
+
+    public void setActiveAccount(DAL.Account activeAccount) {
+        this.activeAccount = activeAccount;
+    }
+
+    public DAL.Character getActiveCharacter() {
+        return activeCharacter;
+    }
+
+    public void setActiveCharacter(DAL.Character activeCharacter) {
+        this.activeCharacter = activeCharacter;
+    }
     
 }
