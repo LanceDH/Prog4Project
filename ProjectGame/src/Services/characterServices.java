@@ -14,7 +14,7 @@ import org.hibernate.*;
  *
  * @author LanceDH
  */
-public class characterServices {
+public class CharacterServices {
     
     public static int UpdateCharacter(DAL.Character character){
         int rows = 0;

@@ -14,7 +14,7 @@ import org.hibernate.*;
  *
  * @author LanceDH
  */
-public class itemServices {
+public class ItemServices {
     public static ArrayList<DAL.Item> LootList;
     
     public static void LoadAllLoot(){

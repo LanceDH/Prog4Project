@@ -1,8 +1,10 @@
 Swing
-- Create account
-- get/set for misc stuff
+[] Create account
+- [] UI
+- [] Save account
+[x] get/set for misc stuff
 
 Site
-- homepage
-- page with search results
-- page per character
+[] homepage
+[] page with search results
+[] page per character

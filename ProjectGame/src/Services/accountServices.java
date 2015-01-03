@@ -14,7 +14,7 @@ import org.hibernate.*;
  *
  * @author LanceDH
  */
-public class accountServices {
+public class AccountServices {
     public static ArrayList<DAL.Account> GetAllAccounts(){
         ArrayList<DAL.Account> list = new ArrayList<DAL.Account>();
         

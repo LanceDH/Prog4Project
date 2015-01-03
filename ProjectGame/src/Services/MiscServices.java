@@ -14,9 +14,9 @@ import org.hibernate.*;
  * @author LanceDH
  */
 public class MiscServices {
-    public static ArrayList<DAL.Race> RaceList;
-    public static ArrayList<DAL.Charclass> ClassList;
-    
+    private static ArrayList<DAL.Race> RaceList;
+    private static ArrayList<DAL.Charclass> ClassList;
+
     
     public static void LoadRaceData(){
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -62,5 +62,13 @@ public class MiscServices {
             session.close();
         }
 
+    }
+
+    public static ArrayList<DAL.Race> getRaceList() {
+        return RaceList;
+    }
+
+    public static ArrayList<DAL.Charclass> getClassList() {
+        return ClassList;
     }
 }

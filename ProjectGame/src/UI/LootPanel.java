@@ -27,7 +27,7 @@ public class LootPanel extends javax.swing.JPanel {
     public LootPanel(GameWindow parent) {
         initComponents();
         this._parent = parent;
-        Services.itemServices.LoadAllLoot();
+        Services.ItemServices.LoadAllLoot();
     }
 
     /**
@@ -222,7 +222,7 @@ public class LootPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ChangeCharacterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChangeCharacterActionPerformed
-        Services.characterServices.UpdateCharacter(_parent.activeCharacter);
+        Services.CharacterServices.UpdateCharacter(_parent.activeCharacter);
         _parent.activeCharacter = null;
         _parent.remove(this);
         _parent.ShowCharacterSelect();
@@ -230,7 +230,7 @@ public class LootPanel extends javax.swing.JPanel {
 
     private void btn_LootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LootActionPerformed
         Random rnd = new Random();
-        loot = Services.itemServices.LootList.get(rnd.nextInt(Services.itemServices.LootList.size()));
+        loot = Services.ItemServices.LootList.get(rnd.nextInt(Services.ItemServices.LootList.size()));
         _parent.ChangeIcon(lbl_LootIcon, loot.getIconPath());
         lbl_ItemName.setText(loot.getName());
         lbl_ItemSlot.setText(loot.getSlot().getName());

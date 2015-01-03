@@ -152,7 +152,7 @@ public class LogingPanel extends javax.swing.JPanel {
         lbl_error.setText("");
         Account acc = null;
         try {    
-            acc = Services.accountServices.Login(txt_Account.getText(), txt_Password.getText());
+            acc = Services.AccountServices.Login(txt_Account.getText(), txt_Password.getText());
         } catch (UIException ex) {
             lbl_error.setText(ex.getMessage());
             return;

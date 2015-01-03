@@ -21,9 +21,9 @@ public class GameWindow extends javax.swing.JFrame {
     DAL.Character activeCharacter;
     
     LogingPanel loginPanel;
-    CharacterSelectWindow CharSelectPanel;
+    CharacterSelectPanel CharSelectPanel;
     LootPanel lootPanel;
-    CharacterCreateWindow characterCreateWindow;
+    CharacterCreatePanel characterCreateWindow;
     
     
     /**
@@ -39,9 +39,9 @@ public class GameWindow extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         loginPanel = new LogingPanel(this);
-        CharSelectPanel = new CharacterSelectWindow(this);
+        CharSelectPanel = new CharacterSelectPanel(this);
         lootPanel = new LootPanel(this);
-        characterCreateWindow = new CharacterCreateWindow(this);
+        characterCreateWindow = new CharacterCreatePanel(this);
         
         this.setLayout(new BorderLayout(10, 10));
         ShowLogin();
