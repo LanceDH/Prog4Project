@@ -6,6 +6,7 @@
 
 package UI;
 
+import Services.UIException;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
@@ -311,7 +312,7 @@ public class CharacterCreateWindow extends javax.swing.JPanel {
         
         try {
             Services.characterServices.InsertCharacter(character);
-        } catch (Exception e) {
+        } catch (UIException e) {
             lbl_Error.setText(e.getMessage());
             return;
         }

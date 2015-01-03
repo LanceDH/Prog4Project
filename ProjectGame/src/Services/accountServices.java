@@ -41,7 +41,7 @@ public class accountServices {
         return list;
     }
     
-    public static Account Login(String name, String pass) throws Exception{
+    public static Account Login(String name, String pass) throws UIException{
         Account account = new Account();
         
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -56,16 +56,19 @@ public class accountServices {
         q.setParameter("pass", pass);
         
         if(q.list().size() == 0){
-            Exception ex = new Exception("Account name or password is incorrect");
+            Exception ex = new UIException("Account name or password is incorrect");
             throw ex;
             
         }
             
         account = (Account)q.list().get(0);
-        
+        } catch (UIException e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+            throw e;
         } catch (Exception e) {
             if (tx != null) tx.rollback();
-            throw e;
+            System.err.println(e.getMessage());
         }
         finally{
             session.close();

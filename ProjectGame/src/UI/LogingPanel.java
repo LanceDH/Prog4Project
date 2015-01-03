@@ -7,15 +7,7 @@
 package UI;
 
 import DAL.Account;
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
+import Services.UIException;
 
 /**
  *
@@ -161,8 +153,7 @@ public class LogingPanel extends javax.swing.JPanel {
         Account acc = null;
         try {    
             acc = Services.accountServices.Login(txt_Account.getText(), txt_Password.getText());
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
+        } catch (UIException ex) {
             lbl_error.setText(ex.getMessage());
             return;
         }

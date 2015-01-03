@@ -1,0 +1,8 @@
+Swing
+- Create account
+- get/set for misc stuff
+
+Site
+- homepage
+- page with search results
+- page per character

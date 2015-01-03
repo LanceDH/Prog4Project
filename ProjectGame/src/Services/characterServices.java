@@ -65,7 +65,7 @@ public class characterServices {
         return list;
     }
     
-    public static int InsertCharacter(DAL.Character character) throws Exception{
+    public static int InsertCharacter(DAL.Character character) throws UIException{
         int rows = 0;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -77,7 +77,7 @@ public class characterServices {
             //rows = q.executeUpdate();
             //tx.commit();
             if (q.list().size() > 0) {
-                throw new Exception("Character name is unavailable");
+                throw new UIException("Character name is unavailable");
             }
                 /*Query q = session.createQuery("insert into Character(AccountId, Name, RaceId, ClassId) values ("
                         + character.getAccount().getId()
@@ -89,10 +89,12 @@ public class characterServices {
             session.save(character);
             tx.commit();
         //session.close();
+        } catch (UIException e) {
+            if (tx != null) tx.rollback();
+            throw e;
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             System.err.println(e.getMessage());
-            throw e;
         } 
         finally{
             session.close();
