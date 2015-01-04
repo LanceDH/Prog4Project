@@ -4,19 +4,22 @@ Swing
 - [x] UI code
 - [x] Save account
 [x] get/set for misc stuff
-[] safeguard no spaces in passwords
-[] safeguard chacter
-- [] name only letters/spaces
-- [] name 3 actual letters
-- [] min/max length
-- [] no start/end with space
-[] safeguard account
-- [] name only letters/spaces
-- [] name 5 actual letters
+[x] safeguard no spaces in passwords
+[x] safeguard chacter
+- [x] name only letters/spaces
+- [x] name 3 actual letters
 - [x] min/max length
-- [] no start/end with space
+- [x] no start/end with space
+[x] safeguard account
+- [x] name only letters
+- [x] name 5 actual letters
+- [x] min/max length
+- [x] no start/end with space
 
 Site
 [] homepage
 [] page with search results
 [] page per character
+
+\p
+^[[:alnum:]]+( [[:alnum:]]+)*$
