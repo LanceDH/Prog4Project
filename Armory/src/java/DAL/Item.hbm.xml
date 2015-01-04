@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 4-jan-2015 22:28:09 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DAL.Item" table="item" catalog="game" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="attribute" class="DAL.Attribute" fetch="select">
+            <column name="Attribute1Id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="slot" class="DAL.Slot" fetch="select">
+            <column name="SlotId" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="Name" length="100" not-null="true" />
+        </property>
+        <property name="attribute1value" type="int">
+            <column name="Attribute1Value" not-null="true" />
+        </property>
+        <property name="iconPath" type="string">
+            <column name="IconPath" not-null="true" />
+        </property>
+        <set name="charactersForBootsItemId" table="character" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="BootsItemId" />
+            </key>
+            <one-to-many class="DAL.Character" />
+        </set>
+        <set name="charactersForWeaponItemId" table="character" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="WeaponItemId" />
+            </key>
+            <one-to-many class="DAL.Character" />
+        </set>
+        <set name="charactersForLegsItemId" table="character" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="LegsItemId" />
+            </key>
+            <one-to-many class="DAL.Character" />
+        </set>
+        <set name="charactersForChestItemId" table="character" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ChestItemId" />
+            </key>
+            <one-to-many class="DAL.Character" />
+        </set>
+    </class>
+</hibernate-mapping>
