@@ -18,6 +18,7 @@ public class Validators {
     public static final int CHARACTER_MINLENGTH = 3;
     public static final int CHARACTER_MAXLENGTH = 25;
     
+    
     public static boolean IsValidAccountName(String name) throws UIException{
         
         if (!name.matches("^[a-zA-Z]*$")) {
