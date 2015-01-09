@@ -71,4 +71,23 @@ public class MiscServices {
     public static ArrayList<DAL.Charclass> getClassList() {
         return ClassList;
     }
+    
+    public static String GetImagePath(String name, int iconSize){
+        String path = name;
+        
+        if (iconSize != -1) {
+            path = "_" + iconSize;
+        }
+        
+        path =  "Images/" + path + ".png";
+        
+        return path;
+        /*
+        try {
+            lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + name + sizeString + ".png")));
+        } catch (Exception e) {
+            System.err.println("Could not find image: " + "/Images/" + name + sizeString + ".png");
+            lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown.png")));
+        }*/
+    }
 }

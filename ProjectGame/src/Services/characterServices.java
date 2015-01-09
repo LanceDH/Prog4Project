@@ -124,4 +124,34 @@ public class CharacterServices {
         
         return rows;
     }
+    
+    public static ArrayList<DAL.Character> GetCharacterLike(String search){
+        ArrayList<DAL.Character> list = new ArrayList<DAL.Character>();
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId "
+                    + "left join fetch c.itemByWeaponItemId  left join fetch c.itemByChestItemId  left join fetch c.itemByLegsItemId "
+                    + "left join fetch c.charclass  left join fetch c.race where c.name like '%" + search + "%'");
+            list = (ArrayList<DAL.Character>) q.list();
+            //because sort by is too mainstream
+            /*Collections.sort(list, new Comparator<DAL.Character>() {
+                @Override
+                public int compare(Character t, Character t1) {
+                    return t.getId().compareTo(t1.getId());
+                }
+            });*/
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+
+        return list;
+    }
 }
