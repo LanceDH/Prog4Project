@@ -104,4 +104,30 @@ public class AccountServices {
         
         return row;
     }
+    
+    public static ArrayList<DAL.Character> GetCharactersOfAccount(int id){
+        DAL.Account acc = new Account();
+        ArrayList<DAL.Character> list = new ArrayList<DAL.Character>();
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+         Transaction tx = null;
+        try {
+            
+            tx = session.beginTransaction();
+            Query q = session.createQuery("from Account a left join fetch a.characters c left join fetch c.charclass left join fetch c.race where a.id = :id");
+            q.setParameter("id", id);
+            acc = (DAL.Account) q.list().get(0);
+            list = new ArrayList<DAL.Character>(acc.getCharacters());
+
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+        
+        
+        return list;
+    }
 }
