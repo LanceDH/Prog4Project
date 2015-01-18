@@ -47,7 +47,7 @@ public class ItemServices {
             
             session.beginTransaction();
              
-        Query q = session.createQuery("from Item i left join fetch i.slot left join fetch i.attribute where ID = :id ");
+        Query q = session.createQuery("from Item i left join fetch i.slot left join fetch i.attribute where i.id = :id ");
         q.setParameter("id", id);
             
         item = (Item)q.list().get(0);

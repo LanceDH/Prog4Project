@@ -16,6 +16,7 @@ import org.hibernate.*;
 public class MiscServices {
     private static ArrayList<DAL.Race> RaceList;
     private static ArrayList<DAL.Charclass> ClassList;
+    private static ArrayList<DAL.Attribute> AttributeList;
 
     
     public static void LoadRaceData(){
@@ -63,6 +64,29 @@ public class MiscServices {
         }
 
     }
+    
+    public static void LoadAttributeData(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            
+            tx = session.beginTransaction();
+             
+        Query q = session.createQuery("from Attribute");
+        AttributeList = (ArrayList<DAL.Attribute>) q.list();
+        
+        
+        tx.commit();
+        //session.close();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+
+    }
 
     public static ArrayList<DAL.Race> getRaceList() {
         return RaceList;
@@ -72,11 +96,15 @@ public class MiscServices {
         return ClassList;
     }
     
+    public static String GetImagePath(String name){
+        return GetImagePath(name, -1);
+    }
+    
     public static String GetImagePath(String name, int iconSize){
         String path = name;
         
         if (iconSize != -1) {
-            path = "_" + iconSize;
+            path = path + "_" + iconSize;
         }
         
         path =  "Images/" + path + ".png";
@@ -89,5 +117,13 @@ public class MiscServices {
             System.err.println("Could not find image: " + "/Images/" + name + sizeString + ".png");
             lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown.png")));
         }*/
+    }
+
+    public static ArrayList<DAL.Attribute> getAttributeList() {
+        return AttributeList;
+    }
+
+    public static void setAttributeList(ArrayList<DAL.Attribute> aAttributeList) {
+        AttributeList = aAttributeList;
     }
 }

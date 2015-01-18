@@ -6,8 +6,7 @@
 package UI;
 
 import DAL.Account;
-import Services.UIException;
-import Services.Validators;
+import DAL.Password;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -32,11 +31,11 @@ public class AccountRegistrationPanel extends javax.swing.JPanel {
             @Override
             @SuppressWarnings("empty-statement")
             public void insertUpdate(DocumentEvent de) {
-                if(txt_Account.getText().length() > Validators.ACCNAME_MAXLENGTH){
+                if(txt_Account.getText().length() > Account.MAXLENGTH){
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            txt_Account.setText(txt_Account.getText().substring(0, Validators.ACCNAME_MAXLENGTH));
+                            txt_Account.setText(txt_Account.getText().substring(0, Account.MAXLENGTH));
                         }
                     });
                     ;
@@ -52,11 +51,11 @@ public class AccountRegistrationPanel extends javax.swing.JPanel {
             @Override
             @SuppressWarnings("empty-statement")
             public void insertUpdate(DocumentEvent de) {
-                if(txt_Password.getText().length() > Validators.PASSWORD_MAXLENGTH){
+                if(txt_Password.getText().length() > Password.MAXLENGTH){
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            txt_Password.setText(txt_Password.getText().substring(0, Validators.PASSWORD_MAXLENGTH));
+                            txt_Password.setText(txt_Password.getText().substring(0, Password.MAXLENGTH));
                         }
                     });
                     ;
@@ -187,29 +186,32 @@ public class AccountRegistrationPanel extends javax.swing.JPanel {
 
     private void btn_RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RegisterActionPerformed
         String name = txt_Account.getText();
-        String pass = txt_Password.getText();
+        String passInput = txt_Password.getText();
         
         // make sure the name is max 25 chars
-        if (name.length() > Validators.ACCNAME_MAXLENGTH) {
-            name = name.substring(0, Validators.ACCNAME_MAXLENGTH);
+        if (name.length() > Account.MAXLENGTH) {
+            name = name.substring(0, Account.MAXLENGTH);
         }
         // make sure the pass is max 25 chars
-        if (name.length() > Validators.PASSWORD_MAXLENGTH) {
-            name = name.substring(0, Validators.PASSWORD_MAXLENGTH);
+        if (name.length() > Password.MAXLENGTH) {
+            name = name.substring(0, Password.MAXLENGTH);
         }
+
+        DAL.Password pass = new Password(passInput);
         
-        try {
-            Validators.IsValidAccountName(name);
-            Validators.IsValidPassword(pass);
-        } catch (Exception e) {
-            lbl_Error.setText(e.getMessage());
+        if (!pass.IsValid()) {
+            lbl_Error.setText(pass.getError());
             return;
         }
         
         DAL.Account account = new Account();
         account.setName(name);
-        account.setPassword(pass);
+        account.setPassword(pass.getPass());
         
+        if (!account.IsValid()) {
+            lbl_Error.setText(account.getError());
+            return;
+        }
         
         try {
             Services.AccountServices.InsertAccount(account);

@@ -6,8 +6,6 @@
 
 package UI;
 
-import Services.UIException;
-import Services.Validators;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
@@ -39,11 +37,11 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
             @Override
             @SuppressWarnings("empty-statement")
             public void insertUpdate(DocumentEvent de) {
-                if(txt_Name.getText().length() > 25){
+                if(txt_Name.getText().length() > DAL.Character.MAXLENGTH){
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            txt_Name.setText(txt_Name.getText().substring(0, 25));
+                            txt_Name.setText(txt_Name.getText().substring(0, DAL.Character.MAXLENGTH));
                         }
                     });
                     ;
@@ -293,20 +291,8 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
         String name = txt_Name.getText();
         
         // make sure the name is max 25 chars
-        if (name.length() > Validators.ACCNAME_MAXLENGTH) {
-            name = name.substring(0, Validators.ACCNAME_MAXLENGTH);
-        }
-        
-        if(name.length() < 3){
-            lbl_Error.setText("Name has to be at least 3 letters.");
-            return;
-        }
-        
-        try {
-            Validators.IsValidCharacterName(name);
-        } catch (Exception e) {
-            lbl_Error.setText(e.getMessage());
-            return;
+        if (name.length() > DAL.Character.MAXLENGTH) {
+            name = name.substring(0, DAL.Character.MAXLENGTH);
         }
 
         DAL.Character character = new DAL.Character();
@@ -315,10 +301,8 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
         character.setCharclass(Services.MiscServices.getClassList().get(_selectedClass));
         character.setName(name);
         
-        try {
-            Services.CharacterServices.InsertCharacter(character);
-        } catch (UIException e) {
-            lbl_Error.setText(e.getMessage());
+        if (!character.IsValid()) {
+            lbl_Error.setText(character.getError());
             return;
         }
 

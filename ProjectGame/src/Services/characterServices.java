@@ -44,7 +44,7 @@ public class CharacterServices {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId  left join fetch c.itemByWeaponItemId  left join fetch c.itemByChestItemId  left join fetch c.itemByLegsItemId  left join fetch c.charclass  left join fetch c.race where AccountId = " + accId);
+            Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId left join fetch c.itemByWeaponItemId  left join fetch c.itemByChestItemId  left join fetch c.itemByLegsItemId left join fetch c.charclass  left join fetch c.race where AccountId = " + accId);
             list = (ArrayList<DAL.Character>) q.list();
             //because sort by is too mainstream
             Collections.sort(list, new Comparator<DAL.Character>() {
@@ -71,6 +71,20 @@ public class CharacterServices {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
+            
+            String name = character.getName();
+            
+            // http://www.leveluplunch.com/java/examples/capitalize-words-in-sentence/
+            String[] exampleSplit = name.split(" ");
+            StringBuffer sb = new StringBuffer();
+            for (String word : exampleSplit) {
+                sb.append(word.substring(0, 1).toUpperCase() + word.substring(1));
+                sb.append(" ");
+            }
+            name = sb.toString();
+            character.setName(name.substring(0, name.length()-1));
+            
+            //character.getName()
             
             Query q = session.createQuery("from Character where name = :name");
             q.setParameter("name", character.getName());
@@ -132,10 +146,18 @@ public class CharacterServices {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId "
+            Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId i "
                     + "left join fetch c.itemByWeaponItemId  left join fetch c.itemByChestItemId  left join fetch c.itemByLegsItemId "
-                    + "left join fetch c.charclass  left join fetch c.race where c.name like '%" + search + "%'");
+                    + "left join fetch c.charclass left join fetch c.race left join fetch i.slot where c.name like '%" + search + "%'");
             list = (ArrayList<DAL.Character>) q.list();
+            
+            // alphabetical order
+            Collections.sort(list, new Comparator<DAL.Character>() {
+                @Override
+                public int compare(Character t, Character t1) {
+                    return t.getName().compareTo(t1.getName());
+                }
+            });
             //because sort by is too mainstream
             /*Collections.sort(list, new Comparator<DAL.Character>() {
                 @Override
@@ -153,5 +175,30 @@ public class CharacterServices {
         }
 
         return list;
+    }
+    
+    public static DAL.Character GetChactersByName(String name){
+        DAL.Character character = new DAL.Character();
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            //Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId  left join fetch c.itemByWeaponItemId left join fetch c.itemByChestItemId left join fetch c.itemByLegsItemId left join fetch c.charclass left join fetch c.race where c.name like '" + name +"'");
+            Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId  left join fetch c.itemByWeaponItemId left join fetch c.itemByChestItemId left join fetch c.itemByLegsItemId left join fetch c.charclass left join fetch c.race where c.name like :name");
+            q.setParameter("name", name);
+            System.out.println(q.list().size());
+            character = (DAL.Character) q.list().get(0);
+            //because sort by is too mainstream
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+
+        return character;
     }
 }

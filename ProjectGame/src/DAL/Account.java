@@ -10,12 +10,15 @@ import java.util.Set;
  */
 public class Account  implements java.io.Serializable {
 
-
-     private Integer id;
-     private String name;
-     private String password;
-     private boolean admin;
-     private Set characters = new HashSet(0);
+    public static final int MINLENGTH = 5;
+    public static final int MAXLENGTH = 25;
+    private static String error;
+    
+    private Integer id;
+    private String name;
+    private String password;
+    private boolean admin;
+    private Set characters = new HashSet(0);
 
     public Account() {
     }
@@ -69,8 +72,31 @@ public class Account  implements java.io.Serializable {
         this.characters = characters;
     }
 
+    public boolean IsValid(){
+        
+        if (!name.matches("^[a-zA-Z]*$")) {
+            error = "Name can only contain letters.";
+            return false;
+        }
+        
+        if(name.length() < MINLENGTH){
+            error = "Name has to be at least "+ MINLENGTH +" letters.";
+            return false;
+        }
+        
+        if(name.length() > MAXLENGTH){
+            error = "Name must be less than "+ MAXLENGTH +" letters.";
+            return false;
+        }
+        
+        
+        
+        return true;
+    }
 
-
+    public String getError() {
+        return error;
+    }
 
 }
 
