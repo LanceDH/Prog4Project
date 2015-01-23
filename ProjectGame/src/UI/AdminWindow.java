@@ -64,6 +64,8 @@ public class AdminWindow extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btn_ViewCharaceter = new javax.swing.JButton();
         btn_DeleteCharacter = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        txt_Accounts_Id = new javax.swing.JTextField();
         pnl_Characters = new javax.swing.JPanel();
         pnl_Items = new javax.swing.JPanel();
         cmb_Items_SlotList = new javax.swing.JComboBox();
@@ -88,6 +90,8 @@ public class AdminWindow extends javax.swing.JFrame {
         txt_Items_Icon = new javax.swing.JTextField();
         lbl_Items_Icon = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txt_Items_Id = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -97,6 +101,12 @@ public class AdminWindow extends javax.swing.JFrame {
         jLabel1.setText("Accounts");
 
         jLabel2.setText("Account Name");
+
+        txt_Name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_NameActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Password");
 
@@ -124,49 +134,81 @@ public class AdminWindow extends javax.swing.JFrame {
 
         btn_DeleteCharacter.setText("Del");
 
+        jLabel13.setText("Id");
+
+        txt_Accounts_Id.setEditable(false);
+        txt_Accounts_Id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_Accounts_IdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_AccountsLayout = new javax.swing.GroupLayout(pnl_Accounts);
         pnl_Accounts.setLayout(pnl_AccountsLayout);
         pnl_AccountsLayout.setHorizontalGroup(
             pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_AccountsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txt_Search, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(cbx_Admin)
-                    .addComponent(jLabel4)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_AccountsLayout.createSequentialGroup()
-                        .addComponent(btn_SaveAccount)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addComponent(btn_DeleteAccount))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_AccountsLayout.createSequentialGroup()
-                        .addComponent(btn_ViewCharaceter)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_DeleteCharacter))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txt_Password)
-                    .addComponent(txt_Name))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                        .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2)
+                                .addComponent(cbx_Admin)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_AccountsLayout.createSequentialGroup()
+                                    .addComponent(btn_SaveAccount)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_DeleteAccount))
+                                .addComponent(txt_Password)
+                                .addComponent(txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel13)
+                            .addComponent(txt_Accounts_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                                .addComponent(btn_ViewCharaceter)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                .addComponent(btn_DeleteCharacter))))
+                    .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                        .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pnl_AccountsLayout.setVerticalGroup(
             pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_AccountsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_DeleteCharacter))
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                                .addGap(120, 120, 120)
+                                .addComponent(btn_ViewCharaceter))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_Accounts_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
@@ -177,16 +219,10 @@ public class AdminWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_SaveAccount)
-                            .addComponent(btn_DeleteAccount))
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_ViewCharaceter)
-                    .addComponent(btn_DeleteCharacter))
-                .addContainerGap(74, Short.MAX_VALUE))
+                            .addComponent(btn_DeleteAccount))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         tpnl_MainPanel.addTab("Accounts", pnl_Accounts);
@@ -199,7 +235,7 @@ public class AdminWindow extends javax.swing.JFrame {
         );
         pnl_CharactersLayout.setVerticalGroup(
             pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
+            .addGap(0, 308, Short.MAX_VALUE)
         );
 
         tpnl_MainPanel.addTab("Characters", pnl_Characters);
@@ -216,7 +252,7 @@ public class AdminWindow extends javax.swing.JFrame {
 
         jLabel6.setText("Slot type");
 
-        jLabel7.setText("Attribute 1");
+        jLabel7.setText("Id");
 
         jLabel8.setText("Value");
 
@@ -250,6 +286,10 @@ public class AdminWindow extends javax.swing.JFrame {
 
         jLabel12.setText("Icon");
 
+        jLabel11.setText("Attribute 1");
+
+        txt_Items_Id.setEditable(false);
+
         javax.swing.GroupLayout pnl_ItemsLayout = new javax.swing.GroupLayout(pnl_Items);
         pnl_Items.setLayout(pnl_ItemsLayout);
         pnl_ItemsLayout.setHorizontalGroup(
@@ -260,67 +300,68 @@ public class AdminWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(cmb_Items_SlotList, 0, 151, Short.MAX_VALUE)
                     .addComponent(txt_Items_Search))
+                .addGap(18, 18, 18)
                 .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_Items_Icon)
+                            .addComponent(txt_Items_Name)
+                            .addComponent(cmb_Items_Slot, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(pnl_ItemsLayout.createSequentialGroup()
                                 .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel12)
                                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
-                                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel12))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ItemsLayout.createSequentialGroup()
-                                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txt_Items_Icon, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txt_Items_Name, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmb_Items_Slot, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_ItemsLayout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                        .addGap(18, 18, 18)))
-                                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel7)
-                                    .addComponent(cmb_Items_Attribute1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ItemsLayout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_Items_Attribute1Value, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel9)
-                                    .addComponent(cmb_Items_Attribute2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ItemsLayout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_Items_Attribute2Value, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(pnl_ItemsLayout.createSequentialGroup()
-                                .addComponent(btn_Items_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_Items_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                                .addComponent(btn_Items_Delete)))
-                        .addContainerGap())
+                                        .addGap(54, 54, 54)
+                                        .addComponent(lbl_Items_Icon)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7)
+                            .addComponent(cmb_Items_Attribute1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ItemsLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_Items_Attribute1Value, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9)
+                            .addComponent(cmb_Items_Attribute2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ItemsLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_Items_Attribute2Value, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_Items_Id)
+                            .addComponent(jLabel11)))
                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(lbl_Items_Icon)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btn_Items_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Items_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Items_Delete)))
+                .addContainerGap())
         );
         pnl_ItemsLayout.setVerticalGroup(
             pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_ItemsLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cmb_Items_SlotList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
-                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cmb_Items_SlotList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_Items_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Items_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnl_ItemsLayout.createSequentialGroup()
-                                .addComponent(txt_Items_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)
+                                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel11))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmb_Items_Slot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -328,31 +369,30 @@ public class AdminWindow extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_Items_Icon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_Items_Icon))))
-                    .addGroup(pnl_ItemsLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmb_Items_Attribute1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_Items_Attribute1Value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmb_Items_Attribute2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_Items_Attribute2Value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))))
+                                .addComponent(lbl_Items_Icon))
+                            .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(cmb_Items_Attribute1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_Items_Attribute1Value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmb_Items_Attribute2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_Items_Attribute2Value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10)))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_Items_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Items_Save)
                     .addComponent(btn_Items_Add)
                     .addComponent(btn_Items_Delete))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tpnl_MainPanel.addTab("Items", pnl_Items);
@@ -361,11 +401,11 @@ public class AdminWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpnl_MainPanel)
+            .addComponent(tpnl_MainPanel, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpnl_MainPanel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(tpnl_MainPanel)
         );
 
         pack();
@@ -462,18 +502,27 @@ public class AdminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_Items_DeleteActionPerformed
 
     private void cmb_Items_SlotListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_Items_SlotListActionPerformed
-        lst_Items_ItemList.removeAll();
+        //lst_Items_ItemList.removeAll();
         
         UpdateItemlist();
     }//GEN-LAST:event_cmb_Items_SlotListActionPerformed
+
+    private void txt_NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_NameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_NameActionPerformed
+
+    private void txt_Accounts_IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Accounts_IdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_Accounts_IdActionPerformed
 
     private void ResetAccountPanel(){
         _selectedAccount = null;
         txt_Name.setText("");
         txt_Password.setText("");
         cbx_Admin.setSelected(false);
-        lst_Characeters.removeAll();
+        //lst_Characeters.removeAll();
         lst_Accounts.setListData(Services.AccountServices.GetAllAccounts().toArray());
+        txt_Accounts_Id.setText("");
     }
     
     private void ResetItemPanel(){
@@ -485,6 +534,7 @@ public class AdminWindow extends javax.swing.JFrame {
         txt_Items_Attribute1Value.setText("");
         cmb_Items_Attribute2.setSelectedIndex(0);
         txt_Items_Attribute2Value.setText("");
+        txt_Items_Id.setText("");
     }
     
     private void InitAccount(){
@@ -500,6 +550,7 @@ public class AdminWindow extends javax.swing.JFrame {
                 txt_Name.setText(_selectedAccount.getName());
                 txt_Password.setText(_selectedAccount.getPassword());
                 cbx_Admin.setSelected(_selectedAccount.isAdmin());
+                txt_Accounts_Id.setText(""+_selectedAccount.getId());
                 
                 lst_Characeters.setListData(Services.CharacterServices.GetAllChactersOfAccount(_selectedAccount.getId()).toArray());
             }
@@ -584,6 +635,8 @@ public class AdminWindow extends javax.swing.JFrame {
                 txt_Items_Icon.setText(_selectedItem.getIconPath());
                 GameWindow gmw = new GameWindow();
                 gmw.ChangeIcon(lbl_Items_Icon, _selectedItem.getIconPath());
+                
+                txt_Items_Id.setText(""+_selectedItem.getId());
             }
         });
         
@@ -681,7 +734,9 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox cmb_Items_SlotList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -701,9 +756,11 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_Characters;
     private javax.swing.JPanel pnl_Items;
     private javax.swing.JTabbedPane tpnl_MainPanel;
+    private javax.swing.JTextField txt_Accounts_Id;
     private javax.swing.JTextField txt_Items_Attribute1Value;
     private javax.swing.JTextField txt_Items_Attribute2Value;
     private javax.swing.JTextField txt_Items_Icon;
+    private javax.swing.JTextField txt_Items_Id;
     private javax.swing.JTextField txt_Items_Name;
     private javax.swing.JTextField txt_Items_Search;
     private javax.swing.JTextField txt_Name;
