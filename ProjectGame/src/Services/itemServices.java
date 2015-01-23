@@ -46,6 +46,37 @@ public class ItemServices {
 
     }
     
+    public static int InsertItem(DAL.Item item) throws UIException{
+        int row = 0;
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            
+            Query q = session.createQuery("from Item where name = :name");
+            q.setParameter("name", item.getName());
+            if (q.list().size() > 0) {
+                throw new UIException("Item name is unavailable");
+            }
+            
+            session.save(item);
+            tx.commit();
+        } catch (UIException e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        } 
+        finally{
+            session.close();
+        }
+        
+        
+        return row;
+    }
+    
     public static Item GetItemById(int id){
         Item item = new Item();
         
@@ -151,6 +182,27 @@ public class ItemServices {
         }
 
         return list;
+    }
+    
+    public static int UpdateItem(DAL.Item item){
+        int rows = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            
+            tx = session.beginTransaction();
+            session.update(item);
+            tx.commit();
+        //session.close();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+        
+        return rows;
     }
 
     public static ArrayList<DAL.Item> getLootList() {
