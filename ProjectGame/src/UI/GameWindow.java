@@ -72,7 +72,7 @@ public class GameWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGap(0, 310, Short.MAX_VALUE)
         );
 
         pack();
@@ -141,7 +141,6 @@ public class GameWindow extends javax.swing.JFrame {
         }
         
         this.add(CharSelectPanel, BorderLayout.CENTER);
-        CharSelectPanel.UpdateCharacters(getActiveAccount().getId());
         this.repaint();
         this.pack();   
     }
@@ -152,8 +151,6 @@ public class GameWindow extends javax.swing.JFrame {
         }
 
         this.add(lootPanel, BorderLayout.CENTER);
-        lootPanel.Reset();
-        lootPanel.UpdateCharacterLoot();
         this.repaint();
         this.pack();   
     }
@@ -166,7 +163,6 @@ public class GameWindow extends javax.swing.JFrame {
     
     void ShowAccountRegistration() {
         this.add(accRegisterPanel, BorderLayout.CENTER);
-        accRegisterPanel.Reset();
         this.repaint();
         this.pack(); 
     }

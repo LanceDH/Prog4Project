@@ -80,6 +80,15 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
         setPreferredSize(new java.awt.Dimension(400, 300));
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -116,13 +125,13 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
             }
         });
 
-        lbl_IconClassChar0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconClassChar0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconClassChar0.setToolTipText("");
         lbl_IconClassChar0.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar0.setMinimumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar0.setPreferredSize(new java.awt.Dimension(25, 25));
 
-        lbl_IconRaceChar0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconRaceChar0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconRaceChar0.setToolTipText("");
         lbl_IconRaceChar0.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconRaceChar0.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -180,13 +189,13 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
             }
         });
 
-        lbl_IconClassChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconClassChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconClassChar1.setToolTipText("");
         lbl_IconClassChar1.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar1.setMinimumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar1.setPreferredSize(new java.awt.Dimension(25, 25));
 
-        lbl_IconRaceChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconRaceChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconRaceChar1.setToolTipText("");
         lbl_IconRaceChar1.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconRaceChar1.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -244,13 +253,13 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
             }
         });
 
-        lbl_IconClassChar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconClassChar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconClassChar2.setToolTipText("");
         lbl_IconClassChar2.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar2.setMinimumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar2.setPreferredSize(new java.awt.Dimension(25, 25));
 
-        lbl_IconRaceChar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconRaceChar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconRaceChar2.setToolTipText("");
         lbl_IconRaceChar2.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconRaceChar2.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -308,13 +317,13 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
             }
         });
 
-        lbl_IconClassChar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconClassChar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconClassChar3.setToolTipText("");
         lbl_IconClassChar3.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar3.setMinimumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar3.setPreferredSize(new java.awt.Dimension(25, 25));
 
-        lbl_IconRaceChar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconRaceChar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconRaceChar3.setToolTipText("");
         lbl_IconRaceChar3.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconRaceChar3.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -372,13 +381,13 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
             }
         });
 
-        lbl_IconClassChar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconClassChar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconClassChar4.setToolTipText("");
         lbl_IconClassChar4.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar4.setMinimumSize(new java.awt.Dimension(25, 25));
         lbl_IconClassChar4.setPreferredSize(new java.awt.Dimension(25, 25));
 
-        lbl_IconRaceChar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/unknown.png"))); // NOI18N
+        lbl_IconRaceChar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown_26.png"))); // NOI18N
         lbl_IconRaceChar4.setToolTipText("");
         lbl_IconRaceChar4.setMaximumSize(new java.awt.Dimension(25, 25));
         lbl_IconRaceChar4.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -578,6 +587,10 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
             UpdateCharacters(_parentWindow.getActiveAccount().getId());
         }
     }//GEN-LAST:event_DeleteCharacter
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        UpdateCharacters(_parentWindow.getActiveAccount().getId());
+    }//GEN-LAST:event_formAncestorAdded
 
     
 

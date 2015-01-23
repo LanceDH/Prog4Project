@@ -12,10 +12,12 @@ public class Item  implements java.io.Serializable {
 
 
      private Integer id;
-     private Attribute attribute;
+     private Attribute attribute1;
+     private Attribute attribute2;
      private Slot slot;
      private String name;
      private int attribute1value;
+     private int attribute2value;
      private String iconPath;
      private Set charactersForBootsItemId = new HashSet(0);
      private Set charactersForWeaponItemId = new HashSet(0);
@@ -26,18 +28,22 @@ public class Item  implements java.io.Serializable {
     }
 
 	
-    public Item(Attribute attribute, Slot slot, String name, int attribute1value, String iconPath) {
-        this.attribute = attribute;
+    public Item(Attribute attribute1, Attribute attribute2, Slot slot, String name, int attribute1value, int attribute2value, String iconPath) {
+        this.attribute1 = attribute1;
+        this.attribute2 = attribute2;
         this.slot = slot;
         this.name = name;
         this.attribute1value = attribute1value;
+        this.attribute2value = attribute2value;
         this.iconPath = iconPath;
     }
-    public Item(Attribute attribute, Slot slot, String name, int attribute1value, String iconPath, Set charactersForBootsItemId, Set charactersForWeaponItemId, Set charactersForLegsItemId, Set charactersForChestItemId) {
-       this.attribute = attribute;
+    public Item(Attribute attribute1, Attribute attribute2, Slot slot, String name, int attribute1value, int attribute2value, String iconPath, Set charactersForBootsItemId, Set charactersForWeaponItemId, Set charactersForLegsItemId, Set charactersForChestItemId) {
+       this.attribute1 = attribute1;
+       this.attribute2 = attribute2;
        this.slot = slot;
        this.name = name;
        this.attribute1value = attribute1value;
+       this.attribute2value = attribute2value;
        this.iconPath = iconPath;
        this.charactersForBootsItemId = charactersForBootsItemId;
        this.charactersForWeaponItemId = charactersForWeaponItemId;
@@ -52,12 +58,12 @@ public class Item  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Attribute getAttribute() {
-        return this.attribute;
+    public Attribute getAttribute1() {
+        return this.attribute1;
     }
     
-    public void setAttribute(Attribute attribute) {
-        this.attribute = attribute;
+    public void setAttribute1(Attribute attribute1) {
+        this.attribute1 = attribute1;
     }
     public Slot getSlot() {
         return this.slot;
@@ -114,6 +120,22 @@ public class Item  implements java.io.Serializable {
     
     public void setCharactersForChestItemId(Set charactersForChestItemId) {
         this.charactersForChestItemId = charactersForChestItemId;
+    }
+
+    public Attribute getAttribute2() {
+        return attribute2;
+    }
+
+    public void setAttribute2(Attribute attribute2) {
+        this.attribute2 = attribute2;
+    }
+
+    public int getAttribute2value() {
+        return attribute2value;
+    }
+
+    public void setAttribute2value(int attribute2value) {
+        this.attribute2value = attribute2value;
     }
 
 

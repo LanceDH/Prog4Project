@@ -6,6 +6,7 @@
 
 package UI;
 
+import Services.UIException;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
@@ -23,6 +24,7 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
     
     /**
      * Creates new form CharacterCreateWindow
+     * @param parent
      */
     public CharacterCreatePanel(GameWindow parent) {
         initComponents();
@@ -63,7 +65,6 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lbl_AccountName = new javax.swing.JLabel();
-        btn_Create = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         lbl_ClassRogue = new javax.swing.JLabel();
         lbl_ClassWarrior = new javax.swing.JLabel();
@@ -78,21 +79,24 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
         btn_Back = new javax.swing.JButton();
         txt_Name = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btn_Create = new javax.swing.JButton();
 
-        setMaximumSize(new java.awt.Dimension(400, 300));
+        setMaximumSize(new java.awt.Dimension(1000, 1000));
         setMinimumSize(new java.awt.Dimension(400, 300));
         setPreferredSize(new java.awt.Dimension(400, 300));
-
-        lbl_AccountName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lbl_AccountName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_AccountName.setText("AccountName");
-
-        btn_Create.setText("Create Character");
-        btn_Create.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CreateActionPerformed(evt);
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+
+        lbl_AccountName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_AccountName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_AccountName.setText("Character Creation");
 
         lbl_ClassRogue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Class_Rogue.png"))); // NOI18N
         lbl_ClassRogue.setName("2"); // NOI18N
@@ -216,6 +220,13 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
 
         jLabel3.setText("Character Name");
 
+        btn_Create.setText("Create Character");
+        btn_Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CreateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,14 +242,14 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Error, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Create, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btn_Back))
-                            .addComponent(txt_Name))
+                            .addComponent(txt_Name)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(btn_Create, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
                         .addGap(17, 17, 17)))
                 .addContainerGap())
         );
@@ -272,13 +283,11 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
 
     private void SelectRace(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectRace
         _selectedRace = Integer.parseInt(evt.getComponent().getName());
-        System.out.println(_selectedRace);
         ChangeSelectedRaceIcon(_selectedRace);
     }//GEN-LAST:event_SelectRace
 
     private void SelectClass(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectClass
         _selectedClass = Integer.parseInt(evt.getComponent().getName());
-        System.out.println(_selectedClass);
         ChangeSelectedClassIcon(_selectedClass);
     }//GEN-LAST:event_SelectClass
 
@@ -289,7 +298,7 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
 
     private void btn_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CreateActionPerformed
         String name = txt_Name.getText();
-        
+
         // make sure the name is max 25 chars
         if (name.length() > DAL.Character.MAXLENGTH) {
             name = name.substring(0, DAL.Character.MAXLENGTH);
@@ -300,15 +309,26 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
         character.setRace(Services.MiscServices.getRaceList().get(_selectedRace));
         character.setCharclass(Services.MiscServices.getClassList().get(_selectedClass));
         character.setName(name);
-        
+
         if (!character.IsValid()) {
             lbl_Error.setText(character.getError());
             return;
         }
-
+        
+        try {
+            Services.CharacterServices.InsertCharacter(character);
+        } catch (UIException ex) {
+            lbl_Error.setText(ex.getMessage());
+        }
+        
+        //Reset();
         _parentWindow.remove(this);
         _parentWindow.ShowCharacterSelect();
     }//GEN-LAST:event_btn_CreateActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        Reset();
+    }//GEN-LAST:event_formAncestorAdded
 
     private void ChangeSelectedRaceIcon(int nr){
         _parentWindow.ChangeIcon(lbl_RaceHuman, Services.MiscServices.getRaceList().get(0).getIconPath());
@@ -363,7 +383,7 @@ public class CharacterCreatePanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Back;
-    private javax.swing.JToggleButton btn_Create;
+    private javax.swing.JButton btn_Create;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;

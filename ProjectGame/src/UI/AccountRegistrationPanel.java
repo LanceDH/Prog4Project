@@ -87,6 +87,15 @@ public class AccountRegistrationPanel extends javax.swing.JPanel {
 
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jPanel2.setMaximumSize(new java.awt.Dimension(129, 114));
         jPanel2.setMinimumSize(new java.awt.Dimension(129, 114));
@@ -157,13 +166,11 @@ public class AccountRegistrationPanel extends javax.swing.JPanel {
                         .addComponent(btn_Cancel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 66, Short.MAX_VALUE)
-                        .addComponent(lbl_Error, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_Error, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
                         .addGap(0, 67, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,6 +231,10 @@ public class AccountRegistrationPanel extends javax.swing.JPanel {
         _parent.remove(this);
         _parent.ShowLogin();
     }//GEN-LAST:event_btn_RegisterActionPerformed
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        Reset();
+    }//GEN-LAST:event_formAncestorAdded
 
     public void Reset(){
         txt_Account.setText("");

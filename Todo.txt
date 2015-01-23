@@ -18,8 +18,8 @@ Swing
 
 Site
 [] homepage
-[] page with search results
-[] page per character
+[x] page with search results
+[x] page per character
 
 \p
 ^[[:alnum:]]+( [[:alnum:]]+)*$

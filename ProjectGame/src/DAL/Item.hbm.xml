@@ -8,8 +8,11 @@
             <column name="ID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="attribute" class="DAL.Attribute" fetch="select">
+        <many-to-one name="attribute1" class="DAL.Attribute" fetch="select">
             <column name="Attribute1Id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="attribute2" class="DAL.Attribute" fetch="select">
+            <column name="Attribute2Id" not-null="true" />
         </many-to-one>
         <many-to-one name="slot" class="DAL.Slot" fetch="select">
             <column name="SlotId" not-null="true" />
@@ -19,6 +22,9 @@
         </property>
         <property name="attribute1value" type="int">
             <column name="Attribute1Value" not-null="true" />
+        </property>
+        <property name="attribute2value" type="int">
+            <column name="Attribute2Value" not-null="true" />
         </property>
         <property name="iconPath" type="string">
             <column name="IconPath" not-null="true" />

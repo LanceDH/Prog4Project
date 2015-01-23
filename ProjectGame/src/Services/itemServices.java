@@ -24,7 +24,7 @@ public class ItemServices {
             
             session.beginTransaction();
              
-        Query q = session.createQuery("from Item i left join fetch i.slot left join fetch i.attribute");
+        Query q = session.createQuery("from Item i left join fetch i.slot left join fetch i.attribute1 left join fetch i.attribute2");
         LootList = (ArrayList<DAL.Item>) q.list();
         
         
@@ -47,7 +47,7 @@ public class ItemServices {
             
             session.beginTransaction();
              
-        Query q = session.createQuery("from Item i left join fetch i.slot left join fetch i.attribute where i.id = :id ");
+        Query q = session.createQuery("from Item i left join fetch i.slot left join fetch i.attribute1 left join fetch i.attribute2 where i.id = :id ");
         q.setParameter("id", id);
             
         item = (Item)q.list().get(0);
