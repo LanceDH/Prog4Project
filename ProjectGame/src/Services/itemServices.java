@@ -107,6 +107,51 @@ public class ItemServices {
 
         return list;
     }
+    
+    public static ArrayList<DAL.Item> GetAccountsLike(String search){
+        return GetAccountsLike(search, null);
+    }
+    
+    public static ArrayList<DAL.Item> GetAccountsLike(String search, DAL.Slot slot){
+        ArrayList<DAL.Item> list = new ArrayList<DAL.Item>();
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String sql = "from Item i left join fetch i.slot where i.name like :search";
+            if(slot != null){
+                sql = "from Item i left join fetch i.slot where i.name like :search and i.slot.id = :id";
+            } 
+            
+            Query q = session.createQuery(sql);
+            q.setParameter("search", "%" + search + "%");
+            if(slot != null){
+                q.setParameter("id", slot.getId());
+            }
+            
+            list = (ArrayList<DAL.Item>) q.list();
+            
+            // alphabetical order
+            Collections.sort(list, new Comparator<DAL.Item>() {
+                @Override
+                public int compare(Item t, Item t1) {
+                    return t.getName().compareTo(t1.getName());
+                }
+
+            });
+
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+
+        return list;
+    }
 
     public static ArrayList<DAL.Item> getLootList() {
         if (LootList == null) {

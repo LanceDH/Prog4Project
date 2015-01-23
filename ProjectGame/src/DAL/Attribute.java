@@ -49,8 +49,10 @@ public class Attribute  implements java.io.Serializable {
         this.items = items;
     }
 
-
-
+    @Override
+    public String toString() {
+        return name;
+    }
 
 }
 

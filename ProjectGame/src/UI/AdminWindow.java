@@ -65,7 +65,7 @@ public class AdminWindow extends javax.swing.JFrame {
         cmb_Items_SlotList = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         lst_Items_ItemList = new javax.swing.JList();
-        tst_Search = new javax.swing.JTextField();
+        txt_Items_Search = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txt_Items_Name = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -247,7 +247,7 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(cmb_Items_SlotList, 0, 151, Short.MAX_VALUE)
-                    .addComponent(tst_Search))
+                    .addComponent(txt_Items_Search))
                 .addGap(18, 18, 18)
                 .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
@@ -305,7 +305,7 @@ public class AdminWindow extends javax.swing.JFrame {
                                     .addComponent(btn_Items_Add)
                                     .addComponent(btn_Items_Delete))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tst_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_Items_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel7)
@@ -395,11 +395,10 @@ public class AdminWindow extends javax.swing.JFrame {
         
         DAL.Slot slot = (DAL.Slot)cmb_Items_SlotList.getSelectedItem();
         if(slot.getName().equals("All")){
-            Services.ItemServices.LoadAllLoot();
-            lst_Items_ItemList.setListData(Services.ItemServices.getLootList().toArray());
+            lst_Items_ItemList.setListData(Services.ItemServices.GetAccountsLike(txt_Items_Search.getText(), null).toArray());
         }
         else{
-            lst_Items_ItemList.setListData(Services.ItemServices.GetItemsBySlot(slot).toArray());
+            lst_Items_ItemList.setListData(Services.ItemServices.GetAccountsLike(txt_Items_Search.getText(), slot).toArray());
         }
     }//GEN-LAST:event_cmb_Items_SlotListActionPerformed
 
@@ -506,8 +505,32 @@ public class AdminWindow extends javax.swing.JFrame {
                     }
                 }
                 
-                
-                //lst_Characeters.setListData(Services.CharacterServices.GetAllChactersOfAccount(_selectedAccount.getId()).toArray());
+            }
+        });
+        
+        txt_Items_Search.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+       
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void insertUpdate(DocumentEvent de) {
+                DAL.Slot slot = (DAL.Slot)cmb_Items_SlotList.getSelectedItem();
+                if (slot.getName().equals("All")) {
+                    lst_Items_ItemList.setListData(Services.ItemServices.GetAccountsLike(txt_Items_Search.getText(), null).toArray());
+                }else{
+                    lst_Items_ItemList.setListData(Services.ItemServices.GetAccountsLike(txt_Items_Search.getText(), slot).toArray());
+                }
+            }
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void removeUpdate(DocumentEvent de) {
+                DAL.Slot slot = (DAL.Slot)cmb_Items_SlotList.getSelectedItem();
+                if (slot.getName().equals("All")) {
+                    lst_Items_ItemList.setListData(Services.ItemServices.GetAccountsLike(txt_Items_Search.getText(), null).toArray());
+                }else{
+                    lst_Items_ItemList.setListData(Services.ItemServices.GetAccountsLike(txt_Items_Search.getText(), slot).toArray());
+                }
             }
         });
     }
@@ -580,10 +603,10 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_Characters;
     private javax.swing.JPanel pnl_Items;
     private javax.swing.JTabbedPane tpnl_MainPanel;
-    private javax.swing.JTextField tst_Search;
     private javax.swing.JTextField txt_Items_Attribute1Value;
     private javax.swing.JTextField txt_Items_Attribute2Value;
     private javax.swing.JTextField txt_Items_Name;
+    private javax.swing.JTextField txt_Items_Search;
     private javax.swing.JTextField txt_Name;
     private javax.swing.JTextField txt_Password;
     private javax.swing.JTextField txt_Search;
