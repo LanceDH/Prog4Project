@@ -38,6 +38,47 @@ public class AccountServices {
         return list;
     }
     
+    public static int UpdateAccount(DAL.Account account){
+        int rows = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            
+            tx = session.beginTransaction();
+            session.update(account);
+            tx.commit();
+        //session.close();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+        
+        return rows;
+    }
+    
+    public static void DeleteAccount(DAL.Account account){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            
+            tx = session.beginTransaction();
+
+            session.delete(account);
+            tx.commit();
+        //session.close();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+
+    }
+    
     public static Account Login(String name, String pass) throws UIException{
         Account account = new Account();
         
@@ -128,6 +169,37 @@ public class AccountServices {
         }
         
         
+        return list;
+    }
+    
+    public static ArrayList<DAL.Account> GetAccountsLike(String search){
+        ArrayList<DAL.Account> list = new ArrayList<DAL.Account>();
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.createQuery("from Account a where a.name like '%" + search + "%'");
+            list = (ArrayList<DAL.Account>) q.list();
+            
+            // alphabetical order
+            Collections.sort(list, new Comparator<DAL.Account>() {
+                @Override
+                public int compare(Account t, Account t1) {
+                    return t.getName().compareTo(t1.getName());
+                }
+
+            });
+
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+
         return list;
     }
 }

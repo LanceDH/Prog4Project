@@ -5,6 +5,7 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -17,6 +18,8 @@ import javax.swing.event.ListSelectionListener;
  */
 public class AdminWindow extends javax.swing.JFrame {
 
+    private DAL.Account _selectedAccount;
+    
     /**
      * Creates new form AdminWindow
      */
@@ -31,12 +34,12 @@ public class AdminWindow extends javax.swing.JFrame {
                 if(lst_Accounts.getSelectedValue() == null){
                     return;
                 }
-                DAL.Account acc = (DAL.Account) lst_Accounts.getSelectedValue();
-                txt_Name.setText(acc.getName());
-                txt_Password.setText(acc.getPassword());
-                cbx_Admin.setSelected(acc.isAdmin());
+                _selectedAccount = (DAL.Account) lst_Accounts.getSelectedValue();
+                txt_Name.setText(_selectedAccount.getName());
+                txt_Password.setText(_selectedAccount.getPassword());
+                cbx_Admin.setSelected(_selectedAccount.isAdmin());
                 
-                lst_Characeters.setListData(Services.CharacterServices.GetAllChactersOfAccount(acc.getId()).toArray());
+                lst_Characeters.setListData(Services.CharacterServices.GetAllChactersOfAccount(_selectedAccount.getId()).toArray());
             }
         });
         
@@ -101,8 +104,18 @@ public class AdminWindow extends javax.swing.JFrame {
         cbx_Admin.setText("Admin Account");
 
         btn_SaveAccount.setText("Save");
+        btn_SaveAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SaveAccountActionPerformed(evt);
+            }
+        });
 
         btn_DeleteAccount.setText("Del");
+        btn_DeleteAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DeleteAccountActionPerformed(evt);
+            }
+        });
 
         jScrollPane3.setViewportView(lst_Characeters);
 
@@ -222,6 +235,51 @@ public class AdminWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_DeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeleteAccountActionPerformed
+        if(_selectedAccount == null){
+            return;
+        }
+        
+        int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete " + _selectedAccount.getName() + " ?", "Warning" , JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            
+            if (Services.CharacterServices.GetAllChactersOfAccount(_selectedAccount.getId()).size() != 0) {
+                JOptionPane.showMessageDialog(null,"Can't delete account that has characters.");
+                return;
+            }
+            else{
+                Services.AccountServices.DeleteAccount(_selectedAccount);
+                ResetAccountPanel();
+            }
+            
+            
+            
+        }
+    }//GEN-LAST:event_btn_DeleteAccountActionPerformed
+
+    private void btn_SaveAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveAccountActionPerformed
+        if(_selectedAccount == null){
+            return;
+        }
+        
+        _selectedAccount.setName(txt_Name.getText());
+        _selectedAccount.setPassword(txt_Password.getText());
+        _selectedAccount.setAdmin(cbx_Admin.isSelected());
+        Services.AccountServices.UpdateAccount(_selectedAccount);
+        JOptionPane.showMessageDialog(this,"Account updated.");
+ 
+        lst_Accounts.setListData(Services.AccountServices.GetAllAccounts().toArray());
+    }//GEN-LAST:event_btn_SaveAccountActionPerformed
+
+    private void ResetAccountPanel(){
+        _selectedAccount = null;
+        txt_Name.setText("");
+        txt_Password.setText("");
+        cbx_Admin.setSelected(false);
+        lst_Characeters.removeAll();
+        lst_Accounts.setListData(Services.AccountServices.GetAllAccounts().toArray());
+    }
+    
     /**
      * @param args the command line arguments
      */

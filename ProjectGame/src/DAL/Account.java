@@ -98,6 +98,17 @@ public class Account  implements java.io.Serializable {
         return error;
     }
 
+    @Override
+    public String toString() {
+        String output = name;
+        if(admin){
+            output += " (A)";
+        }
+        
+        return output;
+    }
+
+    
 }
 
 

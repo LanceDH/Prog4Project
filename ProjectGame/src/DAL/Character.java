@@ -135,6 +135,11 @@ public class Character  implements java.io.Serializable {
         return error;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+    
 }
 
 
