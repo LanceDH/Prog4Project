@@ -77,6 +77,28 @@ public class ItemServices {
         return row;
     }
     
+    public static int DeleteCharacter(DAL.Item item){
+        int rows = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            
+            tx = session.beginTransaction();
+
+            session.delete(item);
+            tx.commit();
+        //session.close();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+        
+        return rows;
+    }
+    
     public static Item GetItemById(int id){
         Item item = new Item();
         

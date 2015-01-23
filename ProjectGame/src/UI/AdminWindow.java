@@ -246,6 +246,7 @@ public class AdminWindow extends javax.swing.JFrame {
         });
 
         lbl_Items_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Unknown.png"))); // NOI18N
+        lbl_Items_Icon.setVerifyInputWhenFocusTarget(false);
 
         jLabel12.setText("Icon");
 
@@ -327,7 +328,7 @@ public class AdminWindow extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_Items_Icon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_Items_Icon, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lbl_Items_Icon))))
                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel7)
@@ -407,13 +408,32 @@ public class AdminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SaveAccountActionPerformed
 
     private void btn_Items_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Items_SaveActionPerformed
+        _selectedItem.setName(txt_Items_Name.getText());
+        _selectedItem.setSlot((DAL.Slot) cmb_Items_Slot.getSelectedItem());
+        _selectedItem.setIconPath(txt_Items_Icon.getText());
+        _selectedItem.setAttribute1((DAL.Attribute)cmb_Items_Attribute1.getSelectedItem());
+        _selectedItem.setAttribute1value(Integer.parseInt(txt_Items_Attribute1Value.getText()));
+        if (((DAL.Attribute)cmb_Items_Attribute1.getSelectedItem()).getName().equals("None")) {
+            _selectedItem.setAttribute2(null);
+            _selectedItem.setAttribute2value(0);
+        }
+        else{
+            _selectedItem.setAttribute2((DAL.Attribute)cmb_Items_Attribute1.getSelectedItem());
+            _selectedItem.setAttribute2value(Integer.parseInt(txt_Items_Attribute2Value.getText()));
+        }
         
+        Services.ItemServices.UpdateItem(_selectedItem);
+        JOptionPane.showMessageDialog(this,"Item updated.");
+
+        
+        UpdateItemlist();
     }//GEN-LAST:event_btn_Items_SaveActionPerformed
 
     private void btn_Items_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Items_AddActionPerformed
         DAL.Item item = new Item();
         item.setName(txt_Items_Name.getText());
         item.setSlot((DAL.Slot) cmb_Items_Slot.getSelectedItem());
+        item.setIconPath(txt_Items_Icon.getText());
         item.setAttribute1((DAL.Attribute)cmb_Items_Attribute1.getSelectedItem());
         item.setAttribute1value(Integer.parseInt(txt_Items_Attribute1Value.getText()));
         if (((DAL.Attribute)cmb_Items_Attribute1.getSelectedItem()).getName().equals("None")) {
@@ -431,12 +451,14 @@ public class AdminWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,ex.getMessage());
             return;
         }
-        
+        JOptionPane.showMessageDialog(this,"Item "+ item.getName() +" added.");
         UpdateItemlist();
     }//GEN-LAST:event_btn_Items_AddActionPerformed
 
     private void btn_Items_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Items_DeleteActionPerformed
-        // TODO add your handling code here:
+        Services.ItemServices.DeleteCharacter(_selectedItem);
+        UpdateItemlist();
+        ResetItemPanel();
     }//GEN-LAST:event_btn_Items_DeleteActionPerformed
 
     private void cmb_Items_SlotListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_Items_SlotListActionPerformed
@@ -452,6 +474,17 @@ public class AdminWindow extends javax.swing.JFrame {
         cbx_Admin.setSelected(false);
         lst_Characeters.removeAll();
         lst_Accounts.setListData(Services.AccountServices.GetAllAccounts().toArray());
+    }
+    
+    private void ResetItemPanel(){
+        _selectedItem = null;
+        txt_Items_Name.setText("");
+        txt_Items_Icon.setText("");
+        cmb_Items_Slot.setSelectedIndex(0);
+        cmb_Items_Attribute1.setSelectedIndex(0);
+        txt_Items_Attribute1Value.setText("");
+        cmb_Items_Attribute2.setSelectedIndex(0);
+        txt_Items_Attribute2Value.setText("");
     }
     
     private void InitAccount(){
