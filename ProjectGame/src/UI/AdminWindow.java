@@ -905,19 +905,41 @@ public class AdminWindow extends javax.swing.JFrame {
     private void ResetCharacterPanel(){
         txt_Characters_Id.setText("");
         txt_Characters_Name.setText("");
+        ResetCharacterWeapon();
         txt_Characters_weaponId.setText("");
+        ResetCharacterChest();
+        txt_Characters_ChestId.setText("");
+        ResetCharacterLegs();
+        txt_Characters_LegsId.setText("");
+        ResetCharacterBoots();
+        txt_Characters_BootsId.setText("");
+        cmb_Characters_Race.setSelectedIndex(0);
+        cmb_Characters_Class.setSelectedIndex(0);
+    }
+    
+    private void ResetCharacterWeapon(){
+        
         lbl_WeaponName.setText("");
         lbl_WeaponAttribute1.setText("");
         lbl_WeaponAttribute2.setText("");
-        txt_Characters_ChestId.setText("");
+    }
+    
+    private void ResetCharacterChest(){
+        
         lbl_ChestName.setText("");
         lbl_ChestAttribute1.setText("");
         lbl_ChestAttribute2.setText("");
-        txt_Characters_LegsId.setText("");
+    }
+    
+    private void ResetCharacterLegs(){
+        
         lbl_LegsName.setText("");
         lbl_LegsAttribute1.setText("");
         lbl_LegsAttribute2.setText("");
-        txt_Characters_BootsId.setText("");
+    }
+    
+    private void ResetCharacterBoots(){
+        
         lbl_BootsName.setText("");
         lbl_BootsAttribute1.setText("");
         lbl_BootsAttribute2.setText("");
@@ -1132,7 +1154,7 @@ public class AdminWindow extends javax.swing.JFrame {
                     return;
                 }
                 _selectedCharacter = (DAL.Character) lst_Characters_CharacterList.getSelectedValue();
-                
+
                 txt_Characters_Id.setText(""+_selectedCharacter.getId());
                 txt_Characters_Name.setText(_selectedCharacter.getName());
                 
@@ -1151,7 +1173,8 @@ public class AdminWindow extends javax.swing.JFrame {
                 }
                 
                 if (_selectedCharacter.getItemByWeaponItemId() != null) {
-                    DAL.Item weapon = Services.ItemServices.GetItemById(_selectedCharacter.getItemByWeaponItemId().getId());
+                    _selectedCharacter.setItemByWeaponItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByWeaponItemId().getId()));
+                    DAL.Item weapon = _selectedCharacter.getItemByWeaponItemId();
                     txt_Characters_weaponId.setText(""+weapon.getId());
                     lbl_WeaponName.setText(weapon.getName());
                     lbl_WeaponAttribute1.setText("+" + weapon.getAttribute1value() + " " + weapon.getAttribute1().getName());
@@ -1161,7 +1184,8 @@ public class AdminWindow extends javax.swing.JFrame {
                 }
                 
                 if (_selectedCharacter.getItemByChestItemId()!= null) {
-                    DAL.Item chest = Services.ItemServices.GetItemById(_selectedCharacter.getItemByChestItemId().getId());
+                    _selectedCharacter.setItemByChestItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByChestItemId().getId()));
+                    DAL.Item chest = _selectedCharacter.getItemByChestItemId();
                     txt_Characters_ChestId.setText(""+chest.getId());
                     lbl_ChestName.setText(chest.getName());
                     lbl_ChestAttribute1.setText("+" + chest.getAttribute1value() + " " + chest.getAttribute1().getName());
@@ -1171,7 +1195,8 @@ public class AdminWindow extends javax.swing.JFrame {
                 }
                 
                 if (_selectedCharacter.getItemByLegsItemId()!= null) {
-                    DAL.Item legs = Services.ItemServices.GetItemById(_selectedCharacter.getItemByLegsItemId().getId());
+                    _selectedCharacter.setItemByLegsItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByLegsItemId().getId()));
+                    DAL.Item legs = _selectedCharacter.getItemByLegsItemId();
                     txt_Characters_LegsId.setText(""+legs.getId());
                     lbl_LegsName.setText(legs.getName());
                     lbl_LegsAttribute1.setText("+" + legs.getAttribute1value() + " " + legs.getAttribute1().getName());
@@ -1181,7 +1206,8 @@ public class AdminWindow extends javax.swing.JFrame {
                 }
                 
                 if (_selectedCharacter.getItemByBootsItemId()!= null) {
-                    DAL.Item boots = Services.ItemServices.GetItemById(_selectedCharacter.getItemByBootsItemId().getId());
+                    _selectedCharacter.setItemByBootsItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByBootsItemId().getId()));
+                    DAL.Item boots = _selectedCharacter.getItemByBootsItemId();
                     txt_Characters_BootsId.setText(""+boots.getId());
                     lbl_BootsName.setText(boots.getName());
                     lbl_BootsAttribute1.setText("+" + boots.getAttribute1value() + " " + boots.getAttribute1().getName());
@@ -1189,42 +1215,190 @@ public class AdminWindow extends javax.swing.JFrame {
                         lbl_BootsAttribute2.setText("+" + boots.getAttribute2value() + " " + boots.getAttribute2().getName());
                     }
                 }
-                
-                /*_selectedItem = (DAL.Item) lst_Items_ItemList.getSelectedValue();
-                txt_Items_Name.setText(_selectedItem.getName());
-                txt_Items_Attribute1Value.setText("" + _selectedItem.getAttribute1value());
-                txt_Items_Attribute2Value.setText("" + _selectedItem.getAttribute2value());
-                for (int i = 0; i < cmb_Items_Slot.getItemCount(); i++) {
-                    DAL.Slot sl = (DAL.Slot)cmb_Items_Slot.getItemAt(i);
-                    if(sl.getId() == _selectedItem.getSlot().getId()){
-                       cmb_Items_Slot.setSelectedIndex(i);
-                    }
-                }
-                
-                for (int i = 0; i < cmb_Items_Attribute1.getItemCount(); i++) {
-                    DAL.Attribute att = (DAL.Attribute)cmb_Items_Attribute1.getItemAt(i);
-                    if (att.getId() == _selectedItem.getAttribute1().getId()) {
-                        cmb_Items_Attribute1.setSelectedIndex(i);
-                    }
-                }
-                
-                if(_selectedItem.getAttribute2() == null){
-                    cmb_Items_Attribute2.setSelectedIndex(0);
-                }else{
-                    for (int i = 1; i < cmb_Items_Attribute2.getItemCount(); i++) {
-                    
-                        DAL.Attribute att = (DAL.Attribute)cmb_Items_Attribute2.getItemAt(i);
-                        if (att.getId() == _selectedItem.getAttribute2().getId()) {
-                            cmb_Items_Attribute2.setSelectedIndex(i);
+            }
+        });
+        
+        txt_Characters_weaponId.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+       
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void insertUpdate(DocumentEvent de) {
+                ResetCharacterWeapon();
+                try {
+                    int id = Integer.parseInt(txt_Characters_weaponId.getText());
+                    DAL.Item item = Services.ItemServices.GetItemById(id);
+                    if (item != null && item.getSlot().getName().equals("Weapon")) {
+                        lbl_WeaponName.setText(item.getName());
+                        lbl_WeaponAttribute1.setText("+" + item.getAttribute1value() + " " + item.getAttribute1().getName());
+                        if (item.getAttribute2() != null) {
+                            lbl_WeaponAttribute2.setText("+" + item.getAttribute2value() + " " + item.getAttribute2().getName());
                         }
+                    }else{
+                        lbl_WeaponName.setText("Invalid Id or slot type");
                     }
+                } catch (Exception e) {
+                    
                 }
-                
-                txt_Items_Icon.setText(_selectedItem.getIconPath());
-                GameWindow gmw = new GameWindow();
-                gmw.ChangeIcon(lbl_Items_Icon, _selectedItem.getIconPath());
-                
-                txt_Items_Id.setText(""+_selectedItem.getId());*/
+            }
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void removeUpdate(DocumentEvent de) {
+                ResetCharacterWeapon();
+                try {
+                    int id = Integer.parseInt(txt_Characters_weaponId.getText());
+                    DAL.Item item = Services.ItemServices.GetItemById(id);
+                    if (item != null && item.getSlot().getName().equals("Weapon")) {
+                        lbl_WeaponName.setText(item.getName());
+                        lbl_WeaponAttribute1.setText("+" + item.getAttribute1value() + " " + item.getAttribute1().getName());
+                        if (item.getAttribute2() != null) {
+                            lbl_WeaponAttribute2.setText("+" + item.getAttribute2value() + " " + item.getAttribute2().getName());
+                        }
+                    }else{
+                        lbl_WeaponName.setText("Invalid Id or slot type");
+                    }
+                } catch (Exception e) {
+                    
+                }
+            }
+        });
+        
+        txt_Characters_ChestId.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+       
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void insertUpdate(DocumentEvent de) {
+                ResetCharacterChest();
+                try {
+                    int id = Integer.parseInt(txt_Characters_ChestId.getText());
+                    DAL.Item item = Services.ItemServices.GetItemById(id);
+                    if (item != null && item.getSlot().getName().equals("Chest")) {
+                        lbl_ChestName.setText(item.getName());
+                        lbl_ChestAttribute1.setText("+" + item.getAttribute1value() + " " + item.getAttribute1().getName());
+                        if (item.getAttribute2() != null) {
+                            lbl_ChestAttribute2.setText("+" + item.getAttribute2value() + " " + item.getAttribute2().getName());
+                        }
+                    }else{
+                        lbl_ChestName.setText("Invalid Id or slot type");
+                    }
+                } catch (Exception e) {
+                    
+                }
+            }
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void removeUpdate(DocumentEvent de) {
+                ResetCharacterChest();
+                try {
+                    int id = Integer.parseInt(txt_Characters_ChestId.getText());
+                    DAL.Item item = Services.ItemServices.GetItemById(id);
+                    if (item != null && item.getSlot().getName().equals("Chest")) {
+                        lbl_ChestName.setText(item.getName());
+                        lbl_ChestAttribute1.setText("+" + item.getAttribute1value() + " " + item.getAttribute1().getName());
+                        if (item.getAttribute2() != null) {
+                            lbl_ChestAttribute2.setText("+" + item.getAttribute2value() + " " + item.getAttribute2().getName());
+                        }
+                    }else{
+                        lbl_ChestName.setText("Invalid Id or slot type");
+                    }
+                } catch (Exception e) {
+                    
+                }
+            }
+        });
+        
+        txt_Characters_LegsId.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+       
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void insertUpdate(DocumentEvent de) {
+                ResetCharacterLegs();
+                try {
+                    int id = Integer.parseInt(txt_Characters_LegsId.getText());
+                    DAL.Item item = Services.ItemServices.GetItemById(id);
+                    if (item != null && item.getSlot().getName().equals("Legs")) {
+                        lbl_LegsName.setText(item.getName());
+                        lbl_LegsAttribute1.setText("+" + item.getAttribute1value() + " " + item.getAttribute1().getName());
+                        if (item.getAttribute2() != null) {
+                            lbl_LegsAttribute2.setText("+" + item.getAttribute2value() + " " + item.getAttribute2().getName());
+                        }
+                    }else{
+                        lbl_LegsName.setText("Invalid Id or slot type");
+                    }
+                } catch (Exception e) {
+                    
+                }
+            }
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void removeUpdate(DocumentEvent de) {
+                ResetCharacterLegs();
+                try {
+                    int id = Integer.parseInt(txt_Characters_LegsId.getText());
+                    DAL.Item item = Services.ItemServices.GetItemById(id);
+                    if (item != null && item.getSlot().getName().equals("Legs")) {
+                        lbl_LegsName.setText(item.getName());
+                        lbl_LegsAttribute1.setText("+" + item.getAttribute1value() + " " + item.getAttribute1().getName());
+                        if (item.getAttribute2() != null) {
+                            lbl_LegsAttribute2.setText("+" + item.getAttribute2value() + " " + item.getAttribute2().getName());
+                        }
+                    }else{
+                        lbl_LegsName.setText("Invalid Id or slot type");
+                    }
+                } catch (Exception e) {
+                    
+                }
+            }
+        });
+        
+        txt_Characters_BootsId.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+       
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void insertUpdate(DocumentEvent de) {
+                ResetCharacterBoots();
+                try {
+                    int id = Integer.parseInt(txt_Characters_BootsId.getText());
+                    DAL.Item item = Services.ItemServices.GetItemById(id);
+                    if (item != null && item.getSlot().getName().equals("Boots")) {
+                        lbl_BootsName.setText(item.getName());
+                        lbl_BootsAttribute1.setText("+" + item.getAttribute1value() + " " + item.getAttribute1().getName());
+                        if (item.getAttribute2() != null) {
+                            lbl_BootsAttribute2.setText("+" + item.getAttribute2value() + " " + item.getAttribute2().getName());
+                        }
+                    }else{
+                        lbl_BootsName.setText("Invalid Id or slot type");
+                    }
+                } catch (Exception e) {
+                    
+                }
+            }
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void removeUpdate(DocumentEvent de) {
+                ResetCharacterBoots();
+                try {
+                    int id = Integer.parseInt(txt_Characters_BootsId.getText());
+                    DAL.Item item = Services.ItemServices.GetItemById(id);
+                    if (item != null && item.getSlot().getName().equals("Boots")) {
+                        lbl_BootsName.setText(item.getName());
+                        lbl_BootsAttribute1.setText("+" + item.getAttribute1value() + " " + item.getAttribute1().getName());
+                        if (item.getAttribute2() != null) {
+                            lbl_BootsAttribute2.setText("+" + item.getAttribute2value() + " " + item.getAttribute2().getName());
+                        }
+                    }else{
+                        lbl_BootsName.setText("Invalid Id or slot type");
+                    }
+                } catch (Exception e) {
+                    
+                }
             }
         });
     }

@@ -100,7 +100,7 @@ public class ItemServices {
     }
     
     public static Item GetItemById(int id){
-        Item item = new Item();
+        Item item = null;//new Item();
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -109,8 +109,10 @@ public class ItemServices {
              
         Query q = session.createQuery("from Item i left join fetch i.slot left join fetch i.attribute1 left join fetch i.attribute2 where i.id = :id ");
         q.setParameter("id", id);
-            
-        item = (Item)q.list().get(0);
+        
+        if(q.list().size() > 0){
+            item = (Item)q.list().get(0);
+        }
         
         } catch (Exception e) {
             throw e;
