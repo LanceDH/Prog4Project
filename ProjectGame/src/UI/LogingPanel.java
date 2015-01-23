@@ -127,11 +127,13 @@ public class LogingPanel extends javax.swing.JPanel {
                         .addComponent(btn_Exit))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 78, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(lbl_error, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_error, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 79, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,9 +171,14 @@ public class LogingPanel extends javax.swing.JPanel {
         
         txt_Account.setText("");
         txt_Password.setText("");
-        
 
         _parent.SetActiveAccount(acc);
+        
+        if (_parent.getActiveAccount().isAdmin()) {
+            AdminWindow aw = new AdminWindow();
+            aw.setVisible(true);
+        }
+        
         _parent.remove(this);
         _parent.ShowCharacterSelect();
     }//GEN-LAST:event_btn_LoginActionPerformed
