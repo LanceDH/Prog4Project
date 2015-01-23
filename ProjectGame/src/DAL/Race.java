@@ -59,8 +59,10 @@ public class Race  implements java.io.Serializable {
         this.characters = characters;
     }
 
-
-
+    @Override
+    public String toString() {
+        return name;
+    }
 
 }
 

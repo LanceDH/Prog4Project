@@ -113,10 +113,16 @@ public class MiscServices {
     }
 
     public static ArrayList<DAL.Race> getRaceList() {
+        if (RaceList == null) {
+            LoadRaceData();
+        }
         return RaceList;
     }
 
     public static ArrayList<DAL.Charclass> getClassList() {
+        if (ClassList == null) {
+            LoadClassData();
+        }
         return ClassList;
     }
     

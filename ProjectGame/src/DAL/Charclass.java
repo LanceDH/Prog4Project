@@ -59,9 +59,11 @@ public class Charclass  implements java.io.Serializable {
         this.characters = characters;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return name;
+    }
+    
 }
 
 
