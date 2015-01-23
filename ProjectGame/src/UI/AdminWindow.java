@@ -5,6 +5,7 @@
  */
 package UI;
 
+import DAL.Slot;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
@@ -19,6 +20,7 @@ import javax.swing.event.ListSelectionListener;
 public class AdminWindow extends javax.swing.JFrame {
 
     private DAL.Account _selectedAccount;
+    private DAL.Item _selectedItem;
     
     /**
      * Creates new form AdminWindow
@@ -26,39 +28,9 @@ public class AdminWindow extends javax.swing.JFrame {
     public AdminWindow() {
         initComponents();
         
-        lst_Accounts.setListData(Services.AccountServices.GetAllAccounts().toArray());
-        lst_Accounts.addListSelectionListener(new ListSelectionListener() {
-
-            @Override
-            public void valueChanged(ListSelectionEvent lse) {
-                if(lst_Accounts.getSelectedValue() == null){
-                    return;
-                }
-                _selectedAccount = (DAL.Account) lst_Accounts.getSelectedValue();
-                txt_Name.setText(_selectedAccount.getName());
-                txt_Password.setText(_selectedAccount.getPassword());
-                cbx_Admin.setSelected(_selectedAccount.isAdmin());
-                
-                lst_Characeters.setListData(Services.CharacterServices.GetAllChactersOfAccount(_selectedAccount.getId()).toArray());
-            }
-        });
+        InitAccount();
+        InitItem();
         
-        
-        txt_Search.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void changedUpdate(DocumentEvent e) {}
-       
-            @Override
-            @SuppressWarnings("empty-statement")
-            public void insertUpdate(DocumentEvent de) {
-                lst_Accounts.setListData(Services.AccountServices.GetAccountsLike(txt_Search.getText()).toArray()); ;
-            }
-            @Override
-            @SuppressWarnings("empty-statement")
-            public void removeUpdate(DocumentEvent de) {
-                lst_Accounts.setListData(Services.AccountServices.GetAccountsLike(txt_Search.getText()).toArray()); ;
-            }
-        });
     }
 
     /**
@@ -90,8 +62,28 @@ public class AdminWindow extends javax.swing.JFrame {
         btn_DeleteCharacter = new javax.swing.JButton();
         pnl_Characters = new javax.swing.JPanel();
         pnl_Items = new javax.swing.JPanel();
+        cmb_Items_SlotList = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lst_Items_ItemList = new javax.swing.JList();
+        tst_Search = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txt_Items_Name = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cmb_Items_Slot = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        cmb_Items_Attribute1 = new javax.swing.JComboBox();
+        txt_Items_Attribute1Value = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        cmb_Items_Attribute2 = new javax.swing.JComboBox();
+        txt_Items_Attribute2Value = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        btn_Items_Save = new javax.swing.JButton();
+        btn_Items_Add = new javax.swing.JButton();
+        btn_Items_Delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jScrollPane2.setViewportView(lst_Accounts);
 
@@ -187,7 +179,7 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ViewCharaceter)
                     .addComponent(btn_DeleteCharacter))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         tpnl_MainPanel.addTab("Accounts", pnl_Accounts);
@@ -200,20 +192,138 @@ public class AdminWindow extends javax.swing.JFrame {
         );
         pnl_CharactersLayout.setVerticalGroup(
             pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addGap(0, 391, Short.MAX_VALUE)
         );
 
         tpnl_MainPanel.addTab("Characters", pnl_Characters);
+
+        cmb_Items_SlotList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_Items_SlotListActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(lst_Items_ItemList);
+
+        jLabel5.setText("Name");
+
+        jLabel6.setText("Slot type");
+
+        jLabel7.setText("Attribute 1");
+
+        jLabel8.setText("Value");
+
+        jLabel9.setText("Attribute 2");
+
+        jLabel10.setText("Value");
+
+        btn_Items_Save.setText("Save");
+        btn_Items_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Items_SaveActionPerformed(evt);
+            }
+        });
+
+        btn_Items_Add.setText("Add");
+        btn_Items_Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Items_AddActionPerformed(evt);
+            }
+        });
+
+        btn_Items_Delete.setText("Delete");
+        btn_Items_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Items_DeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_ItemsLayout = new javax.swing.GroupLayout(pnl_Items);
         pnl_Items.setLayout(pnl_ItemsLayout);
         pnl_ItemsLayout.setHorizontalGroup(
             pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 516, Short.MAX_VALUE)
+            .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(cmb_Items_SlotList, 0, 151, Short.MAX_VALUE)
+                    .addComponent(tst_Search))
+                .addGap(18, 18, 18)
+                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_Items_Name)
+                            .addComponent(cmb_Items_Slot, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7)
+                            .addComponent(cmb_Items_Attribute1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ItemsLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_Items_Attribute1Value, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9)
+                            .addComponent(cmb_Items_Attribute2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ItemsLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_Items_Attribute2Value, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                        .addComponent(btn_Items_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Items_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                        .addComponent(btn_Items_Delete)))
+                .addContainerGap())
         );
         pnl_ItemsLayout.setVerticalGroup(
             pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmb_Items_SlotList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                                .addComponent(txt_Items_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmb_Items_Slot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(73, 73, 73)
+                                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btn_Items_Save)
+                                    .addComponent(btn_Items_Add)
+                                    .addComponent(btn_Items_Delete))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tst_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmb_Items_Attribute1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_Items_Attribute1Value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmb_Items_Attribute2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_Items_Attribute2Value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         tpnl_MainPanel.addTab("Items", pnl_Items);
@@ -226,10 +336,7 @@ public class AdminWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tpnl_MainPanel)
-                .addContainerGap())
+            .addComponent(tpnl_MainPanel, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -271,6 +378,31 @@ public class AdminWindow extends javax.swing.JFrame {
         lst_Accounts.setListData(Services.AccountServices.GetAllAccounts().toArray());
     }//GEN-LAST:event_btn_SaveAccountActionPerformed
 
+    private void btn_Items_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Items_SaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Items_SaveActionPerformed
+
+    private void btn_Items_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Items_AddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Items_AddActionPerformed
+
+    private void btn_Items_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Items_DeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Items_DeleteActionPerformed
+
+    private void cmb_Items_SlotListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_Items_SlotListActionPerformed
+        lst_Items_ItemList.removeAll();
+        
+        DAL.Slot slot = (DAL.Slot)cmb_Items_SlotList.getSelectedItem();
+        if(slot.getName().equals("All")){
+            Services.ItemServices.LoadAllLoot();
+            lst_Items_ItemList.setListData(Services.ItemServices.getLootList().toArray());
+        }
+        else{
+            lst_Items_ItemList.setListData(Services.ItemServices.GetItemsBySlot(slot).toArray());
+        }
+    }//GEN-LAST:event_cmb_Items_SlotListActionPerformed
+
     private void ResetAccountPanel(){
         _selectedAccount = null;
         txt_Name.setText("");
@@ -278,6 +410,106 @@ public class AdminWindow extends javax.swing.JFrame {
         cbx_Admin.setSelected(false);
         lst_Characeters.removeAll();
         lst_Accounts.setListData(Services.AccountServices.GetAllAccounts().toArray());
+    }
+    
+    private void InitAccount(){
+        lst_Accounts.setListData(Services.AccountServices.GetAllAccounts().toArray());
+        lst_Accounts.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                if(lst_Accounts.getSelectedValue() == null){
+                    return;
+                }
+                _selectedAccount = (DAL.Account) lst_Accounts.getSelectedValue();
+                txt_Name.setText(_selectedAccount.getName());
+                txt_Password.setText(_selectedAccount.getPassword());
+                cbx_Admin.setSelected(_selectedAccount.isAdmin());
+                
+                lst_Characeters.setListData(Services.CharacterServices.GetAllChactersOfAccount(_selectedAccount.getId()).toArray());
+            }
+        });
+        
+        txt_Search.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+       
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void insertUpdate(DocumentEvent de) {
+                lst_Accounts.setListData(Services.AccountServices.GetAccountsLike(txt_Search.getText()).toArray()); ;
+            }
+            @Override
+            @SuppressWarnings("empty-statement")
+            public void removeUpdate(DocumentEvent de) {
+                lst_Accounts.setListData(Services.AccountServices.GetAccountsLike(txt_Search.getText()).toArray()); ;
+            }
+        });
+    }
+    
+    private void InitItem(){
+        Slot slot = new Slot("All");
+        cmb_Items_SlotList.addItem(slot);
+        
+        if(Services.MiscServices.getSlotList() == null){
+            Services.MiscServices.LoadSlotData();
+        }
+        for (DAL.Slot s : Services.MiscServices.getSlotList()) {
+            cmb_Items_SlotList.addItem(s);
+            cmb_Items_Slot.addItem(s);
+        }
+
+        DAL.Attribute attribute = new DAL.Attribute("None");
+        cmb_Items_Attribute2.addItem(attribute);
+        for (DAL.Attribute att : Services.MiscServices.getAttributeList()) {
+            cmb_Items_Attribute1.addItem(att);
+            cmb_Items_Attribute2.addItem(att);
+        }
+        
+        lst_Items_ItemList.setListData(Services.ItemServices.getLootList().toArray());
+        
+        
+        lst_Items_ItemList.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                if(lst_Items_ItemList.getSelectedValue() == null){
+                    return;
+                }
+                _selectedItem = (DAL.Item) lst_Items_ItemList.getSelectedValue();
+                txt_Items_Name.setText(_selectedItem.getName());
+                txt_Items_Attribute1Value.setText("" + _selectedItem.getAttribute1value());
+                txt_Items_Attribute2Value.setText("" + _selectedItem.getAttribute2value());
+                for (int i = 0; i < cmb_Items_Slot.getItemCount(); i++) {
+                    DAL.Slot sl = (DAL.Slot)cmb_Items_Slot.getItemAt(i);
+                    if(sl.getId() == _selectedItem.getSlot().getId()){
+                       cmb_Items_Slot.setSelectedIndex(i);
+                    }
+                }
+                
+                for (int i = 0; i < cmb_Items_Attribute1.getItemCount(); i++) {
+                    DAL.Attribute att = (DAL.Attribute)cmb_Items_Attribute1.getItemAt(i);
+                    if (att.getId() == _selectedItem.getAttribute1().getId()) {
+                        cmb_Items_Attribute1.setSelectedIndex(i);
+                    }
+                }
+                
+                if(_selectedItem.getAttribute2() == null){
+                    cmb_Items_Attribute2.setSelectedIndex(0);
+                }else{
+                    for (int i = 1; i < cmb_Items_Attribute2.getItemCount(); i++) {
+                    
+                        DAL.Attribute att = (DAL.Attribute)cmb_Items_Attribute2.getItemAt(i);
+                        if (att.getId() == _selectedItem.getAttribute2().getId()) {
+                            cmb_Items_Attribute2.setSelectedIndex(i);
+                        }
+                    }
+                }
+                
+                
+                //lst_Characeters.setListData(Services.CharacterServices.GetAllChactersOfAccount(_selectedAccount.getId()).toArray());
+            }
+        });
     }
     
     /**
@@ -318,21 +550,40 @@ public class AdminWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_DeleteAccount;
     private javax.swing.JButton btn_DeleteCharacter;
+    private javax.swing.JButton btn_Items_Add;
+    private javax.swing.JButton btn_Items_Delete;
+    private javax.swing.JButton btn_Items_Save;
     private javax.swing.JButton btn_SaveAccount;
     private javax.swing.JButton btn_ViewCharaceter;
     private javax.swing.JCheckBox cbx_Admin;
+    private javax.swing.JComboBox cmb_Items_Attribute1;
+    private javax.swing.JComboBox cmb_Items_Attribute2;
+    private javax.swing.JComboBox cmb_Items_Slot;
+    private javax.swing.JComboBox cmb_Items_SlotList;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList lst_Accounts;
     private javax.swing.JList lst_Characeters;
+    private javax.swing.JList lst_Items_ItemList;
     private javax.swing.JPanel pnl_Accounts;
     private javax.swing.JPanel pnl_Characters;
     private javax.swing.JPanel pnl_Items;
     private javax.swing.JTabbedPane tpnl_MainPanel;
+    private javax.swing.JTextField tst_Search;
+    private javax.swing.JTextField txt_Items_Attribute1Value;
+    private javax.swing.JTextField txt_Items_Attribute2Value;
+    private javax.swing.JTextField txt_Items_Name;
     private javax.swing.JTextField txt_Name;
     private javax.swing.JTextField txt_Password;
     private javax.swing.JTextField txt_Search;

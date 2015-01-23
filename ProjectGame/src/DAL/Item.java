@@ -138,8 +138,10 @@ public class Item  implements java.io.Serializable {
         this.attribute2value = attribute2value;
     }
 
-
-
+    @Override
+    public String toString() {
+        return name;
+    }
 
 }
 
