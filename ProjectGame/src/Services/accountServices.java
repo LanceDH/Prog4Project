@@ -38,6 +38,33 @@ public class AccountServices {
         return list;
     }
     
+    public static Account GetAccountById(int id){
+        Account account = null;//new Item();
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            
+            session.beginTransaction();
+             
+        Query q = session.createQuery("from Account a where a.id = :id ");
+        q.setParameter("id", id);
+        
+        if(q.list().size() > 0){
+            account = (Account)q.list().get(0);
+        }
+        
+        } catch (Exception e) {
+            throw e;
+        } catch(ExceptionInInitializerError e){
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+        
+        return account;
+    }
+    
     public static int UpdateAccount(DAL.Account account){
         int rows = 0;
         Session session = HibernateUtil.getSessionFactory().openSession();

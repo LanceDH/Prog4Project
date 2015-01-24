@@ -37,7 +37,7 @@ public class SearchCharacters extends HttpServlet {
         
         String search = request.getParameter("search");
         
-        ArrayList<DAL.Character> chars = Services.CharacterServices.GetCharacterLike(search);
+        ArrayList<DAL.Character> chars = Services.CharacterServices.GetCharactersLike(search);
         
         request.getSession().setAttribute("Characters", chars);
         RequestDispatcher dispatcher = request.getRequestDispatcher("Search.jsp");
