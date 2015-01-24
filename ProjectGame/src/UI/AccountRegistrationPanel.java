@@ -7,6 +7,7 @@ package UI;
 
 import DAL.Account;
 import DAL.Password;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -229,7 +230,7 @@ public class AccountRegistrationPanel extends javax.swing.JPanel {
             return;
         }
         
-        
+        JOptionPane.showMessageDialog(this, "Account created.");
         _parent.remove(this);
         _parent.ShowLogin();
     }//GEN-LAST:event_btn_RegisterActionPerformed

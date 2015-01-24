@@ -163,11 +163,11 @@ public class ItemServices {
         return list;
     }
     
-    public static ArrayList<DAL.Item> GetAccountsLike(String search){
-        return GetAccountsLike(search, null);
+    public static ArrayList<DAL.Item> GetItemsLike(String search){
+        return GetItemsLike(search, null);
     }
     
-    public static ArrayList<DAL.Item> GetAccountsLike(String search, DAL.Slot slot){
+    public static ArrayList<DAL.Item> GetItemsLike(String search, DAL.Slot slot){
         ArrayList<DAL.Item> list = new ArrayList<DAL.Item>();
         
         Session session = HibernateUtil.getSessionFactory().openSession();

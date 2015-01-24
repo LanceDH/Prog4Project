@@ -114,7 +114,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         });
 
         btn_DeleteChar0.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btn_DeleteChar0.setText("x");
+        btn_DeleteChar0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Delete_16.png"))); // NOI18N
         btn_DeleteChar0.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar0.setMinimumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar0.setName("0"); // NOI18N
@@ -178,7 +178,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         });
 
         btn_DeleteChar1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btn_DeleteChar1.setText("x");
+        btn_DeleteChar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Delete_16.png"))); // NOI18N
         btn_DeleteChar1.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar1.setMinimumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar1.setName("1"); // NOI18N
@@ -242,7 +242,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         });
 
         btn_DeleteChar2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btn_DeleteChar2.setText("x");
+        btn_DeleteChar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Delete_16.png"))); // NOI18N
         btn_DeleteChar2.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar2.setMinimumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar2.setName("2"); // NOI18N
@@ -306,7 +306,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         });
 
         btn_DeleteChar3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btn_DeleteChar3.setText("x");
+        btn_DeleteChar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Delete_16.png"))); // NOI18N
         btn_DeleteChar3.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar3.setMinimumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar3.setName("3"); // NOI18N
@@ -370,7 +370,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         });
 
         btn_DeleteChar4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btn_DeleteChar4.setText("x");
+        btn_DeleteChar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Delete_16.png"))); // NOI18N
         btn_DeleteChar4.setMaximumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar4.setMinimumSize(new java.awt.Dimension(26, 26));
         btn_DeleteChar4.setName("4"); // NOI18N

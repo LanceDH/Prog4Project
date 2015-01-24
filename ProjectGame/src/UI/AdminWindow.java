@@ -66,6 +66,8 @@ public class AdminWindow extends javax.swing.JFrame {
         btn_Accounts_ViewCharacter = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txt_Accounts_Id = new javax.swing.JTextField();
+        lbl_Accounts_RefreshAccounts = new javax.swing.JLabel();
+        lbl_Accounts_RefreshCharacters = new javax.swing.JLabel();
         pnl_Characters = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         lst_Characters_CharacterList = new javax.swing.JList();
@@ -111,6 +113,8 @@ public class AdminWindow extends javax.swing.JFrame {
         btn_BootsView = new javax.swing.JButton();
         btn_Characters_Save = new javax.swing.JButton();
         btn_Characters_Delete = new javax.swing.JButton();
+        lbl_Characters_Refresh = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         pnl_Items = new javax.swing.JPanel();
         cmb_Items_SlotList = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -136,6 +140,8 @@ public class AdminWindow extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txt_Items_Id = new javax.swing.JTextField();
+        lbl_Items_Refresh = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -163,7 +169,7 @@ public class AdminWindow extends javax.swing.JFrame {
             }
         });
 
-        btn_Accounts_Delete.setText("Del");
+        btn_Accounts_Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Delete_16.png"))); // NOI18N
         btn_Accounts_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_Accounts_DeleteActionPerformed(evt);
@@ -190,6 +196,20 @@ public class AdminWindow extends javax.swing.JFrame {
             }
         });
 
+        lbl_Accounts_RefreshAccounts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Refresh_16.png"))); // NOI18N
+        lbl_Accounts_RefreshAccounts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_Accounts_RefreshAccountsMouseClicked(evt);
+            }
+        });
+
+        lbl_Accounts_RefreshCharacters.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Refresh_16.png"))); // NOI18N
+        lbl_Accounts_RefreshCharacters.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_Accounts_RefreshCharactersMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_AccountsLayout = new javax.swing.GroupLayout(pnl_Accounts);
         pnl_Accounts.setLayout(pnl_AccountsLayout);
         pnl_AccountsLayout.setHorizontalGroup(
@@ -199,18 +219,23 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
                         .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                            .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE))
+                            .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_Accounts_RefreshAccounts)
+                                .addGap(50, 50, 50)))
                         .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel2)
                                 .addComponent(cbx_Accounts_Admin)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_AccountsLayout.createSequentialGroup()
+                                .addGroup(pnl_AccountsLayout.createSequentialGroup()
                                     .addComponent(btn_Accounts_Save)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_Accounts_Delete))
+                                    .addComponent(btn_Accounts_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(txt_Accounts_Password)
                                 .addComponent(txt_Accounts_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel13)
@@ -219,12 +244,14 @@ public class AdminWindow extends javax.swing.JFrame {
                         .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(pnl_AccountsLayout.createSequentialGroup()
-                                .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(pnl_AccountsLayout.createSequentialGroup()
-                                        .addGap(49, 49, 49)
-                                        .addComponent(btn_Accounts_ViewCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 46, Short.MAX_VALUE))))
+                                .addGap(49, 49, 49)
+                                .addComponent(btn_Accounts_ViewCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 70, Short.MAX_VALUE))
+                            .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_Accounts_RefreshCharacters)
+                                .addGap(8, 8, 8))))
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
                         .addComponent(txt_Accounts_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -233,16 +260,20 @@ public class AdminWindow extends javax.swing.JFrame {
         pnl_AccountsLayout.setVerticalGroup(
             pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_AccountsLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(lbl_Accounts_RefreshCharacters))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_Accounts_ViewCharacter))
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(lbl_Accounts_RefreshAccounts))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
@@ -265,7 +296,7 @@ public class AdminWindow extends javax.swing.JFrame {
                             .addComponent(btn_Accounts_Delete))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_Accounts_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         tpnl_MainPanel.addTab("Accounts", pnl_Accounts);
@@ -334,12 +365,12 @@ public class AdminWindow extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addGroup(weaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_WeaponAttribute2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(lbl_WeaponAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
+                                    .addComponent(lbl_WeaponAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
+                    .addGroup(weaponLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_WeaponView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(weaponLayout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
-                .addComponent(btn_WeaponView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
         );
         weaponLayout.setVerticalGroup(
             weaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,7 +424,7 @@ public class AdminWindow extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Characters_ChestId, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(txt_Characters_ChestId)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -405,12 +436,12 @@ public class AdminWindow extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_ChestAttribute2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(lbl_ChestAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
+                                    .addComponent(lbl_ChestAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_ChestView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_ChestView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,7 +495,7 @@ public class AdminWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Characters_LegsId, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(txt_Characters_LegsId)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel20)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -476,12 +507,12 @@ public class AdminWindow extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_LegsAttribute2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(lbl_LegsAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
+                                    .addComponent(lbl_LegsAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_LegsView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_LegsView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,7 +566,7 @@ public class AdminWindow extends javax.swing.JFrame {
             .addGroup(BootsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BootsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Characters_BootsId, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(txt_Characters_BootsId)
                     .addGroup(BootsLayout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -547,12 +578,12 @@ public class AdminWindow extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addGroup(BootsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_BootsAttribute2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(lbl_BootsAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
+                                    .addComponent(lbl_BootsAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
+                    .addGroup(BootsLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_BootsView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(BootsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_BootsView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         BootsLayout.setVerticalGroup(
             BootsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,7 +607,21 @@ public class AdminWindow extends javax.swing.JFrame {
 
         btn_Characters_Save.setText("Save");
 
-        btn_Characters_Delete.setText("Del");
+        btn_Characters_Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Delete_16.png"))); // NOI18N
+        btn_Characters_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Characters_DeleteActionPerformed(evt);
+            }
+        });
+
+        lbl_Characters_Refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Refresh_16.png"))); // NOI18N
+        lbl_Characters_Refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_Characters_RefreshMouseClicked(evt);
+            }
+        });
+
+        jLabel22.setText("Characters");
 
         javax.swing.GroupLayout pnl_CharactersLayout = new javax.swing.GroupLayout(pnl_Characters);
         pnl_Characters.setLayout(pnl_CharactersLayout);
@@ -584,54 +629,56 @@ public class AdminWindow extends javax.swing.JFrame {
             pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_CharactersLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txt_Character_AccountId)
-                    .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(txt_Characters_Search, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
-                        .addComponent(jLabel14)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_CharactersLayout.createSequentialGroup()
+                        .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_Characters_Search, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_CharactersLayout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_Characters_Refresh)
+                                .addGap(8, 8, 8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_CharactersLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_Character_AccountId)))
+                        .addGap(20, 20, 20))
+                    .addGroup(pnl_CharactersLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)))
+                .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnl_CharactersLayout.createSequentialGroup()
                         .addComponent(btn_Characters_Save)
-                        .addGap(59, 59, 59)
-                        .addComponent(btn_Characters_Delete))
-                    .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel15)
-                            .addComponent(txt_Characters_Id)
-                            .addComponent(lbl_Characters_Name)
-                            .addComponent(txt_Characters_Name)
-                            .addComponent(jLabel16)
-                            .addComponent(cmb_Characters_Race, 0, 161, Short.MAX_VALUE))
-                        .addComponent(jLabel17)
-                        .addComponent(cmb_Characters_Class, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addComponent(btn_Characters_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmb_Characters_Class, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmb_Characters_Race, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_Characters_Name)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel16)
+                    .addComponent(lbl_Characters_Name)
+                    .addComponent(jLabel15)
+                    .addComponent(txt_Characters_Id))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tpnl_Gear)
+                .addComponent(tpnl_Gear, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnl_CharactersLayout.setVerticalGroup(
             pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_CharactersLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tpnl_Gear, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_CharactersLayout.createSequentialGroup()
-                        .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_Character_AccountId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_Characters_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(lbl_Characters_Refresh)
+                            .addComponent(jLabel22))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnl_CharactersLayout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(txt_Characters_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_Characters_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))
-                            .addGroup(pnl_CharactersLayout.createSequentialGroup()
                                 .addComponent(lbl_Characters_Name)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_Characters_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -643,14 +690,21 @@ public class AdminWindow extends javax.swing.JFrame {
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmb_Characters_Class, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btn_Characters_Save)
-                                    .addComponent(btn_Characters_Delete))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(pnl_CharactersLayout.createSequentialGroup()
-                        .addComponent(tpnl_Gear, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pnl_CharactersLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_Characters_Delete))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_CharactersLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btn_Characters_Save))))
+                            .addComponent(jScrollPane4))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_Characters_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_CharactersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_Character_AccountId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         tpnl_MainPanel.addTab("Characters", pnl_Characters);
@@ -689,7 +743,7 @@ public class AdminWindow extends javax.swing.JFrame {
             }
         });
 
-        btn_Items_Delete.setText("Delete");
+        btn_Items_Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Delete_16.png"))); // NOI18N
         btn_Items_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_Items_DeleteActionPerformed(evt);
@@ -705,16 +759,32 @@ public class AdminWindow extends javax.swing.JFrame {
 
         txt_Items_Id.setEditable(false);
 
+        lbl_Items_Refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Refresh_16.png"))); // NOI18N
+        lbl_Items_Refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_Items_RefreshMouseClicked(evt);
+            }
+        });
+
+        jLabel23.setText("Items");
+
         javax.swing.GroupLayout pnl_ItemsLayout = new javax.swing.GroupLayout(pnl_Items);
         pnl_Items.setLayout(pnl_ItemsLayout);
         pnl_ItemsLayout.setHorizontalGroup(
             pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_ItemsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(cmb_Items_SlotList, 0, 151, Short.MAX_VALUE)
-                    .addComponent(txt_Items_Search))
+                .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_Items_Search)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_ItemsLayout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_Items_Refresh)
+                        .addGap(9, 9, 9))
+                    .addComponent(cmb_Items_SlotList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnl_ItemsLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
@@ -732,7 +802,7 @@ public class AdminWindow extends javax.swing.JFrame {
                                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
                                         .addGap(54, 54, 54)
                                         .addComponent(lbl_Items_Icon)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7)
@@ -754,18 +824,19 @@ public class AdminWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_Items_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Items_Delete)))
+                        .addComponent(btn_Items_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnl_ItemsLayout.setVerticalGroup(
             pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_ItemsLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cmb_Items_SlotList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel7))
+                    .addComponent(lbl_Items_Refresh)
+                    .addComponent(jLabel23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_ItemsLayout.createSequentialGroup()
@@ -807,7 +878,9 @@ public class AdminWindow extends javax.swing.JFrame {
                     .addComponent(btn_Items_Save)
                     .addComponent(btn_Items_Add)
                     .addComponent(btn_Items_Delete))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmb_Items_SlotList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         tpnl_MainPanel.addTab("Items", pnl_Items);
@@ -816,7 +889,7 @@ public class AdminWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tpnl_MainPanel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(tpnl_MainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -840,7 +913,9 @@ public class AdminWindow extends javax.swing.JFrame {
             }
             else{
                 Services.AccountServices.DeleteAccount(_selectedAccount);
+                JOptionPane.showMessageDialog(this,"Account "+ _selectedAccount.getName() +" deleted.");
                 ResetAccountPanel();
+                
             }
  
         }
@@ -999,6 +1074,62 @@ public class AdminWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_LegsViewActionPerformed
 
+    private void btn_Characters_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Characters_DeleteActionPerformed
+        
+        
+        int result = JOptionPane.showConfirmDialog(this,"Are you sure you want to delete " + _selectedCharacter.getName() + " ?", "Warning" , JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            try {
+                Services.CharacterServices.DeleteCharacter(_selectedCharacter);
+            
+            } catch (Exception e) {
+                return;
+            }
+        }
+        
+        JOptionPane.showMessageDialog(this,"Character "+ _selectedCharacter.getName() +" deleted.");
+        lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharactersLike("").toArray());
+        _selectedCharacter = null;
+        ResetCharacterPanel();
+    }//GEN-LAST:event_btn_Characters_DeleteActionPerformed
+
+    private void lbl_Accounts_RefreshAccountsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_Accounts_RefreshAccountsMouseClicked
+        UpdateAccountList();
+    }//GEN-LAST:event_lbl_Accounts_RefreshAccountsMouseClicked
+
+    private void lbl_Characters_RefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_Characters_RefreshMouseClicked
+        UpdateCharacterList();
+    }//GEN-LAST:event_lbl_Characters_RefreshMouseClicked
+
+    private void lbl_Items_RefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_Items_RefreshMouseClicked
+        UpdateItemlist();
+    }//GEN-LAST:event_lbl_Items_RefreshMouseClicked
+
+    private void lbl_Accounts_RefreshCharactersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_Accounts_RefreshCharactersMouseClicked
+        UpdateAccountCharactersList();
+    }//GEN-LAST:event_lbl_Accounts_RefreshCharactersMouseClicked
+
+    private void UpdateAccountList(){
+        lst_Accounts_AccountList.setListData(Services.AccountServices.GetAllAccounts().toArray());
+    }
+    
+    private void UpdateAccountCharactersList(){
+        if (_selectedAccount != null) {
+            lst_Accounts_Characters.setListData(Services.CharacterServices.GetAllChactersOfAccount(_selectedAccount.getId()).toArray());
+        }
+    }
+    
+    private void UpdateCharacterList(){
+        int id = -1;
+        if (!txt_Character_AccountId.getText().equals("")) {
+            try {
+            id = Integer.parseInt(txt_Character_AccountId.getText());
+        } catch (Exception e) {
+        }
+        }
+        lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharactersLike(txt_Characters_Search.getText(), id).toArray());
+    }
+    
     private void ResetAccountPanel(){
         _selectedAccount = null;
         txt_Accounts_Name.setText("");
@@ -1190,12 +1321,12 @@ public class AdminWindow extends javax.swing.JFrame {
             @Override
             @SuppressWarnings("empty-statement")
             public void insertUpdate(DocumentEvent de) {
-                lst_Accounts_AccountList.setListData(Services.AccountServices.GetAccountsLike(txt_Accounts_Search.getText()).toArray()); ;
+                lst_Accounts_AccountList.setListData(Services.AccountServices.GetAccountsLike(txt_Accounts_Search.getText()).toArray());
             }
             @Override
             @SuppressWarnings("empty-statement")
             public void removeUpdate(DocumentEvent de) {
-                lst_Accounts_AccountList.setListData(Services.AccountServices.GetAccountsLike(txt_Accounts_Search.getText()).toArray()); ;
+                lst_Accounts_AccountList.setListData(Services.AccountServices.GetAccountsLike(txt_Accounts_Search.getText()).toArray());
             }
         });
     }
@@ -1271,7 +1402,7 @@ public class AdminWindow extends javax.swing.JFrame {
     }
     
     private void InitCharacter(){
-        lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharacterLike("").toArray());
+        lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharactersLike("").toArray());
         for (DAL.Race r : Services.MiscServices.getRaceList()) {
             cmb_Characters_Race.addItem(r);
         }
@@ -1286,12 +1417,14 @@ public class AdminWindow extends javax.swing.JFrame {
             @Override
             @SuppressWarnings("empty-statement")
             public void insertUpdate(DocumentEvent de) {
-                lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharacterLike(txt_Characters_Search.getText()).toArray());
+                //lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharactersLike(txt_Characters_Search.getText()).toArray());
+                UpdateCharacterList();
             }
             @Override
             @SuppressWarnings("empty-statement")
             public void removeUpdate(DocumentEvent de) {
-                lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharacterLike(txt_Characters_Search.getText()).toArray());
+                //lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharactersLike(txt_Characters_Search.getText()).toArray());
+                UpdateCharacterList();
             }
         });
         
@@ -1302,8 +1435,8 @@ public class AdminWindow extends javax.swing.JFrame {
             @Override
             @SuppressWarnings("empty-statement")
             public void insertUpdate(DocumentEvent de) {
-                if(txt_Character_AccountId.getText().equals("")){
-                    lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharacterLike("").toArray());
+                /*if(txt_Character_AccountId.getText().equals("")){
+                    lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharactersLike("").toArray());
                 }
                 else{
                     try {
@@ -1312,13 +1445,14 @@ public class AdminWindow extends javax.swing.JFrame {
                     } catch (Exception e) {
                         return;
                     }
-                }
+                }*/
+                UpdateCharacterList();
             }
             @Override
             @SuppressWarnings("empty-statement")
             public void removeUpdate(DocumentEvent de) {
-                if(txt_Character_AccountId.getText().equals("")){
-                    lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharacterLike("").toArray());
+                /*if(txt_Character_AccountId.getText().equals("")){
+                    lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharactersLike("").toArray());
                 }
                 else{
                     try {
@@ -1328,7 +1462,8 @@ public class AdminWindow extends javax.swing.JFrame {
                         return;
                     }
                 }
-                
+                */
+                UpdateCharacterList();
             }
         });
         
@@ -1534,9 +1669,9 @@ public class AdminWindow extends javax.swing.JFrame {
     private void UpdateItemlist(){
         DAL.Slot slot = (DAL.Slot)cmb_Items_SlotList.getSelectedItem();
         if (slot.getName().equals("All")) { 
-            lst_Items_ItemList.setListData(Services.ItemServices.GetAccountsLike(txt_Items_Search.getText(), null).toArray());
+            lst_Items_ItemList.setListData(Services.ItemServices.GetItemsLike(txt_Items_Search.getText(), null).toArray());
         }else{
-            lst_Items_ItemList.setListData(Services.ItemServices.GetAccountsLike(txt_Items_Search.getText(), slot).toArray());
+            lst_Items_ItemList.setListData(Services.ItemServices.GetItemsLike(txt_Items_Search.getText(), slot).toArray());
         }
     }
     
@@ -1610,6 +1745,8 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1623,14 +1760,18 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lbl_Accounts_RefreshAccounts;
+    private javax.swing.JLabel lbl_Accounts_RefreshCharacters;
     private javax.swing.JLabel lbl_BootsAttribute1;
     private javax.swing.JLabel lbl_BootsAttribute2;
     private javax.swing.JLabel lbl_BootsName;
     private javax.swing.JLabel lbl_Characters_Name;
+    private javax.swing.JLabel lbl_Characters_Refresh;
     private javax.swing.JLabel lbl_ChestAttribute1;
     private javax.swing.JLabel lbl_ChestAttribute2;
     private javax.swing.JLabel lbl_ChestName;
     private javax.swing.JLabel lbl_Items_Icon;
+    private javax.swing.JLabel lbl_Items_Refresh;
     private javax.swing.JLabel lbl_LegsAttribute1;
     private javax.swing.JLabel lbl_LegsAttribute2;
     private javax.swing.JLabel lbl_LegsName;

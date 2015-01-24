@@ -139,16 +139,33 @@ public class CharacterServices {
         return rows;
     }
     
-    public static ArrayList<DAL.Character> GetCharacterLike(String search){
+    public static ArrayList<DAL.Character> GetCharactersLike(String search){
+        return GetCharactersLike(search, -1);
+    }
+    
+    public static ArrayList<DAL.Character> GetCharactersLike(String search, int accountId){
         ArrayList<DAL.Character> list = new ArrayList<DAL.Character>();
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId i "
+            
+            String sql = "from Character c left join fetch c.account left join fetch c.itemByBootsItemId i "
                     + "left join fetch c.itemByWeaponItemId  left join fetch c.itemByChestItemId  left join fetch c.itemByLegsItemId "
-                    + "left join fetch c.charclass left join fetch c.race left join fetch i.slot where c.name like '%" + search + "%'");
+                    + "left join fetch c.charclass left join fetch c.race left join fetch i.slot where c.name like :search";
+            if(accountId != -1){
+                sql = "from Character c left join fetch c.account left join fetch c.itemByBootsItemId i "
+                    + "left join fetch c.itemByWeaponItemId  left join fetch c.itemByChestItemId  left join fetch c.itemByLegsItemId "
+                    + "left join fetch c.charclass left join fetch c.race left join fetch i.slot where c.name like :search and c.account.id = :id";
+            } 
+            
+            
+            Query q = session.createQuery(sql);
+            q.setParameter("search", "%"+search+"%");
+            if(accountId != -1){
+                q.setParameter("id", accountId);
+            } 
             list = (ArrayList<DAL.Character>) q.list();
             
             // alphabetical order

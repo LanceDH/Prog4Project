@@ -10,6 +10,7 @@ import DAL.HibernateUtil;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -109,13 +110,20 @@ public class GameWindow extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GameWindow().setVisible(true);
+                try {
+                    new GameWindow().setVisible(true);
+                } catch (ExceptionInInitializerError e) {
+                    JOptionPane.showMessageDialog(null, "Database is not running.");
+                    System.exit(0);
+                }
+                
                 
             }
         });
+        
         
         //Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
         //public void run() {
