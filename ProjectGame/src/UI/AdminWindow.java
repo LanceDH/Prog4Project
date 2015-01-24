@@ -64,7 +64,6 @@ public class AdminWindow extends javax.swing.JFrame {
         lst_Accounts_Characters = new javax.swing.JList();
         jLabel4 = new javax.swing.JLabel();
         btn_Accounts_ViewCharacter = new javax.swing.JButton();
-        btn_Accounts_DeleteCharacter = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txt_Accounts_Id = new javax.swing.JTextField();
         pnl_Characters = new javax.swing.JPanel();
@@ -84,28 +83,32 @@ public class AdminWindow extends javax.swing.JFrame {
         tpnl_Gear = new javax.swing.JTabbedPane();
         weapon = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        txt_Characters_weaponId = new javax.swing.JTextField();
+        txt_Characters_WeaponId = new javax.swing.JTextField();
         lbl_WeaponName = new javax.swing.JLabel();
         lbl_WeaponAttribute1 = new javax.swing.JLabel();
         lbl_WeaponAttribute2 = new javax.swing.JLabel();
+        btn_WeaponView = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         txt_Characters_ChestId = new javax.swing.JTextField();
         lbl_ChestName = new javax.swing.JLabel();
         lbl_ChestAttribute1 = new javax.swing.JLabel();
         lbl_ChestAttribute2 = new javax.swing.JLabel();
+        btn_ChestView = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         txt_Characters_LegsId = new javax.swing.JTextField();
         lbl_LegsName = new javax.swing.JLabel();
         lbl_LegsAttribute1 = new javax.swing.JLabel();
         lbl_LegsAttribute2 = new javax.swing.JLabel();
+        btn_LegsView = new javax.swing.JButton();
         Boots = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         txt_Characters_BootsId = new javax.swing.JTextField();
         lbl_BootsName = new javax.swing.JLabel();
         lbl_BootsAttribute1 = new javax.swing.JLabel();
         lbl_BootsAttribute2 = new javax.swing.JLabel();
+        btn_BootsView = new javax.swing.JButton();
         btn_Characters_Save = new javax.swing.JButton();
         btn_Characters_Delete = new javax.swing.JButton();
         pnl_Items = new javax.swing.JPanel();
@@ -172,8 +175,11 @@ public class AdminWindow extends javax.swing.JFrame {
         jLabel4.setText("Characters");
 
         btn_Accounts_ViewCharacter.setText("View");
-
-        btn_Accounts_DeleteCharacter.setText("Del");
+        btn_Accounts_ViewCharacter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Accounts_ViewCharacterActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("Id");
 
@@ -213,12 +219,12 @@ public class AdminWindow extends javax.swing.JFrame {
                         .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(pnl_AccountsLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pnl_AccountsLayout.createSequentialGroup()
-                                .addComponent(btn_Accounts_ViewCharacter)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                                .addComponent(btn_Accounts_DeleteCharacter))))
+                                .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(pnl_AccountsLayout.createSequentialGroup()
+                                        .addGap(49, 49, 49)
+                                        .addComponent(btn_Accounts_ViewCharacter, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 46, Short.MAX_VALUE))))
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
                         .addComponent(txt_Accounts_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -234,15 +240,11 @@ public class AdminWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_Accounts_DeleteCharacter))
+                        .addComponent(btn_Accounts_ViewCharacter))
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_AccountsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnl_AccountsLayout.createSequentialGroup()
-                                .addGap(120, 120, 120)
-                                .addComponent(btn_Accounts_ViewCharacter))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_AccountsLayout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -306,6 +308,13 @@ public class AdminWindow extends javax.swing.JFrame {
         lbl_WeaponAttribute2.setPreferredSize(new java.awt.Dimension(170, 16));
         lbl_WeaponAttribute2.setRequestFocusEnabled(false);
 
+        btn_WeaponView.setText("View");
+        btn_WeaponView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_WeaponViewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout weaponLayout = new javax.swing.GroupLayout(weapon);
         weapon.setLayout(weaponLayout);
         weaponLayout.setHorizontalGroup(
@@ -313,7 +322,7 @@ public class AdminWindow extends javax.swing.JFrame {
             .addGroup(weaponLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(weaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Characters_weaponId, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(txt_Characters_WeaponId)
                     .addGroup(weaponLayout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -327,6 +336,10 @@ public class AdminWindow extends javax.swing.JFrame {
                                     .addComponent(lbl_WeaponAttribute2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(lbl_WeaponAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
                 .addContainerGap())
+            .addGroup(weaponLayout.createSequentialGroup()
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addComponent(btn_WeaponView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         weaponLayout.setVerticalGroup(
             weaponLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,14 +347,16 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_Characters_weaponId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_Characters_WeaponId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_WeaponName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_WeaponAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_WeaponAttribute2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_WeaponView)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         tpnl_Gear.addTab("Weapon", weapon);
@@ -364,6 +379,13 @@ public class AdminWindow extends javax.swing.JFrame {
         lbl_ChestAttribute2.setPreferredSize(new java.awt.Dimension(170, 16));
         lbl_ChestAttribute2.setRequestFocusEnabled(false);
 
+        btn_ChestView.setText("View");
+        btn_ChestView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ChestViewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -385,6 +407,10 @@ public class AdminWindow extends javax.swing.JFrame {
                                     .addComponent(lbl_ChestAttribute2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(lbl_ChestAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_ChestView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,7 +425,9 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addComponent(lbl_ChestAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_ChestAttribute2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_ChestView)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         tpnl_Gear.addTab("Chest", jPanel1);
@@ -422,6 +450,13 @@ public class AdminWindow extends javax.swing.JFrame {
         lbl_LegsAttribute2.setPreferredSize(new java.awt.Dimension(170, 16));
         lbl_LegsAttribute2.setRequestFocusEnabled(false);
 
+        btn_LegsView.setText("View");
+        btn_LegsView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LegsViewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -443,6 +478,10 @@ public class AdminWindow extends javax.swing.JFrame {
                                     .addComponent(lbl_LegsAttribute2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(lbl_LegsAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_LegsView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,7 +496,9 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addComponent(lbl_LegsAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_LegsAttribute2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_LegsView)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         tpnl_Gear.addTab("Legs", jPanel2);
@@ -480,6 +521,13 @@ public class AdminWindow extends javax.swing.JFrame {
         lbl_BootsAttribute2.setPreferredSize(new java.awt.Dimension(170, 16));
         lbl_BootsAttribute2.setRequestFocusEnabled(false);
 
+        btn_BootsView.setText("View");
+        btn_BootsView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BootsViewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BootsLayout = new javax.swing.GroupLayout(Boots);
         Boots.setLayout(BootsLayout);
         BootsLayout.setHorizontalGroup(
@@ -501,6 +549,10 @@ public class AdminWindow extends javax.swing.JFrame {
                                     .addComponent(lbl_BootsAttribute2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(lbl_BootsAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
                 .addContainerGap())
+            .addGroup(BootsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_BootsView, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         BootsLayout.setVerticalGroup(
             BootsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -515,7 +567,9 @@ public class AdminWindow extends javax.swing.JFrame {
                 .addComponent(lbl_BootsAttribute1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_BootsAttribute2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_BootsView)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         tpnl_Gear.addTab("Boots", Boots);
@@ -595,7 +649,7 @@ public class AdminWindow extends javax.swing.JFrame {
                                     .addComponent(btn_Characters_Delete))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(pnl_CharactersLayout.createSequentialGroup()
-                        .addComponent(tpnl_Gear, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tpnl_Gear, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -880,6 +934,71 @@ public class AdminWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_Characters_SearchActionPerformed
 
+    private void btn_Accounts_ViewCharacterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Accounts_ViewCharacterActionPerformed
+        if (lst_Accounts_Characters.getSelectedValue() != null) {
+            _selectedCharacter = (DAL.Character)lst_Accounts_Characters.getSelectedValue();
+            ResetCharacterPanel();
+            UpdateCharacterPanel();
+            tpnl_MainPanel.setSelectedIndex(1);
+        }
+    }//GEN-LAST:event_btn_Accounts_ViewCharacterActionPerformed
+
+    private void btn_WeaponViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_WeaponViewActionPerformed
+        try {
+            int id = Integer.parseInt(txt_Characters_WeaponId.getText());
+            DAL.Item item = Services.ItemServices.GetItemById(id);
+            if (item != null) {
+                ResetItemPanel();
+                _selectedItem = item;
+                UpdateItemPanel();
+                tpnl_MainPanel.setSelectedIndex(2);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btn_WeaponViewActionPerformed
+
+    private void btn_ChestViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChestViewActionPerformed
+        try {
+            int id = Integer.parseInt(txt_Characters_ChestId.getText());
+            DAL.Item item = Services.ItemServices.GetItemById(id);
+            if (item != null) {
+                ResetItemPanel();
+                _selectedItem = item;
+                UpdateItemPanel();
+                tpnl_MainPanel.setSelectedIndex(2);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btn_ChestViewActionPerformed
+
+    private void btn_BootsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BootsViewActionPerformed
+        try {
+            int id = Integer.parseInt(txt_Characters_BootsId.getText());
+            DAL.Item item = Services.ItemServices.GetItemById(id);
+            if (item != null) {
+                ResetItemPanel();
+                _selectedItem = item;
+                UpdateItemPanel();
+                tpnl_MainPanel.setSelectedIndex(2);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btn_BootsViewActionPerformed
+
+    private void btn_LegsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LegsViewActionPerformed
+        try {
+            int id = Integer.parseInt(txt_Characters_LegsId.getText());
+            DAL.Item item = Services.ItemServices.GetItemById(id);
+            if (item != null) {
+                ResetItemPanel();
+                _selectedItem = item;
+                UpdateItemPanel();
+                tpnl_MainPanel.setSelectedIndex(2);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btn_LegsViewActionPerformed
+
     private void ResetAccountPanel(){
         _selectedAccount = null;
         txt_Accounts_Name.setText("");
@@ -906,7 +1025,7 @@ public class AdminWindow extends javax.swing.JFrame {
         txt_Characters_Id.setText("");
         txt_Characters_Name.setText("");
         ResetCharacterWeapon();
-        txt_Characters_weaponId.setText("");
+        txt_Characters_WeaponId.setText("");
         ResetCharacterChest();
         txt_Characters_ChestId.setText("");
         ResetCharacterLegs();
@@ -943,6 +1062,106 @@ public class AdminWindow extends javax.swing.JFrame {
         lbl_BootsName.setText("");
         lbl_BootsAttribute1.setText("");
         lbl_BootsAttribute2.setText("");
+    }
+    
+    private void UpdateCharacterPanel(){
+        txt_Characters_Id.setText(""+_selectedCharacter.getId());
+        txt_Characters_Name.setText(_selectedCharacter.getName());
+        
+        for (int i = 0; i < cmb_Characters_Race.getItemCount(); i++) {
+            DAL.Race sl = (DAL.Race)cmb_Characters_Race.getItemAt(i);
+            if(sl.getId() == _selectedCharacter.getRace().getId()){
+               cmb_Characters_Race.setSelectedIndex(i);
+            }
+        }
+        
+        for (int i = 0; i < cmb_Characters_Class.getItemCount(); i++) {
+            DAL.Charclass sl = (DAL.Charclass)cmb_Characters_Class.getItemAt(i);
+            if(sl.getId() == _selectedCharacter.getCharclass().getId()){
+               cmb_Characters_Class.setSelectedIndex(i);
+            }
+        }
+        
+        if (_selectedCharacter.getItemByWeaponItemId() != null) {
+            _selectedCharacter.setItemByWeaponItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByWeaponItemId().getId()));
+            DAL.Item weapon = _selectedCharacter.getItemByWeaponItemId();
+            txt_Characters_WeaponId.setText(""+weapon.getId());
+            lbl_WeaponName.setText(weapon.getName());
+            lbl_WeaponAttribute1.setText("+" + weapon.getAttribute1value() + " " + weapon.getAttribute1().getName());
+            if (weapon.getAttribute2() != null) {
+                lbl_WeaponAttribute2.setText("+" + weapon.getAttribute2value() + " " + weapon.getAttribute2().getName());
+            }
+        }
+        
+        if (_selectedCharacter.getItemByChestItemId()!= null) {
+            _selectedCharacter.setItemByChestItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByChestItemId().getId()));
+            DAL.Item chest = _selectedCharacter.getItemByChestItemId();
+            txt_Characters_ChestId.setText(""+chest.getId());
+            lbl_ChestName.setText(chest.getName());
+            lbl_ChestAttribute1.setText("+" + chest.getAttribute1value() + " " + chest.getAttribute1().getName());
+            if (chest.getAttribute2() != null) {
+                lbl_ChestAttribute2.setText("+" + chest.getAttribute2value() + " " + chest.getAttribute2().getName());
+            }
+        }
+        
+        if (_selectedCharacter.getItemByLegsItemId()!= null) {
+            _selectedCharacter.setItemByLegsItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByLegsItemId().getId()));
+            DAL.Item legs = _selectedCharacter.getItemByLegsItemId();
+            txt_Characters_LegsId.setText(""+legs.getId());
+            lbl_LegsName.setText(legs.getName());
+            lbl_LegsAttribute1.setText("+" + legs.getAttribute1value() + " " + legs.getAttribute1().getName());
+            if (legs.getAttribute2() != null) {
+                lbl_LegsAttribute2.setText("+" + legs.getAttribute2value() + " " + legs.getAttribute2().getName());
+            }
+        }
+        
+        if (_selectedCharacter.getItemByBootsItemId()!= null) {
+            _selectedCharacter.setItemByBootsItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByBootsItemId().getId()));
+            DAL.Item boots = _selectedCharacter.getItemByBootsItemId();
+            txt_Characters_BootsId.setText(""+boots.getId());
+            lbl_BootsName.setText(boots.getName());
+            lbl_BootsAttribute1.setText("+" + boots.getAttribute1value() + " " + boots.getAttribute1().getName());
+            if (boots.getAttribute2() != null) {
+                lbl_BootsAttribute2.setText("+" + boots.getAttribute2value() + " " + boots.getAttribute2().getName());
+            }
+        }
+    }
+    
+    private void UpdateItemPanel(){
+        txt_Items_Name.setText(_selectedItem.getName());
+                txt_Items_Attribute1Value.setText("" + _selectedItem.getAttribute1value());
+                txt_Items_Attribute2Value.setText("" + _selectedItem.getAttribute2value());
+                for (int i = 0; i < cmb_Items_Slot.getItemCount(); i++) {
+                    DAL.Slot sl = (DAL.Slot)cmb_Items_Slot.getItemAt(i);
+                    if(sl.getId() == _selectedItem.getSlot().getId()){
+                       cmb_Items_Slot.setSelectedIndex(i);
+                    }
+                }
+                
+                for (int i = 0; i < cmb_Items_Attribute1.getItemCount(); i++) {
+                    DAL.Attribute att = (DAL.Attribute)cmb_Items_Attribute1.getItemAt(i);
+                    if (att.getId() == _selectedItem.getAttribute1().getId()) {
+                        cmb_Items_Attribute1.setSelectedIndex(i);
+                    }
+                }
+                
+                if(_selectedItem.getAttribute2() == null){
+                    cmb_Items_Attribute2.setSelectedIndex(0);
+                }else{
+                    for (int i = 1; i < cmb_Items_Attribute2.getItemCount(); i++) {
+                    
+                        DAL.Attribute att = (DAL.Attribute)cmb_Items_Attribute2.getItemAt(i);
+                        if (att.getId() == _selectedItem.getAttribute2().getId()) {
+                            cmb_Items_Attribute2.setSelectedIndex(i);
+                        }
+                    }
+                }
+                
+                txt_Items_Icon.setText(_selectedItem.getIconPath());
+                GameWindow gmw = new GameWindow();
+                gmw.ChangeIcon(lbl_Items_Icon, _selectedItem.getIconPath());
+                
+                txt_Items_Id.setText(""+_selectedItem.getId());
     }
     
     private void InitAccount(){
@@ -1011,40 +1230,8 @@ public class AdminWindow extends javax.swing.JFrame {
                     return;
                 }
                 _selectedItem = (DAL.Item) lst_Items_ItemList.getSelectedValue();
-                txt_Items_Name.setText(_selectedItem.getName());
-                txt_Items_Attribute1Value.setText("" + _selectedItem.getAttribute1value());
-                txt_Items_Attribute2Value.setText("" + _selectedItem.getAttribute2value());
-                for (int i = 0; i < cmb_Items_Slot.getItemCount(); i++) {
-                    DAL.Slot sl = (DAL.Slot)cmb_Items_Slot.getItemAt(i);
-                    if(sl.getId() == _selectedItem.getSlot().getId()){
-                       cmb_Items_Slot.setSelectedIndex(i);
-                    }
-                }
                 
-                for (int i = 0; i < cmb_Items_Attribute1.getItemCount(); i++) {
-                    DAL.Attribute att = (DAL.Attribute)cmb_Items_Attribute1.getItemAt(i);
-                    if (att.getId() == _selectedItem.getAttribute1().getId()) {
-                        cmb_Items_Attribute1.setSelectedIndex(i);
-                    }
-                }
-                
-                if(_selectedItem.getAttribute2() == null){
-                    cmb_Items_Attribute2.setSelectedIndex(0);
-                }else{
-                    for (int i = 1; i < cmb_Items_Attribute2.getItemCount(); i++) {
-                    
-                        DAL.Attribute att = (DAL.Attribute)cmb_Items_Attribute2.getItemAt(i);
-                        if (att.getId() == _selectedItem.getAttribute2().getId()) {
-                            cmb_Items_Attribute2.setSelectedIndex(i);
-                        }
-                    }
-                }
-                
-                txt_Items_Icon.setText(_selectedItem.getIconPath());
-                GameWindow gmw = new GameWindow();
-                gmw.ChangeIcon(lbl_Items_Icon, _selectedItem.getIconPath());
-                
-                txt_Items_Id.setText(""+_selectedItem.getId());
+                UpdateItemPanel();
             }
         });
         
@@ -1155,70 +1342,11 @@ public class AdminWindow extends javax.swing.JFrame {
                 }
                 _selectedCharacter = (DAL.Character) lst_Characters_CharacterList.getSelectedValue();
 
-                txt_Characters_Id.setText(""+_selectedCharacter.getId());
-                txt_Characters_Name.setText(_selectedCharacter.getName());
-                
-                for (int i = 0; i < cmb_Characters_Race.getItemCount(); i++) {
-                    DAL.Race sl = (DAL.Race)cmb_Characters_Race.getItemAt(i);
-                    if(sl.getId() == _selectedCharacter.getRace().getId()){
-                       cmb_Characters_Race.setSelectedIndex(i);
-                    }
-                }
-                
-                for (int i = 0; i < cmb_Characters_Class.getItemCount(); i++) {
-                    DAL.Charclass sl = (DAL.Charclass)cmb_Characters_Class.getItemAt(i);
-                    if(sl.getId() == _selectedCharacter.getCharclass().getId()){
-                       cmb_Characters_Class.setSelectedIndex(i);
-                    }
-                }
-                
-                if (_selectedCharacter.getItemByWeaponItemId() != null) {
-                    _selectedCharacter.setItemByWeaponItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByWeaponItemId().getId()));
-                    DAL.Item weapon = _selectedCharacter.getItemByWeaponItemId();
-                    txt_Characters_weaponId.setText(""+weapon.getId());
-                    lbl_WeaponName.setText(weapon.getName());
-                    lbl_WeaponAttribute1.setText("+" + weapon.getAttribute1value() + " " + weapon.getAttribute1().getName());
-                    if (weapon.getAttribute2() != null) {
-                        lbl_WeaponAttribute2.setText("+" + weapon.getAttribute2value() + " " + weapon.getAttribute2().getName());
-                    }
-                }
-                
-                if (_selectedCharacter.getItemByChestItemId()!= null) {
-                    _selectedCharacter.setItemByChestItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByChestItemId().getId()));
-                    DAL.Item chest = _selectedCharacter.getItemByChestItemId();
-                    txt_Characters_ChestId.setText(""+chest.getId());
-                    lbl_ChestName.setText(chest.getName());
-                    lbl_ChestAttribute1.setText("+" + chest.getAttribute1value() + " " + chest.getAttribute1().getName());
-                    if (chest.getAttribute2() != null) {
-                        lbl_ChestAttribute2.setText("+" + chest.getAttribute2value() + " " + chest.getAttribute2().getName());
-                    }
-                }
-                
-                if (_selectedCharacter.getItemByLegsItemId()!= null) {
-                    _selectedCharacter.setItemByLegsItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByLegsItemId().getId()));
-                    DAL.Item legs = _selectedCharacter.getItemByLegsItemId();
-                    txt_Characters_LegsId.setText(""+legs.getId());
-                    lbl_LegsName.setText(legs.getName());
-                    lbl_LegsAttribute1.setText("+" + legs.getAttribute1value() + " " + legs.getAttribute1().getName());
-                    if (legs.getAttribute2() != null) {
-                        lbl_LegsAttribute2.setText("+" + legs.getAttribute2value() + " " + legs.getAttribute2().getName());
-                    }
-                }
-                
-                if (_selectedCharacter.getItemByBootsItemId()!= null) {
-                    _selectedCharacter.setItemByBootsItemId(Services.ItemServices.GetItemById(_selectedCharacter.getItemByBootsItemId().getId()));
-                    DAL.Item boots = _selectedCharacter.getItemByBootsItemId();
-                    txt_Characters_BootsId.setText(""+boots.getId());
-                    lbl_BootsName.setText(boots.getName());
-                    lbl_BootsAttribute1.setText("+" + boots.getAttribute1value() + " " + boots.getAttribute1().getName());
-                    if (boots.getAttribute2() != null) {
-                        lbl_BootsAttribute2.setText("+" + boots.getAttribute2value() + " " + boots.getAttribute2().getName());
-                    }
-                }
+                UpdateCharacterPanel();
             }
         });
         
-        txt_Characters_weaponId.getDocument().addDocumentListener(new DocumentListener() {
+        txt_Characters_WeaponId.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void changedUpdate(DocumentEvent e) {}
        
@@ -1227,7 +1355,7 @@ public class AdminWindow extends javax.swing.JFrame {
             public void insertUpdate(DocumentEvent de) {
                 ResetCharacterWeapon();
                 try {
-                    int id = Integer.parseInt(txt_Characters_weaponId.getText());
+                    int id = Integer.parseInt(txt_Characters_WeaponId.getText());
                     DAL.Item item = Services.ItemServices.GetItemById(id);
                     if (item != null && item.getSlot().getName().equals("Weapon")) {
                         lbl_WeaponName.setText(item.getName());
@@ -1247,7 +1375,7 @@ public class AdminWindow extends javax.swing.JFrame {
             public void removeUpdate(DocumentEvent de) {
                 ResetCharacterWeapon();
                 try {
-                    int id = Integer.parseInt(txt_Characters_weaponId.getText());
+                    int id = Integer.parseInt(txt_Characters_WeaponId.getText());
                     DAL.Item item = Services.ItemServices.GetItemById(id);
                     if (item != null && item.getSlot().getName().equals("Weapon")) {
                         lbl_WeaponName.setText(item.getName());
@@ -1450,14 +1578,17 @@ public class AdminWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Boots;
     private javax.swing.JButton btn_Accounts_Delete;
-    private javax.swing.JButton btn_Accounts_DeleteCharacter;
     private javax.swing.JButton btn_Accounts_Save;
     private javax.swing.JButton btn_Accounts_ViewCharacter;
+    private javax.swing.JButton btn_BootsView;
     private javax.swing.JButton btn_Characters_Delete;
     private javax.swing.JButton btn_Characters_Save;
+    private javax.swing.JButton btn_ChestView;
     private javax.swing.JButton btn_Items_Add;
     private javax.swing.JButton btn_Items_Delete;
     private javax.swing.JButton btn_Items_Save;
+    private javax.swing.JButton btn_LegsView;
+    private javax.swing.JButton btn_WeaponView;
     private javax.swing.JCheckBox cbx_Accounts_Admin;
     private javax.swing.JComboBox cmb_Characters_Class;
     private javax.swing.JComboBox cmb_Characters_Race;
@@ -1526,7 +1657,7 @@ public class AdminWindow extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Characters_LegsId;
     private javax.swing.JTextField txt_Characters_Name;
     private javax.swing.JTextField txt_Characters_Search;
-    private javax.swing.JTextField txt_Characters_weaponId;
+    private javax.swing.JTextField txt_Characters_WeaponId;
     private javax.swing.JTextField txt_Items_Attribute1Value;
     private javax.swing.JTextField txt_Items_Attribute2Value;
     private javax.swing.JTextField txt_Items_Icon;
