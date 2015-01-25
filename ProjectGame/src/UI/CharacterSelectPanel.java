@@ -47,7 +47,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btn_Logout = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         pnl_Char0 = new javax.swing.JPanel();
@@ -96,10 +96,10 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Logged in as:");
 
-        jButton3.setText("logout");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_Logout.setText("logout");
+        btn_Logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_LogoutActionPerformed(evt);
             }
         });
 
@@ -484,7 +484,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btn_Admin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btn_Logout)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -510,7 +510,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
                 .addComponent(btn_CreateChar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(btn_Logout)
                     .addComponent(btn_Admin))
                 .addContainerGap())
         );
@@ -603,16 +603,20 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         }
     }
     
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btn_LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LogoutActionPerformed
         _parentWindow.CloseAdminWindow();
         _parentWindow.setActiveAccount(null);
         _parentWindow.remove(this);
         _parentWindow.ShowLogin();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btn_LogoutActionPerformed
 
     private void SelectCharacter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectCharacter
         int charIdInArray = Integer.parseInt(((JButton)evt.getSource()).getName());
-        _parentWindow.setActiveCharacter(characterList.get(charIdInArray));
+        DAL.Character character = characterList.get(charIdInArray);
+        Services.CharacterServices.LoginCharacter(character);
+        character.setIsLoggedIn(true);
+        _parentWindow.setActiveCharacter(character);
+        
         _parentWindow.remove(this);
         _parentWindow.ShowLoot();
     }//GEN-LAST:event_SelectCharacter
@@ -659,7 +663,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
     private javax.swing.JButton btn_LoginChar2;
     private javax.swing.JButton btn_LoginChar3;
     private javax.swing.JButton btn_LoginChar4;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_Logout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

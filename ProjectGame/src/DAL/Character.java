@@ -20,6 +20,7 @@ public class Character  implements java.io.Serializable {
     private Item itemByChestItemId;
     private Race race;
     private String name;
+    private Boolean isLoggedIn = false;
 
     public Character() {
     }
@@ -138,6 +139,14 @@ public class Character  implements java.io.Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    public Boolean getIsLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setIsLoggedIn(Boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
     }
     
 }

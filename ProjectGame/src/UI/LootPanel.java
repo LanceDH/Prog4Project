@@ -397,7 +397,15 @@ public class LootPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ChangeCharacterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChangeCharacterActionPerformed
-        Services.CharacterServices.UpdateCharacter(_parent.getActiveCharacter());
+        
+        /*Services.CharacterServices.UpdateCharacter(_parent.getActiveCharacter());
+        DAL.Character character = characterList.get(charIdInArray);
+        Services.CharacterServices.LoginCharacter(character);
+        character.setIsLoggedIn(false);*/
+        DAL.Character character = _parent.getActiveCharacter();
+        character.setIsLoggedIn(false);
+        Services.CharacterServices.LogoutCharacter(_parent.getActiveCharacter());
+        
         _parent.setActiveCharacter(null);
         _parent.remove(this);
         _parent.ShowCharacterSelect();

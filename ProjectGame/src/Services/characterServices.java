@@ -37,6 +37,29 @@ public class CharacterServices {
         return rows;
     }
     
+    public static DAL.Character GetAllChacterById(int id){
+        DAL.Character character = new DAL.Character();
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query q = session.createQuery("from Character c left join fetch c.account left join fetch c.itemByBootsItemId left join fetch c.itemByWeaponItemId  left join fetch c.itemByChestItemId  left join fetch c.itemByLegsItemId left join fetch c.charclass  left join fetch c.race where c.id =  :id");
+            q.setParameter("id", id);
+            character = (DAL.Character) q.list().get(0);
+            
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            System.err.println(e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+
+        return character;
+    }
+    
     public static ArrayList<DAL.Character> GetAllChactersOfAccount(int accId){
         ArrayList<DAL.Character> list = new ArrayList<DAL.Character>();
         
@@ -217,5 +240,15 @@ public class CharacterServices {
         }
 
         return character;
+    }
+    
+    public static void LoginCharacter(DAL.Character character){
+        character.setIsLoggedIn(true);
+        UpdateCharacter(character);
+    }
+    
+    public static void LogoutCharacter(DAL.Character character){
+        character.setIsLoggedIn(false);
+        UpdateCharacter(character);
     }
 }
