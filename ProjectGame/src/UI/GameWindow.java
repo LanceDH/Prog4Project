@@ -128,7 +128,7 @@ public class GameWindow extends javax.swing.JFrame {
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
         public void run() {
             if (activeCharacter != null) {
-                Services.CharacterServices.UpdateCharacter(activeCharacter);
+                Services.CharacterServices.LogoutCharacter(activeCharacter);
             }
         }
         }, "Shutdown-thread"));

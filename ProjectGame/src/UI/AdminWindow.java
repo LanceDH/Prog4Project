@@ -1139,7 +1139,15 @@ public class AdminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LegsViewActionPerformed
 
     private void btn_Characters_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Characters_DeleteActionPerformed
-        
+        if(_selectedCharacter == null){
+            return;
+        }
+
+        DAL.Character tempCharacter = Services.CharacterServices.GetAllChacterById(_selectedCharacter.getId());
+        if(tempCharacter.getIsLoggedIn()){
+            JOptionPane.showMessageDialog(this,"Can't delete a character that is currently logged in.");
+            return;
+        }
         
         int result = JOptionPane.showConfirmDialog(this,"Are you sure you want to delete " + _selectedCharacter.getName() + " ?", "Warning" , JOptionPane.YES_NO_OPTION);
         if(result == JOptionPane.YES_OPTION){
@@ -1179,6 +1187,12 @@ public class AdminWindow extends javax.swing.JFrame {
 
     private void btn_Characters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Characters_SaveActionPerformed
         if (_selectedCharacter == null) {
+            return;
+        }
+        
+        DAL.Character tempCharacter = Services.CharacterServices.GetAllChacterById(_selectedCharacter.getId());
+        if(tempCharacter.getIsLoggedIn()){
+            JOptionPane.showMessageDialog(this,"Can't delete a character that is currently logged in.");
             return;
         }
         
