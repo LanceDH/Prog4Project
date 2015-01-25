@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class GameWindow extends javax.swing.JFrame {
 
-    private DAL.Account activeAccount;
-    private DAL.Character activeCharacter;
+    private static DAL.Account activeAccount;
+    private static DAL.Character activeCharacter;
     
     private LogingPanel loginPanel;
     private CharacterSelectPanel CharSelectPanel;
@@ -125,11 +125,13 @@ public class GameWindow extends javax.swing.JFrame {
         });
         
         
-        //Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-        //public void run() {
-        //    System.out.println("In shutdown hook");
-        //}
-        //}, "Shutdown-thread"));
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+        public void run() {
+            if (activeCharacter != null) {
+                Services.CharacterServices.UpdateCharacter(activeCharacter);
+            }
+        }
+        }, "Shutdown-thread"));
         
     }
     
@@ -148,7 +150,7 @@ public class GameWindow extends javax.swing.JFrame {
             ShowLogin();
         }
         
-        this.add(CharSelectPanel, BorderLayout.CENTER);
+        this.add(getCharSelectPanel(), BorderLayout.CENTER);
         this.repaint();
         this.pack();   
     }
@@ -209,12 +211,25 @@ public class GameWindow extends javax.swing.JFrame {
         this.activeCharacter = activeCharacter;
     }
 
+    public void CloseAdminWindow() {
+        if(getAdminwWindow() != null){
+            getAdminwWindow().dispose();
+        }
+    }
+
+    public void ShowAdminWindow() {
+        if(activeAccount != null && activeAccount.isAdmin()){
+            _adminwWindow = new AdminWindow(activeAccount, this);
+            getAdminwWindow().setVisible(true);
+        }
+    }
+
     public AdminWindow getAdminwWindow() {
         return _adminwWindow;
     }
 
-    public void setAdminwWindow(AdminWindow _adminwWindow) {
-        this._adminwWindow = _adminwWindow;
+    public CharacterSelectPanel getCharSelectPanel() {
+        return CharSelectPanel;
     }
-    
+
 }

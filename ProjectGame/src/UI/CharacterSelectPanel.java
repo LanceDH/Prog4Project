@@ -77,6 +77,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         lbl_IconRaceChar4 = new javax.swing.JLabel();
         btn_CreateChar = new javax.swing.JButton();
         lbl_AccountName = new javax.swing.JLabel();
+        btn_Admin = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
@@ -466,15 +467,23 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         lbl_AccountName.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lbl_AccountName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        btn_Admin.setText("Admin");
+        btn_Admin.setEnabled(false);
+        btn_Admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_CreateChar)
-                .addGap(123, 123, 123)
+                .addContainerGap()
+                .addComponent(btn_Admin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -483,6 +492,10 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                     .addComponent(lbl_AccountName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_CreateChar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -491,12 +504,14 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_AccountName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_CreateChar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(btn_CreateChar))
+                    .addComponent(btn_Admin))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -545,16 +560,16 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         p.setVisible(true);
         JLabel lblRace = (JLabel)map.get("race");
         _parentWindow.ChangeIcon(lblRace, character.getRace().getIconPath());
-        //lblRace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getRace().getIconPath() + "_26.png")));
         JLabel lbl_Class = (JLabel)map.get("class");
         _parentWindow.ChangeIcon(lbl_Class, character.getCharclass().getIconPath());
-        //lbl_Class.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/" + character.getCharclass().getIconPath() + "_26.png")));
-        
         JButton b1 = (JButton)map.get("login");
         b1.setText(character.getName());
     }
     
     private void ResetAllCharacterPanels(){
+        
+        btn_Admin.setEnabled(false);
+        btn_Admin.setVisible(false);
         
         for (Map map : charMaps) {
             JPanel p = (JPanel)map.get("panel");
@@ -571,6 +586,11 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         
         lbl_AccountName.setText(_parentWindow.getActiveAccount().getName());
         
+        if(_parentWindow.getActiveAccount().isAdmin()){
+            btn_Admin.setEnabled(true);
+            btn_Admin.setVisible(true);
+        }
+        
         characterList = Services.CharacterServices.GetAllChactersOfAccount(accId);
         
         for (int i = 0; i < characterList.size(); i++) {
@@ -584,8 +604,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        _parentWindow.getAdminwWindow().dispose();
-        _parentWindow.setAdminwWindow(null);
+        _parentWindow.CloseAdminWindow();
         _parentWindow.setActiveAccount(null);
         _parentWindow.remove(this);
         _parentWindow.ShowLogin();
@@ -617,9 +636,18 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         UpdateCharacters(_parentWindow.getActiveAccount().getId());
     }//GEN-LAST:event_formAncestorAdded
 
+    private void btn_AdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdminActionPerformed
+        if (_parentWindow.getAdminwWindow().isVisible()) {
+            _parentWindow.CloseAdminWindow();
+        }else{
+            _parentWindow.ShowAdminWindow();
+        }
+    }//GEN-LAST:event_btn_AdminActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Admin;
     private javax.swing.JButton btn_CreateChar;
     private javax.swing.JButton btn_DeleteChar0;
     private javax.swing.JButton btn_DeleteChar1;

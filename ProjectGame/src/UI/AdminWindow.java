@@ -10,6 +10,7 @@ import DAL.Slot;
 import Services.UIException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
@@ -22,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
  * @author LanceDH
  */
 public class AdminWindow extends javax.swing.JFrame {
+    private GameWindow _gameWindow;
     private DAL.Account _activeAdmin;
     private DAL.Account _selectedAccount;
     private DAL.Item _selectedItem;
@@ -30,17 +32,19 @@ public class AdminWindow extends javax.swing.JFrame {
     /**
      * Creates new form AdminWindow
      */
-    public AdminWindow(DAL.Account account) {
+    public AdminWindow(DAL.Account account, GameWindow parent) {
         
         if(!account.isAdmin()){
             this.setVisible(false);
         }
-        
+        _gameWindow = parent;
         _activeAdmin = account;
         initComponents();
         InitAccount();
         InitItem();
         InitCharacter();
+        
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     public AdminWindow() {
@@ -156,7 +160,11 @@ public class AdminWindow extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Admin");
         setResizable(false);
+
+        tpnl_MainPanel.setToolTipText("");
+        tpnl_MainPanel.setName(""); // NOI18N
 
         jScrollPane2.setViewportView(lst_Accounts_AccountList);
 
@@ -1143,6 +1151,10 @@ public class AdminWindow extends javax.swing.JFrame {
             }
         }
         
+        if(_selectedCharacter.getAccount().getId() == _activeAdmin.getId()){
+            _gameWindow.getCharSelectPanel().UpdateCharacters(_activeAdmin.getId());
+        }
+        
         JOptionPane.showMessageDialog(this,"Character "+ _selectedCharacter.getName() +" deleted.");
         lst_Characters_CharacterList.setListData(Services.CharacterServices.GetCharactersLike("").toArray());
         _selectedCharacter = null;
@@ -1276,8 +1288,12 @@ public class AdminWindow extends javax.swing.JFrame {
                     return;
                 }
             
-                
             Services.CharacterServices.UpdateCharacter(tempChar);
+            
+            if(tempChar.getAccount().getId() == _activeAdmin.getId()){
+                _gameWindow.getCharSelectPanel().UpdateCharacters(_activeAdmin.getId());
+            }
+            
             JOptionPane.showMessageDialog(this, "Character " + _selectedCharacter.getName() + " updated.");
             UpdateCharacterList();
         
