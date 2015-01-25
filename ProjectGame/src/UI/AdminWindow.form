@@ -188,9 +188,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_Accounts_Name">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_Accounts_NameActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -255,9 +252,6 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_Accounts_IdActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_Accounts_RefreshAccounts">
               <Properties>
@@ -445,9 +439,6 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JTextField" name="txt_Characters_Search">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_Characters_SearchActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>

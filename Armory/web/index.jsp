@@ -26,9 +26,9 @@
                 <div class="floatClear"></div>
             </header>
         <main>
-        <h1>Hello World!</h1>
+        <h1>Enter a name to search for a character.</h1>
         <form action="Search">
-                    search: <input type="text" name="search">
+                    <input type="text" name="search">
                     <input type="submit" value="Search">
                 </form>
                 </main>

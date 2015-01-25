@@ -172,12 +172,6 @@ public class AdminWindow extends javax.swing.JFrame {
 
         jLabel2.setText("Account Name");
 
-        txt_Accounts_Name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_Accounts_NameActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Password");
 
         cbx_Accounts_Admin.setText("Admin Account");
@@ -210,11 +204,6 @@ public class AdminWindow extends javax.swing.JFrame {
         jLabel13.setText("Id");
 
         txt_Accounts_Id.setEditable(false);
-        txt_Accounts_Id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_Accounts_IdActionPerformed(evt);
-            }
-        });
 
         lbl_Accounts_RefreshAccounts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/UI_Refresh_16.png"))); // NOI18N
         lbl_Accounts_RefreshAccounts.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -322,12 +311,6 @@ public class AdminWindow extends javax.swing.JFrame {
         tpnl_MainPanel.addTab("Accounts", pnl_Accounts);
 
         jScrollPane4.setViewportView(lst_Characters_CharacterList);
-
-        txt_Characters_Search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_Characters_SearchActionPerformed(evt);
-            }
-        });
 
         jLabel14.setText("Account Id");
 
@@ -1060,18 +1043,6 @@ public class AdminWindow extends javax.swing.JFrame {
         
         UpdateItemlist();
     }//GEN-LAST:event_cmb_Items_SlotListActionPerformed
-
-    private void txt_Accounts_NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Accounts_NameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_Accounts_NameActionPerformed
-
-    private void txt_Accounts_IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Accounts_IdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_Accounts_IdActionPerformed
-
-    private void txt_Characters_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Characters_SearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_Characters_SearchActionPerformed
 
     private void btn_Accounts_ViewCharacterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Accounts_ViewCharacterActionPerformed
         if (lst_Accounts_Characters.getSelectedValue() != null) {
