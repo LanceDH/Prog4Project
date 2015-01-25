@@ -26,6 +26,7 @@ public class GameWindow extends javax.swing.JFrame {
     private LootPanel lootPanel;
     private CharacterCreatePanel characterCreatePanel;
     private AccountRegistrationPanel accRegisterPanel;
+    private AdminWindow _adminwWindow;
     
     
     /**
@@ -61,8 +62,7 @@ public class GameWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Totally Not Warcraft");
-        setMinimumSize(new java.awt.Dimension(433, 310));
-        setPreferredSize(new java.awt.Dimension(433, 310));
+        setMinimumSize(new java.awt.Dimension(10, 10));
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,6 +207,14 @@ public class GameWindow extends javax.swing.JFrame {
 
     public void setActiveCharacter(DAL.Character activeCharacter) {
         this.activeCharacter = activeCharacter;
+    }
+
+    public AdminWindow getAdminwWindow() {
+        return _adminwWindow;
+    }
+
+    public void setAdminwWindow(AdminWindow _adminwWindow) {
+        this._adminwWindow = _adminwWindow;
     }
     
 }

@@ -76,10 +76,11 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         lbl_IconClassChar4 = new javax.swing.JLabel();
         lbl_IconRaceChar4 = new javax.swing.JLabel();
         btn_CreateChar = new javax.swing.JButton();
+        lbl_AccountName = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
-        setPreferredSize(new java.awt.Dimension(400, 300));
+        setPreferredSize(new java.awt.Dimension(500, 350));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -101,7 +102,13 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
             }
         });
 
+        jPanel2.setMaximumSize(new java.awt.Dimension(500, 214));
+        jPanel2.setMinimumSize(new java.awt.Dimension(500, 214));
+
         jPanel1.setLayout(new java.awt.GridLayout(5, 1));
+
+        pnl_Char0.setMaximumSize(new java.awt.Dimension(296, 38));
+        pnl_Char0.setMinimumSize(new java.awt.Dimension(296, 38));
 
         btn_LoginChar0.setMaximumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar0.setMinimumSize(new java.awt.Dimension(33, 26));
@@ -167,6 +174,9 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
 
         jPanel1.add(pnl_Char0);
 
+        pnl_Char1.setMaximumSize(new java.awt.Dimension(296, 38));
+        pnl_Char1.setMinimumSize(new java.awt.Dimension(296, 38));
+
         btn_LoginChar1.setMaximumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar1.setMinimumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar1.setName("1"); // NOI18N
@@ -230,6 +240,9 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         );
 
         jPanel1.add(pnl_Char1);
+
+        pnl_Char2.setMaximumSize(new java.awt.Dimension(296, 38));
+        pnl_Char2.setMinimumSize(new java.awt.Dimension(296, 38));
 
         btn_LoginChar2.setMaximumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar2.setMinimumSize(new java.awt.Dimension(33, 26));
@@ -295,6 +308,9 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
 
         jPanel1.add(pnl_Char2);
 
+        pnl_Char3.setMaximumSize(new java.awt.Dimension(296, 38));
+        pnl_Char3.setMinimumSize(new java.awt.Dimension(296, 38));
+
         btn_LoginChar3.setMaximumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar3.setMinimumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar3.setName("3"); // NOI18N
@@ -358,6 +374,9 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         );
 
         jPanel1.add(pnl_Char3);
+
+        pnl_Char4.setMaximumSize(new java.awt.Dimension(296, 38));
+        pnl_Char4.setMinimumSize(new java.awt.Dimension(296, 38));
 
         btn_LoginChar4.setMaximumSize(new java.awt.Dimension(33, 26));
         btn_LoginChar4.setMinimumSize(new java.awt.Dimension(33, 26));
@@ -428,24 +447,24 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
         );
 
-        btn_CreateChar.setText("New");
+        btn_CreateChar.setText("Create New");
         btn_CreateChar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CreateCharActionPerformed(evt);
             }
         });
+
+        lbl_AccountName.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lbl_AccountName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -453,29 +472,32 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(163, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btn_CreateChar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91)
-                        .addComponent(jButton3)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(159, 159, 159))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_CreateChar)
+                .addGap(123, 123, 123)
+                .addComponent(jButton3)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                    .addComponent(lbl_AccountName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_AccountName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(btn_CreateChar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -547,6 +569,8 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
     public void UpdateCharacters(int accId) {
         ResetAllCharacterPanels();
         
+        lbl_AccountName.setText(_parentWindow.getActiveAccount().getName());
+        
         characterList = Services.CharacterServices.GetAllChactersOfAccount(accId);
         
         for (int i = 0; i < characterList.size(); i++) {
@@ -560,7 +584,8 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        _parentWindow.getAdminwWindow().dispose();
+        _parentWindow.setAdminwWindow(null);
         _parentWindow.setActiveAccount(null);
         _parentWindow.remove(this);
         _parentWindow.ShowLogin();
@@ -610,6 +635,7 @@ public class CharacterSelectPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbl_AccountName;
     private javax.swing.JLabel lbl_IconClassChar0;
     private javax.swing.JLabel lbl_IconClassChar1;
     private javax.swing.JLabel lbl_IconClassChar2;
