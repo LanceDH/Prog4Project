@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
  * @author LanceDH
  */
 public class AdminWindow extends javax.swing.JFrame {
-
+    private DAL.Account _activeAdmin;
     private DAL.Account _selectedAccount;
     private DAL.Item _selectedItem;
     private DAL.Character _selectedCharacter;
@@ -30,12 +30,21 @@ public class AdminWindow extends javax.swing.JFrame {
     /**
      * Creates new form AdminWindow
      */
-    public AdminWindow() {
-        initComponents();
+    public AdminWindow(DAL.Account account) {
         
+        if(!account.isAdmin()){
+            this.setVisible(false);
+        }
+        
+        _activeAdmin = account;
+        initComponents();
         InitAccount();
         InitItem();
         InitCharacter();
+    }
+    
+    public AdminWindow() {
+        
     }
 
     /**
@@ -941,6 +950,11 @@ public class AdminWindow extends javax.swing.JFrame {
             return;
         }
         
+        if(_selectedAccount.getId() == _activeAdmin.getId()){
+            JOptionPane.showMessageDialog(this,"Can't delete account currently used to access admin console");
+            return;
+        }
+        
         int result = JOptionPane.showConfirmDialog(this,"Are you sure you want to delete " + _selectedAccount.getName() + " ?", "Warning" , JOptionPane.YES_NO_OPTION);
         if(result == JOptionPane.YES_OPTION){
             
@@ -960,6 +974,11 @@ public class AdminWindow extends javax.swing.JFrame {
 
     private void btn_Accounts_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Accounts_SaveActionPerformed
         if(_selectedAccount == null){
+            return;
+        }
+        
+        if(_selectedAccount.getId() == _activeAdmin.getId()){
+            JOptionPane.showMessageDialog(this,"Can't edit account currently used to access admin console");
             return;
         }
         
@@ -1147,17 +1166,25 @@ public class AdminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_Accounts_RefreshCharactersMouseClicked
 
     private void btn_Characters_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Characters_SaveActionPerformed
-        if (_selectedCharacter != null) {
-            _selectedCharacter.setName(txt_Characters_Name.getText());
-            _selectedCharacter.setRace((DAL.Race) cmb_Characters_Race.getSelectedItem());
-            _selectedCharacter.setCharclass((DAL.Charclass) cmb_Characters_Class.getSelectedItem());
+        if (_selectedCharacter == null) {
+            return;
+        }
+        
+        DAL.Character tempChar = new DAL.Character(_selectedCharacter.getAccount(), _selectedCharacter.getCharclass()
+                ,_selectedCharacter.getItemByBootsItemId(), _selectedCharacter.getItemByWeaponItemId(), _selectedCharacter.getItemByLegsItemId()
+                , _selectedCharacter.getItemByChestItemId(), _selectedCharacter.getRace(), _selectedCharacter.getName());
+        tempChar.setId(_selectedCharacter.getId());
+            
+            tempChar.setName(txt_Characters_Name.getText());
+            tempChar.setRace((DAL.Race) cmb_Characters_Race.getSelectedItem());
+            tempChar.setCharclass((DAL.Charclass) cmb_Characters_Class.getSelectedItem());
             //add weapon item
             if (!txt_Characters_WeaponId.getText().equals("")) {
                 try {
                     int id = Integer.parseInt(txt_Characters_WeaponId.getText());
                     DAL.Item item = Services.ItemServices.GetItemById(id);
                     if (item != null && item.getSlot().getName().equals("Weapon")) {
-                        _selectedCharacter.setItemByWeaponItemId(item);
+                        tempChar.setItemByWeaponItemId(item);
                     }else{
                         throw new Exception();
                     }
@@ -1167,7 +1194,7 @@ public class AdminWindow extends javax.swing.JFrame {
                 }
             }
             else{
-                _selectedCharacter.setItemByWeaponItemId(null);
+                tempChar.setItemByWeaponItemId(null);
             }
 
             //add chest item
@@ -1176,7 +1203,7 @@ public class AdminWindow extends javax.swing.JFrame {
                     int id = Integer.parseInt(txt_Characters_ChestId.getText());
                     DAL.Item item = Services.ItemServices.GetItemById(id);
                     if (item != null && item.getSlot().getName().equals("Chest")) {
-                        _selectedCharacter.setItemByChestItemId(item);
+                        tempChar.setItemByChestItemId(item);
                     }else{
                         throw new Exception();
                     }
@@ -1186,7 +1213,7 @@ public class AdminWindow extends javax.swing.JFrame {
                 }
             }
             else{
-                _selectedCharacter.setItemByChestItemId(null);
+                tempChar.setItemByChestItemId(null);
             }
             
             //add legs item
@@ -1195,7 +1222,7 @@ public class AdminWindow extends javax.swing.JFrame {
                     int id = Integer.parseInt(txt_Characters_LegsId.getText());
                     DAL.Item item = Services.ItemServices.GetItemById(id);
                     if (item != null && item.getSlot().getName().equals("Legs")) {
-                        _selectedCharacter.setItemByLegsItemId(item);
+                        tempChar.setItemByLegsItemId(item);
                     }else{
                         throw new Exception();
                     }
@@ -1205,7 +1232,7 @@ public class AdminWindow extends javax.swing.JFrame {
                 }
             }
             else{
-                _selectedCharacter.setItemByLegsItemId(null);
+                tempChar.setItemByLegsItemId(null);
             }
             
             //add boots item
@@ -1214,7 +1241,7 @@ public class AdminWindow extends javax.swing.JFrame {
                     int id = Integer.parseInt(txt_Characters_BootsId.getText());
                     DAL.Item item = Services.ItemServices.GetItemById(id);
                     if (item != null && item.getSlot().getName().equals("Boots")) {
-                        _selectedCharacter.setItemByBootsItemId(item);
+                        tempChar.setItemByBootsItemId(item);
                     }else{
                         throw new Exception();
                     }
@@ -1224,29 +1251,36 @@ public class AdminWindow extends javax.swing.JFrame {
                 }
             }
             else{
-                _selectedCharacter.setItemByBootsItemId(null);
+                tempChar.setItemByBootsItemId(null);
             }
             
-            // add account
-            try {
+            //add account
+            
+                try {
                     int id = Integer.parseInt(txt_Characters_CharAccId.getText());
-                    DAL.Account account = Services.AccountServices.GetAccountById(id);
-                    if (account != null) {
-                        _selectedCharacter.setAccount(account);
-                    }else{
-                        throw new Exception();
+                    if(id != _selectedCharacter.getAccount().getId()){
+                        if (Services.AccountServices.GetCharactersOfAccount(id).size() >= DAL.Account.MAXCHARACTERCOUNT) {
+                            JOptionPane.showMessageDialog(this, "Target account already has max characters ("+ DAL.Account.MAXCHARACTERCOUNT + ").");
+                            return;
+                        }
+                        
+                        DAL.Account account = Services.AccountServices.GetAccountById(id);
+                        if (account != null) {
+                            tempChar.setAccount(account);
+                        }else{
+                            throw new Exception();
+                        }
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Character has an invalid account ID.");
                     return;
                 }
             
-            //System.err.println("");
-            
-            Services.CharacterServices.UpdateCharacter(_selectedCharacter);
+                
+            Services.CharacterServices.UpdateCharacter(tempChar);
             JOptionPane.showMessageDialog(this, "Character " + _selectedCharacter.getName() + " updated.");
             UpdateCharacterList();
-        }
+        
     }//GEN-LAST:event_btn_Characters_SaveActionPerformed
 
     private void UpdateAccountList(){

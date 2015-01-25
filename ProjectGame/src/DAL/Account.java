@@ -10,6 +10,7 @@ import java.util.Set;
  */
 public class Account  implements java.io.Serializable {
 
+    public static final int MAXCHARACTERCOUNT = 5;
     public static final int MINLENGTH = 5;
     public static final int MAXLENGTH = 25;
     private static String error;
